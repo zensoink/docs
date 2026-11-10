@@ -73,8 +73,8 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: 'Documentation',
-					items: [{ autogenerate: { directory: 'docs' } }],
+					label: 'Getting Started',
+					items: [{ autogenerate: { directory: 'docs/getting-started' } }],
 				},
 			],
 			customCss: ['./src/styles/global.css'],

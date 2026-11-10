@@ -61,4 +61,13 @@ test('compileAllTemplates reads src/templates and generates docs, pl/docs, ja/do
 	assert.match(enContent, /file:\s*\.\.\/\.\.\/\.\.\/\.\.\/assets\/logo\.svg/);
 	assert.match(plContent, /file:\s*\.\.\/\.\.\/\.\.\/\.\.\/assets\/logo\.svg/);
 	assert.match(jaContent, /file:\s*\.\.\/\.\.\/\.\.\/\.\.\/assets\/logo\.svg/);
+
+	// Verify Getting Started documentation pages are compiled
+	const enQuickstartPath = path.join(outputDocsDir, 'en/docs/getting-started/quickstart.mdx');
+	const plQuickstartPath = path.join(outputDocsDir, 'pl/docs/getting-started/quickstart.mdx');
+	const jaQuickstartPath = path.join(outputDocsDir, 'ja/docs/getting-started/quickstart.mdx');
+
+	assert.ok(fs.existsSync(enQuickstartPath), 'en/docs/getting-started/quickstart.mdx must exist');
+	assert.ok(fs.existsSync(plQuickstartPath), 'pl/docs/getting-started/quickstart.mdx must exist');
+	assert.ok(fs.existsSync(jaQuickstartPath), 'ja/docs/getting-started/quickstart.mdx must exist');
 });

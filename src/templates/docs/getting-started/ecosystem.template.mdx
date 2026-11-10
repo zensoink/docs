@@ -1,0 +1,53 @@
+---
+title: Public Repositories & Open Ecosystem Hub
+description: Complete directory of open-source repositories, developer tools, and container images across the Zenso ecosystem.
+---
+
+Zenso is built around an open, extensible architecture. Every layer of the stack—from firmware to frontend widgets—is accessible across our public repositories.
+
+:::note[Status Legend]
+- 🟢 **Active / Public**: Tested, documented, and accessible on GitHub.
+- 🟡 **WIP (In Development / Planned)**: Under active development, internal testing, or initial packaging.
+:::
+
+---
+
+## Display Firmware & Hardware
+
+| Repository | Status | License | Description |
+| :--- | :---: | :---: | :--- |
+| **[zenso-firmware](https://github.com/zensoink/zenso-firmware)** | 🟢 Active | GNU GPLv3 | ESP32-S3 firmware for Waveshare 7.3" ACeP 7-color e-Paper display with captive portal Wi-Fi provisioning, LittleFS cache, and serial developer menu. |
+
+---
+
+## Widget SDK, Plugins & Tools
+
+| Repository | Status | License | Description |
+| :--- | :---: | :---: | :--- |
+| **[zenso-plugin-template](https://github.com/zensoink/zenso-plugin-template)** | 🟢 Active | MIT | Reference widget and starter boilerplate with Liquid templating, mock datasets, and Vite dev server. |
+| **[vite-plugin](https://github.com/zensoink/vite-plugin)** | 🟢 Active | Apache 2.0 | Vite plugin for live rendering Liquid templates, compiling manifest schemas, and bundling production `plugin.zip` archives. |
+| **[zenso-schemas](https://github.com/zensoink/zenso-schemas)** | 🟢 Active | Apache 2.0 | Canonical JSON Schemas defining widget manifests, user settings fields, and API contracts. |
+| **[plugin-calendar](https://github.com/zensoink/plugin-calendar)** | 🟢 Active | MIT | Ambient calendar widget showing daily schedules, Google Calendar & CalDAV sync. |
+| **[plugin-image](https://github.com/zensoink/plugin-image)** | 🟢 Active | MIT | Digital photo frame and curated artwork widget with automatic orientation and dithered rendering. |
+| **[plugin-immich](https://github.com/zensoink/plugin-immich)** | 🟡 WIP | MIT | Self-hosted Immich photo server integration for streaming personal albums directly to the frame without cloud storage. |
+
+---
+
+## Web Applications & Backend Services
+
+| Repository | Status | Description |
+| :--- | :---: | :--- |
+| **[zenso-api](https://github.com/zensoink/zenso-api)** | 🟡 WIP | Core backend engine built on NestJS & PostgreSQL (Prisma). Handles device pairing, widget execution, headless Chromium rendering, and 7-color ACeP dithered binary generation. |
+| **[zenso-panel](https://github.com/zensoink/zenso-panel)** | 🟡 WIP | Self-hosted web dashboard built with Angular. Offers visual widget layout customization, schedule management, device pairing, and live 7-color display preview. |
+| **[zenso-website](https://github.com/kstepien3/zenso-website)** | 🟢 Active | Official marketing and landing page built in Angular with Tailwind CSS and e-ink Japandi aesthetic. |
+| **home-assistant-zenso** | 🟡 Planned | HACS custom integration allowing Home Assistant dashboards, smart sensors, and notifications to push straight to Zenso displays. |
+
+---
+
+## Container Registry Hub (Docker)
+
+Zenso publishes pre-built container images for self-hosters and homelab setups:
+
+- **`ghcr.io/zensoink/zenso-api:latest`** *(🟡 WIP)*: Headless rendering service with Cairo & Chromium dependencies pre-installed.
+- **`ghcr.io/zensoink/zenso-panel:latest`** *(🟡 WIP)*: Angular management web dashboard served over lightweight Nginx alpine image.
+- **`postgres:16-alpine`** *(🟢 Official)*: PostgreSQL database engine storing configuration state and refresh schedules.

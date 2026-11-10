@@ -1,0 +1,32 @@
+---
+title: System Architecture & Rendering
+description: How Zenso renders widgets in the cloud or local server and streams dithered buffers to low-power e-paper frames.
+---
+
+Unlike typical tablets or digital photo frames that run power-hungry operating systems, local web browsers, and backlights, Zenso utilizes an efficient **server-side rendering pipeline**. The frame remains in deep sleep mode and only wakes for brief seconds to check for updates.
+
+## Server-Side Rendering Flow
+
+```text
+Widget Data & Templates
+  → Liquid Template Engine (Modular Widgets)
+  → Headless Render Pipeline (High-DPI Chromium with Cairo)
+  → Color Quantization & Dithering (ACeP 7-Color Palette)
+  → 4bpp RAW Bitmap Compression
+  → Secure delivery over Wi-Fi
+  → Frame draws to e-paper & enters deep sleep (< 15 µA)
+```
+
+## Energy Optimization & Caching
+
+### HTTP ETags & 304 Not Modified
+When the device wakes on its scheduled timer, it issues an HTTP conditional request sending the `ETag` of its currently cached `/display.raw` buffer. If the layout or widget data has not changed:
+1. The server immediately returns an empty `HTTP 304 Not Modified` header.
+2. The frame skips display refresh entirely.
+3. The microcontroller returns to deep sleep in less than a second, saving battery.
+
+### Adaptive Refresh Scheduling
+Refresh intervals can be tailored in the management portal to suit your daily rhythm (e.g., refresh weather hourly between 07:00 and 22:00, and sleep completely overnight).
+
+### 100% Local-First Philosophy
+Zenso displays are engineered for complete privacy. You can use the official Zenso Cloud, or run your own lightweight Docker container stack on your home network with zero telemetry and no cloud dependency.
