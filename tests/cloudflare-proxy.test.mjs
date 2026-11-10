@@ -2,121 +2,86 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import worker, { isDocsRoute, resolveTargetPathname } from '../cloudflare/docs-proxy-worker.ts';
 
 const ROOT_DIR = path.resolve(import.meta.dirname, '..');
 
-test('isDocsRoute matches documentation paths, assets, and sitemaps', () => {
-	// Documentation core paths
-	assert.equal(isDocsRoute('/docs'), true);
-	assert.equal(isDocsRoute('/docs/'), true);
-	assert.equal(isDocsRoute('/docs/getting-started'), true);
+test('wrangler.jsonc is the single source of truth in root directory and cloudflare/ folder is removed', () => {
+	const wranglerPath = path.join(ROOT_DIR, 'wrangler.jsonc');
+	const legacyCloudflareDir = path.join(ROOT_DIR, 'cloudflare');
+	const legacyTomlPath = path.join(ROOT_DIR, 'wrangler.toml');
 
-	// Localized docs paths
-	assert.equal(isDocsRoute('/en/docs'), true);
-	assert.equal(isDocsRoute('/en/docs/'), true);
-	assert.equal(isDocsRoute('/en/docs/installation'), true);
-
-	assert.equal(isDocsRoute('/pl/docs'), true);
-	assert.equal(isDocsRoute('/pl/docs/'), true);
-	assert.equal(isDocsRoute('/pl/docs/instalacja'), true);
-
-	assert.equal(isDocsRoute('/ja/docs'), true);
-	assert.equal(isDocsRoute('/ja/docs/'), true);
-	assert.equal(isDocsRoute('/ja/docs/setup'), true);
-
-	// Static assets and search index
-	assert.equal(isDocsRoute('/_docs_assets/style.css'), true);
-	assert.equal(isDocsRoute('/_docs_assets/logo.svg'), true);
-	assert.equal(isDocsRoute('/pagefind/pagefind.js'), true);
-	assert.equal(isDocsRoute('/pagefind/pagefind-entry.json'), true);
-
-	// Sitemaps
-	assert.equal(isDocsRoute('/docs-sitemap.xml'), true);
-	assert.equal(isDocsRoute('/sitemap-index.xml'), true);
-	assert.equal(isDocsRoute('/sitemap-0.xml'), true);
-	assert.equal(isDocsRoute('/docs/sitemap.xml'), true);
+	assert.ok(fs.existsSync(wranglerPath), 'wrangler.jsonc must exist in the root directory');
+	assert.ok(!fs.existsSync(legacyCloudflareDir), 'Legacy ./cloudflare directory must be removed');
+	assert.ok(!fs.existsSync(legacyTomlPath), 'Legacy wrangler.toml must not exist');
 });
 
-test('isDocsRoute returns false for main website (Angular) paths', () => {
-	assert.equal(isDocsRoute('/'), false);
-	assert.equal(isDocsRoute('/en'), false);
-	assert.equal(isDocsRoute('/en/'), false);
-	assert.equal(isDocsRoute('/pl'), false);
-	assert.equal(isDocsRoute('/pl/'), false);
-	assert.equal(isDocsRoute('/ja'), false);
-	assert.equal(isDocsRoute('/ja/'), false);
-	assert.equal(isDocsRoute('/about'), false);
-	assert.equal(isDocsRoute('/en/pricing'), false);
-	assert.equal(isDocsRoute('/pl/kontakt'), false);
-	assert.equal(isDocsRoute('/assets/main.js'), false);
-});
+test('wrangler.jsonc configures Cloudflare Workers Static Assets with strict, least-privilege routes', () => {
+	const wranglerPath = path.join(ROOT_DIR, 'wrangler.jsonc');
+	const content = fs.readFileSync(wranglerPath, 'utf-8');
 
-test('resolveTargetPathname rewrites /docs-sitemap.xml to /sitemap-index.xml', () => {
-	assert.equal(resolveTargetPathname('/docs-sitemap.xml'), '/sitemap-index.xml');
-	assert.equal(resolveTargetPathname('/en/docs/'), '/en/docs/');
-	assert.equal(resolveTargetPathname('/_docs_assets/logo.svg'), '/_docs_assets/logo.svg');
-});
+	// Strip single-line comments for JSON parsing
+	const jsonClean = content.replace(/\/\/.*$/gm, '');
+	/** @type {{ name: string; assets?: { directory: string; not_found_handling: string }; routes?: { pattern: string; zone_name: string }[] }} */
+	const config = JSON.parse(jsonClean);
 
-test('Cloudflare Worker proxies docs requests and rewrites docs-sitemap.xml', async () => {
-	const originalFetch = globalThis.fetch;
-	/** @type {{ url: string; method: string; redirect?: RequestRedirect; headers: Headers }[]} */
-	const intercepted = [];
+	assert.equal(config.name, 'zenso-docs');
+	assert.equal(config.assets?.directory, './dist');
+	assert.equal(config.assets?.not_found_handling, '404-page');
 
-	globalThis.fetch = async (input, init) => {
-		const req = input instanceof Request ? input : new Request(input, init);
-		intercepted.push({
-			url: req.url,
-			method: req.method,
-			redirect: req.redirect,
-			headers: req.headers,
-		});
+	const routes = config.routes || [];
+	const patterns = routes.map((r) => r.pattern);
 
-		return new Response('mock-response', {
-			status: 200,
-			statusText: 'OK',
-			headers: { 'X-Custom-Header': 'ZensoDocs' },
-		});
-	};
+	// Must contain all 7 documentation-specific routes
+	const expectedPatterns = [
+		'zenso.ink/en/docs*',
+		'zenso.ink/pl/docs*',
+		'zenso.ink/ja/docs*',
+		'zenso.ink/docs*',
+		'zenso.ink/_docs_assets/*',
+		'zenso.ink/pagefind/*',
+		'zenso.ink/docs-sitemap*.xml',
+	];
 
-	try {
-		// 1. Docs route test
-		const docsReq = new Request('https://zenso.ink/en/docs/', {
-			method: 'GET',
-			headers: { Accept: 'text/html', 'User-Agent': 'TestBot' },
-		});
-		const docsRes = await worker.fetch(docsReq, { DOCS_ORIGIN: 'https://custom-docs.pages.dev' });
-		assert.equal(docsRes.status, 200);
-		assert.equal(docsRes.headers.get('X-Custom-Header'), 'ZensoDocs');
-		assert.equal(intercepted[0]?.url, 'https://custom-docs.pages.dev/en/docs/');
-		assert.equal(intercepted[0]?.redirect, 'manual');
-
-		// 2. Docs sitemap rewrite test
-		const sitemapReq = new Request('https://zenso.ink/docs-sitemap.xml');
-		await worker.fetch(sitemapReq, { DOCS_ORIGIN: 'https://custom-docs.pages.dev' });
-		assert.equal(intercepted[1]?.url, 'https://custom-docs.pages.dev/sitemap-index.xml');
-
-		// 3. Non-docs route passthrough test (to Angular)
-		const mainReq = new Request('https://zenso.ink/pl/features');
-		await worker.fetch(mainReq, { DOCS_ORIGIN: 'https://custom-docs.pages.dev' });
-		assert.equal(intercepted[2]?.url, 'https://zenso.ink/pl/features');
-	} finally {
-		globalThis.fetch = originalFetch;
+	for (const expected of expectedPatterns) {
+		assert.ok(
+			patterns.includes(expected),
+			`wrangler.jsonc routes must include ${expected}`
+		);
 	}
+
+	// Must NEVER contain greedy catch-all patterns that hijack Angular website
+	assert.ok(
+		!patterns.includes('zenso.ink/*'),
+		'wrangler.jsonc must not contain catch-all zenso.ink/*'
+	);
+	assert.ok(
+		!patterns.includes('www.zenso.ink/*'),
+		'wrangler.jsonc must not contain catch-all www.zenso.ink/*'
+	);
 });
 
-test('Wrangler configuration files are valid and point to docs-proxy-worker.ts', () => {
-	const jsonPath = path.join(ROOT_DIR, 'cloudflare/wrangler.json');
-	const tomlPath = path.join(ROOT_DIR, 'cloudflare/wrangler.toml');
+test('Static build outputs docs-sitemap files matching wrangler.jsonc route pattern', () => {
+	const docsSitemapPath = path.join(ROOT_DIR, 'dist/docs-sitemap.xml');
+	const docsSitemap0Path = path.join(ROOT_DIR, 'dist/docs-sitemap-0.xml');
 
-	assert.ok(fs.existsSync(jsonPath), 'cloudflare/wrangler.json must exist');
-	assert.ok(fs.existsSync(tomlPath), 'cloudflare/wrangler.toml must exist');
+	assert.ok(
+		fs.existsSync(docsSitemapPath),
+		'dist/docs-sitemap.xml must exist for static serving'
+	);
+	assert.ok(
+		fs.existsSync(docsSitemap0Path),
+		'dist/docs-sitemap-0.xml must exist for static serving'
+	);
 
-	const json = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
-	assert.equal(json.main, 'docs-proxy-worker.ts');
-	assert.equal(json.vars?.DOCS_ORIGIN, 'https://zenso-docs.pages.dev');
+	const indexContent = fs.readFileSync(docsSitemapPath, 'utf-8');
+	assert.match(
+		indexContent,
+		/https:\/\/zenso\.ink\/docs-sitemap-0\.xml/,
+		'docs-sitemap.xml must point to docs-sitemap-0.xml'
+	);
 
-	const toml = fs.readFileSync(tomlPath, 'utf-8');
-	assert.match(toml, /main\s*=\s*["']docs-proxy-worker\.ts["']/);
-	assert.match(toml, /DOCS_ORIGIN\s*=\s*["']https:\/\/zenso-docs\.pages\.dev["']/);
+	const urlsetContent = fs.readFileSync(docsSitemap0Path, 'utf-8');
+	assert.match(urlsetContent, /https:\/\/zenso\.ink\/en\/docs\//);
+	assert.match(urlsetContent, /https:\/\/zenso\.ink\/pl\/docs\//);
+	assert.match(urlsetContent, /https:\/\/zenso\.ink\/ja\/docs\//);
 });
