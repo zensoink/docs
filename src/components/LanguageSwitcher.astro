@@ -46,9 +46,6 @@ function computeLocalizedPath(pathname: string, targetLang: string): string {
 		cleanPath = '/docs' + (cleanPath === '/' ? '/' : cleanPath);
 	}
 
-	if (targetLang === 'en') {
-		return cleanPath;
-	}
 	return `/${targetLang}${cleanPath}`;
 }
 
@@ -162,9 +159,6 @@ const currentLang = getLocaleFromPath(currentPath);
 			cleanPath = '/docs' + (cleanPath === '/' ? '/' : cleanPath);
 		}
 
-		if (targetLang === 'en') {
-			return cleanPath;
-		}
 		return `/${targetLang}${cleanPath}`;
 	}
 

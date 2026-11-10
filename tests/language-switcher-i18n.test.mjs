@@ -10,13 +10,13 @@ test('astro.config.mjs configures Starlight defaultLocale and locales for en, pl
 
 	assert.match(
 		astroConfig,
-		/defaultLocale:\s*['"]root['"]/,
-		'astro.config.mjs must configure defaultLocale: "root"'
+		/defaultLocale:\s*['"]en['"]/,
+		'astro.config.mjs must configure defaultLocale: "en"'
 	);
 	assert.match(
 		astroConfig,
-		/locales:\s*\{[\s\S]*?root:[\s\S]*?pl:[\s\S]*?ja:[\s\S]*?\}/,
-		'astro.config.mjs must configure locales with root (en), pl, and ja'
+		/locales:\s*\{[\s\S]*?en:[\s\S]*?pl:[\s\S]*?ja:[\s\S]*?\}/,
+		'astro.config.mjs must configure locales with en, pl, and ja'
 	);
 });
 
@@ -63,11 +63,11 @@ test('LanguageSwitcher handles live navigation for en, pl, and ja locales under 
 });
 
 test('Static build outputs localized HTML pages with correct lang attributes and active switcher states under /{lang}/docs', () => {
-	const enHtmlPath = path.join(ROOT_DIR, 'dist/docs/index.html');
+	const enHtmlPath = path.join(ROOT_DIR, 'dist/en/docs/index.html');
 	const plHtmlPath = path.join(ROOT_DIR, 'dist/pl/docs/index.html');
 	const jaHtmlPath = path.join(ROOT_DIR, 'dist/ja/docs/index.html');
 
-	assert.ok(fs.existsSync(enHtmlPath), 'dist/docs/index.html must exist');
+	assert.ok(fs.existsSync(enHtmlPath), 'dist/en/docs/index.html must exist');
 	assert.ok(fs.existsSync(plHtmlPath), 'dist/pl/docs/index.html must exist');
 	assert.ok(fs.existsSync(jaHtmlPath), 'dist/ja/docs/index.html must exist');
 
@@ -99,7 +99,11 @@ test('Static build outputs localized HTML pages with correct lang attributes and
 	// Target URLs in rendered switcher buttons
 	assert.match(enHtml, /data-href="\/pl\/docs\/"/, 'EN switcher button for PL must point to /pl/docs/');
 	assert.match(enHtml, /data-href="\/ja\/docs\/"/, 'EN switcher button for JA must point to /ja/docs/');
-	assert.match(plHtml, /data-href="\/docs\/"/, 'PL switcher button for EN must point to /docs/');
+	assert.match(plHtml, /data-href="\/en\/docs\/"/, 'PL switcher button for EN must point to /en/docs/');
+
+	// Verify /docs redirects to /en/docs
+	const docsRedirect = fs.readFileSync(path.join(ROOT_DIR, 'dist/docs/index.html'), 'utf-8');
+	assert.match(docsRedirect, /url=\/en\/docs/, '/docs must redirect to /en/docs');
 });
 
 test('LanguageSwitcher preserves scroll position across language switches', () => {

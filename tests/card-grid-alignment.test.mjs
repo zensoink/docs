@@ -6,8 +6,12 @@ import path from 'node:path';
 const ROOT_DIR = path.resolve(import.meta.dirname, '..');
 
 test('Landing page CardGrid displays cards aligned without stagger offset artifact', () => {
-	const indexPath = fs.existsSync(path.join(ROOT_DIR, 'src/content/docs/docs/index.mdx'))
-		? path.join(ROOT_DIR, 'src/content/docs/docs/index.mdx')
+	const templatePath = path.join(ROOT_DIR, 'src/templates/docs/index.template.mdx');
+	const enDocsPath = path.join(ROOT_DIR, 'src/content/docs/en/docs/index.mdx');
+	const indexPath = fs.existsSync(templatePath)
+		? templatePath
+		: fs.existsSync(enDocsPath)
+		? enDocsPath
 		: path.join(ROOT_DIR, 'src/content/docs/index.mdx');
 	const indexMdx = fs.readFileSync(indexPath, 'utf-8');
 

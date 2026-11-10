@@ -3,11 +3,13 @@ import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
 const { siteTitle } = Astro.locals.starlightRoute;
 const currentPath = Astro.url.pathname;
-let docsHomeHref = '/docs/';
+let docsHomeHref = '/en/docs/';
 if (currentPath.startsWith('/pl/') || currentPath.startsWith('/pl/docs')) {
 	docsHomeHref = '/pl/docs/';
 } else if (currentPath.startsWith('/ja/') || currentPath.startsWith('/ja/docs')) {
 	docsHomeHref = '/ja/docs/';
+} else if (currentPath.startsWith('/en/') || currentPath.startsWith('/en/docs')) {
+	docsHomeHref = '/en/docs/';
 }
 ---
 

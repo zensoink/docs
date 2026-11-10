@@ -28,6 +28,7 @@ pnpm-debug.log*
 docs_backup/
 
 # generated i18n docs (compiled from src/templates/ + src/i18n/)
-src/content/docs/docs/
+src/content/docs/en/
 src/content/docs/pl/
 src/content/docs/ja/
+src/content/docs/docs/

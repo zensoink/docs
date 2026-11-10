@@ -6,7 +6,9 @@ import path from 'node:path';
 const ROOT_DIR = path.resolve(import.meta.dirname, '..');
 
 test('Mobile hamburger menu button and drawer are present on the docs landing page and doc pages', () => {
-	const indexPath = fs.existsSync(path.join(ROOT_DIR, 'dist/docs/index.html'))
+	const indexPath = fs.existsSync(path.join(ROOT_DIR, 'dist/en/docs/index.html'))
+		? path.join(ROOT_DIR, 'dist/en/docs/index.html')
+		: fs.existsSync(path.join(ROOT_DIR, 'dist/docs/index.html'))
 		? path.join(ROOT_DIR, 'dist/docs/index.html')
 		: path.join(ROOT_DIR, 'dist/index.html');
 	assert.ok(fs.existsSync(indexPath), 'Landing page HTML must exist');

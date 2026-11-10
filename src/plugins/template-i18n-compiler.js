@@ -88,18 +88,9 @@ export function compileAllTemplates({
 
 		for (const loc of locales) {
 			const dict = dictionaries[loc] || {};
-			let destRelPath;
-			let assetsPrefix;
-
-			if (loc === 'en') {
-				destRelPath = targetRelativeName; // e.g. docs/index.mdx
-				const segments = destRelPath.split('/');
-				assetsPrefix = '../'.repeat(segments.length + 1);
-			} else {
-				destRelPath = `${loc}/${targetRelativeName}`; // e.g. pl/docs/index.mdx
-				const segments = destRelPath.split('/');
-				assetsPrefix = '../'.repeat(segments.length + 1);
-			}
+			const destRelPath = `${loc}/${targetRelativeName}`;
+			const segments = destRelPath.split('/');
+			const assetsPrefix = '../'.repeat(segments.length + 1);
 
 			const compiledContent = compileTemplateContent(rawTemplate, dict, enDict, assetsPrefix);
 			const destFullPath = path.join(outputDocsDir, destRelPath);

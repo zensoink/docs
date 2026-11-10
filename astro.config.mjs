@@ -11,16 +11,16 @@ export default defineConfig({
 		assets: '_docs_assets',
 	},
 	redirects: {
-		'/': '/docs',
-		'/en/docs': '/docs',
+		'/': '/en/docs',
+		'/docs': '/en/docs',
 	},
 	integrations: [
 		templateI18nCompiler(),
 		starlight({
 			title: 'Zenso',
-			defaultLocale: 'root',
+			defaultLocale: 'en',
 			locales: {
-				root: {
+				en: {
 					label: 'English',
 					lang: 'en',
 				},

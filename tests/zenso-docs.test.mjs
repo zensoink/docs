@@ -46,7 +46,9 @@ test('Build distribution contains styled documentation landing page', () => {
 	const distDir = path.join(ROOT_DIR, 'dist');
 	assert.ok(fs.existsSync(distDir), 'dist/ directory must exist from build');
 
-	const indexHtmlPath = fs.existsSync(path.join(distDir, 'docs/index.html'))
+	const indexHtmlPath = fs.existsSync(path.join(distDir, 'en/docs/index.html'))
+		? path.join(distDir, 'en/docs/index.html')
+		: fs.existsSync(path.join(distDir, 'docs/index.html'))
 		? path.join(distDir, 'docs/index.html')
 		: path.join(distDir, 'index.html');
 	assert.ok(fs.existsSync(indexHtmlPath), 'Landing page HTML must exist');

@@ -35,11 +35,11 @@ test('compileAllTemplates reads src/templates and generates docs, pl/docs, ja/do
 
 	compileAllTemplates({ templatesDir, i18nDir, outputDocsDir });
 
-	const enPath = path.join(outputDocsDir, 'docs/index.mdx');
+	const enPath = path.join(outputDocsDir, 'en/docs/index.mdx');
 	const plPath = path.join(outputDocsDir, 'pl/docs/index.mdx');
 	const jaPath = path.join(outputDocsDir, 'ja/docs/index.mdx');
 
-	assert.ok(fs.existsSync(enPath), 'src/content/docs/docs/index.mdx must exist');
+	assert.ok(fs.existsSync(enPath), 'src/content/docs/en/docs/index.mdx must exist');
 	assert.ok(fs.existsSync(plPath), 'src/content/docs/pl/docs/index.mdx must exist');
 	assert.ok(fs.existsSync(jaPath), 'src/content/docs/ja/docs/index.mdx must exist');
 
@@ -58,7 +58,7 @@ test('compileAllTemplates reads src/templates and generates docs, pl/docs, ja/do
 	assert.match(jaContent, /title:\s*Zenso ドキュメント/);
 
 	// Verify correct relative asset depth
-	assert.match(enContent, /file:\s*\.\.\/\.\.\/\.\.\/assets\/logo\.svg/);
+	assert.match(enContent, /file:\s*\.\.\/\.\.\/\.\.\/\.\.\/assets\/logo\.svg/);
 	assert.match(plContent, /file:\s*\.\.\/\.\.\/\.\.\/\.\.\/assets\/logo\.svg/);
 	assert.match(jaContent, /file:\s*\.\.\/\.\.\/\.\.\/\.\.\/assets\/logo\.svg/);
 });
