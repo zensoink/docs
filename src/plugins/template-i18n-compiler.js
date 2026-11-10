@@ -1,16 +1,21 @@
+// @ts-check
 import fs from 'node:fs';
 import path from 'node:path';
 
 /**
  * Retrieve nested object property by dot path
+ * @param {Record<string, unknown> | undefined} obj
+ * @param {string} dotPath
+ * @returns {string | undefined}
  */
 export function getNestedValue(obj, dotPath) {
 	if (!obj || typeof obj !== 'object') return undefined;
 	const parts = dotPath.split('.');
+	/** @type {unknown} */
 	let current = obj;
 	for (const part of parts) {
 		if (current && typeof current === 'object' && part in current) {
-			current = current[part];
+			current = Reflect.get(current, part);
 		} else {
 			return undefined;
 		}
@@ -20,6 +25,11 @@ export function getNestedValue(obj, dotPath) {
 
 /**
  * Interpolate {{key.subkey}} and {{assets_prefix}} into template content
+ * @param {string} templateContent
+ * @param {Record<string, unknown>} dict
+ * @param {Record<string, unknown>} fallbackDict
+ * @param {string} assetsPrefix
+ * @returns {string}
  */
 export function compileTemplateContent(templateContent, dict, fallbackDict, assetsPrefix) {
 	// First replace {{assets_prefix}}
@@ -39,7 +49,16 @@ export function compileTemplateContent(templateContent, dict, fallbackDict, asse
 }
 
 /**
+ * @typedef {Object} CompileTemplatesOptions
+ * @property {string} [templatesDir]
+ * @property {string} [i18nDir]
+ * @property {string} [outputDocsDir]
+ * @property {string[]} [locales]
+ */
+
+/**
  * Compile all template files across all supported locales
+ * @param {CompileTemplatesOptions} [options]
  */
 export function compileAllTemplates({
 	templatesDir = path.resolve('src/templates'),
@@ -51,8 +70,10 @@ export function compileAllTemplates({
 	if (!fs.existsSync(enDictPath)) {
 		throw new Error(`Base dictionary not found at ${enDictPath}`);
 	}
+	/** @type {Record<string, unknown>} */
 	const enDict = JSON.parse(fs.readFileSync(enDictPath, 'utf-8'));
 
+	/** @type {Record<string, Record<string, unknown>>} */
 	const dictionaries = { en: enDict };
 	for (const loc of locales) {
 		if (loc === 'en') continue;
@@ -64,8 +85,14 @@ export function compileAllTemplates({
 		}
 	}
 
+	/**
+	 * @param {string} dir
+	 * @param {string} [base]
+	 * @returns {{ fullPath: string; relPath: string }[]}
+	 */
 	function findTemplateFiles(dir, base = '') {
 		const entries = fs.readdirSync(dir, { withFileTypes: true });
+		/** @type {{ fullPath: string; relPath: string }[]} */
 		let files = [];
 		for (const entry of entries) {
 			const fullPath = path.join(dir, entry.name);
@@ -103,6 +130,7 @@ export function compileAllTemplates({
 
 /**
  * Astro Integration Plugin for Template-based i18n
+ * @returns {import('astro').AstroIntegration}
  */
 export default function templateI18nCompiler() {
 	return {

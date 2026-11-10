@@ -1,5 +1,5 @@
-name = "zenso-subpath-router"
-main = "worker.js"
+name = "zenso-docs-proxy"
+main = "docs-proxy-worker.ts"
 compatibility_date = "2026-01-01"
 
 routes = [
@@ -9,4 +9,3 @@ routes = [
 
 [vars]
 DOCS_ORIGIN = "https://zenso-docs.pages.dev"
-MAIN_ORIGIN = "https://zenso-website.pages.dev"

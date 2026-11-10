@@ -49,7 +49,12 @@ export default defineConfig({
 				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/vTjzkwz3XV' },
 				{ icon: 'external', label: 'Zenso.ink', href: 'https://zenso.ink' },
 			],
-			sidebar: [],
+			sidebar: [
+				{
+					label: 'Documentation',
+					items: [{ autogenerate: { directory: 'docs' } }],
+				},
+			],
 			customCss: ['./src/styles/global.css'],
 		}),
 	],

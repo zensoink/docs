@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zenso-docs-proxy",
+  "main": "docs-proxy-worker.ts",
+  "compatibility_date": "2026-01-01",
+  "routes": [
+    { "pattern": "zenso.ink/*", "zone_name": "zenso.ink" },
+    { "pattern": "www.zenso.ink/*", "zone_name": "zenso.ink" }
+  ],
+  "vars": {
+    "DOCS_ORIGIN": "https://zenso-docs.pages.dev"
+  }
+}
