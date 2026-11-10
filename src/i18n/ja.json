@@ -1,0 +1,39 @@
+{
+  "site": {
+    "title": "Zenso ドキュメント",
+    "description": "Zenso 7色電子ペーパーエコシステムの公式技術ガイドおよび情報ハブ。"
+  },
+  "hero": {
+    "tagline": "Zenso の完全な情報ソース — コードレス7色E-Inkスマートフレーム、ESP32ファームウェア、Webダッシュボード、セルフホストDockerスタック、オープンなプラグインSDK。",
+    "actions": {
+      "zenso_web": "Zenso.ink を訪問",
+      "github": "GitHub オーガニゼーション",
+      "discord": "Discord に参加"
+    }
+  },
+  "ecosystem": {
+    "section_title": "エコシステムを探る",
+    "cards": {
+      "opensource": {
+        "title": "オープンソース＆コミュニティ",
+        "desc": "Zenso はオープンなエコシステムを重視して設計されています。公開リポジトリ、コンテナイメージ、コミュニティツールをご覧ください。",
+        "link": "GitHub を見る →"
+      },
+      "design_system": {
+        "title": "デザインシステムとデザイントークン",
+        "desc": "穏やかなコンピューティング（Calm Computing）の思想：本物の7色ACePパレット、温かみのある紙のトーン、Newsreaderセリフフォント、ディザテクスチャ。",
+        "link": "Zenso.ink で詳しく知る →"
+      },
+      "discord": {
+        "title": "Discord コミュニティ",
+        "desc": "クリエイターと繋がり、ハードウェアやホームラボのセルフホストについて質問し、ウィジェットのアイデアを共有しましょう。",
+        "link": "Discord に参加 →"
+      },
+      "in_progress": {
+        "title": "ドキュメント準備中",
+        "desc": "Docker セルフホスト、ファームウェア書き込み、ウィジェットプラグイン SDK の技術ガイドを準備中です。",
+        "link": "アップデートをフォロー →"
+      }
+    }
+  }
+}

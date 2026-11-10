@@ -2,14 +2,37 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwindcss from '@tailwindcss/vite';
+import templateI18nCompiler from './src/plugins/template-i18n-compiler.js';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://zenso.ink',
-	base: '/docs',
+	build: {
+		assets: '_docs_assets',
+	},
+	redirects: {
+		'/': '/docs',
+		'/en/docs': '/docs',
+	},
 	integrations: [
+		templateI18nCompiler(),
 		starlight({
 			title: 'Zenso',
+			defaultLocale: 'root',
+			locales: {
+				root: {
+					label: 'English',
+					lang: 'en',
+				},
+				pl: {
+					label: 'Polski',
+					lang: 'pl',
+				},
+				ja: {
+					label: '日本語',
+					lang: 'ja',
+				},
+			},
 			logo: {
 				src: './src/assets/logo.svg',
 				alt: 'Zenso Logo',

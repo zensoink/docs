@@ -3,7 +3,8 @@
  * Zen Typographic Language Switcher Component
  * Exact parity with zenso-website ZenLanguageSwitcher:
  * Pure letterspaced typography with subtle editorial dot separators (EN · PL · JA)
- * Persists to localStorage key 'zenso.lang'
+ * Persists to localStorage key 'zenso.lang', preserves scroll position, and provides live route switching
+ * Supports /{lang}/docs URL pattern (/docs for EN, /pl/docs for PL, /ja/docs for JA)
  */
 interface Props {
 	class?: string;
@@ -17,13 +18,42 @@ const langs = [
 	{ code: 'ja', label: 'JA' },
 ];
 
-const pathname = Astro.url.pathname;
-let currentLang = 'en';
-if (pathname.includes('/pl/') || pathname.endsWith('/pl')) {
-	currentLang = 'pl';
-} else if (pathname.includes('/ja/') || pathname.endsWith('/ja')) {
-	currentLang = 'ja';
+function getLocaleFromPath(pathname: string): string {
+	if (pathname.startsWith('/pl/') || pathname === '/pl' || pathname.startsWith('/pl/docs')) {
+		return 'pl';
+	}
+	if (pathname.startsWith('/ja/') || pathname === '/ja' || pathname.startsWith('/ja/docs')) {
+		return 'ja';
+	}
+	return 'en';
 }
+
+function computeLocalizedPath(pathname: string, targetLang: string): string {
+	let cleanPath = pathname;
+	if (cleanPath.startsWith('/pl/') || cleanPath === '/pl') {
+		cleanPath = cleanPath.slice(3) || '/';
+	} else if (cleanPath.startsWith('/ja/') || cleanPath === '/ja') {
+		cleanPath = cleanPath.slice(3) || '/';
+	} else if (cleanPath.startsWith('/en/') || cleanPath === '/en') {
+		cleanPath = cleanPath.slice(3) || '/';
+	}
+
+	if (!cleanPath.startsWith('/')) {
+		cleanPath = '/' + cleanPath;
+	}
+
+	if (!cleanPath.startsWith('/docs')) {
+		cleanPath = '/docs' + (cleanPath === '/' ? '/' : cleanPath);
+	}
+
+	if (targetLang === 'en') {
+		return cleanPath;
+	}
+	return `/${targetLang}${cleanPath}`;
+}
+
+const currentPath = Astro.url.pathname;
+const currentLang = getLocaleFromPath(currentPath);
 ---
 
 <div
@@ -33,21 +63,25 @@ if (pathname.includes('/pl/') || pathname.endsWith('/pl')) {
 	data-zen-lang-switcher
 >
 	{
-		langs.map((item, index) => (
-			<>
-				{index > 0 && <span aria-hidden="true" class="zen-sep">·</span>}
-				<button
-					type="button"
-					data-lang={item.code}
-					class:list={['zen-lang-btn', { active: item.code === currentLang }]}
-					aria-label={`Switch language to ${item.label}`}
-					aria-current={item.code === currentLang ? 'page' : undefined}
-					lang={item.code}
-				>
-					{item.label}
-				</button>
-			</>
-		))
+		langs.map((item, index) => {
+			const targetHref = computeLocalizedPath(currentPath, item.code);
+			return (
+				<>
+					{index > 0 && <span aria-hidden="true" class="zen-sep">·</span>}
+					<button
+						type="button"
+						data-lang={item.code}
+						data-href={targetHref}
+						class:list={['zen-lang-btn', { active: item.code === currentLang }]}
+						aria-label={`Switch language to ${item.label}`}
+						aria-current={item.code === currentLang ? 'page' : undefined}
+						lang={item.code}
+					>
+						{item.label}
+					</button>
+				</>
+			);
+		})
 	}
 </div>
 
@@ -97,14 +131,80 @@ if (pathname.includes('/pl/') || pathname.endsWith('/pl')) {
 </style>
 
 <script>
-	function initLanguageSwitchers() {
-		const LANG_KEY = 'zenso.lang';
+	const LANG_KEY = 'zenso.lang';
+	const SCROLL_KEY = 'zenso.lang_switch_scroll';
 
-		function setStoredLang(code: string) {
-			try {
-				localStorage.setItem(LANG_KEY, code);
-			} catch {}
+	function getLocaleFromPath(pathname: string): string {
+		if (pathname.startsWith('/pl/') || pathname === '/pl' || pathname.startsWith('/pl/docs')) {
+			return 'pl';
 		}
+		if (pathname.startsWith('/ja/') || pathname.startsWith('/ja/docs') || pathname === '/ja') {
+			return 'ja';
+		}
+		return 'en';
+	}
+
+	function computeLocalizedPath(pathname: string, targetLang: string): string {
+		let cleanPath = pathname;
+		if (cleanPath.startsWith('/pl/') || cleanPath === '/pl') {
+			cleanPath = cleanPath.slice(3) || '/';
+		} else if (cleanPath.startsWith('/ja/') || cleanPath === '/ja') {
+			cleanPath = cleanPath.slice(3) || '/';
+		} else if (cleanPath.startsWith('/en/') || cleanPath === '/en') {
+			cleanPath = cleanPath.slice(3) || '/';
+		}
+
+		if (!cleanPath.startsWith('/')) {
+			cleanPath = '/' + cleanPath;
+		}
+
+		if (!cleanPath.startsWith('/docs')) {
+			cleanPath = '/docs' + (cleanPath === '/' ? '/' : cleanPath);
+		}
+
+		if (targetLang === 'en') {
+			return cleanPath;
+		}
+		return `/${targetLang}${cleanPath}`;
+	}
+
+	function restoreScrollPosition() {
+		try {
+			const saved = sessionStorage.getItem(SCROLL_KEY);
+			if (saved !== null) {
+				sessionStorage.removeItem(SCROLL_KEY);
+				const top = parseInt(saved, 10);
+				if (!Number.isNaN(top) && top > 0) {
+					if ('scrollRestoration' in history) {
+						history.scrollRestoration = 'manual';
+					}
+					window.scrollTo({ top, behavior: 'instant' });
+					requestAnimationFrame(() => {
+						window.scrollTo({ top, behavior: 'instant' });
+					});
+				}
+			}
+		} catch {}
+	}
+
+	function syncActiveState() {
+		const activeCode = getLocaleFromPath(window.location.pathname);
+		document.querySelectorAll<HTMLElement>('[data-zen-lang-switcher]').forEach((container) => {
+			container.querySelectorAll<HTMLButtonElement>('[data-lang]').forEach((btn) => {
+				const isCurrent = btn.getAttribute('data-lang') === activeCode;
+				btn.classList.toggle('active', isCurrent);
+				if (isCurrent) {
+					btn.setAttribute('aria-current', 'page');
+				} else {
+					btn.removeAttribute('aria-current');
+				}
+			});
+		});
+	}
+
+	function initLanguageSwitchers() {
+		restoreScrollPosition();
+		syncActiveState();
 
 		document.querySelectorAll<HTMLElement>('[data-zen-lang-switcher]').forEach((container) => {
 			if (container.dataset.initialized) return;
@@ -113,16 +213,21 @@ if (pathname.includes('/pl/') || pathname.endsWith('/pl')) {
 			container.querySelectorAll<HTMLButtonElement>('[data-lang]').forEach((btn) => {
 				btn.addEventListener('click', () => {
 					const code = btn.getAttribute('data-lang') || 'en';
-					setStoredLang(code);
+					try {
+						localStorage.setItem(LANG_KEY, code);
+					} catch {}
 
-					// When translations become available, navigate to the localized path
-					if (code === 'en') {
-						const currentPath = window.location.pathname;
-						if (currentPath.includes('/pl/') || currentPath.includes('/ja/')) {
-							const cleanPath = currentPath.replace(/\/docs\/(pl|ja)\//, '/docs/');
-							window.location.pathname = cleanPath;
-						}
-					}
+					const currentLang = getLocaleFromPath(window.location.pathname);
+					if (code === currentLang) return;
+
+					// Preserve current scroll position across language change
+					try {
+						const scrollY = window.scrollY ?? document.documentElement.scrollTop ?? 0;
+						sessionStorage.setItem(SCROLL_KEY, String(scrollY));
+					} catch {}
+
+					const targetPath = computeLocalizedPath(window.location.pathname, code);
+					window.location.pathname = targetPath;
 				});
 			});
 		});

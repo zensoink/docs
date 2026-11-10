@@ -2,6 +2,13 @@
 import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
 const { siteTitle } = Astro.locals.starlightRoute;
+const currentPath = Astro.url.pathname;
+let docsHomeHref = '/docs/';
+if (currentPath.startsWith('/pl/') || currentPath.startsWith('/pl/docs')) {
+	docsHomeHref = '/pl/docs/';
+} else if (currentPath.startsWith('/ja/') || currentPath.startsWith('/ja/docs')) {
+	docsHomeHref = '/ja/docs/';
+}
 ---
 
 <div class="site-title-container sl-flex">
@@ -28,7 +35,7 @@ const { siteTitle } = Astro.locals.starlightRoute;
 		)}
 		<span class="site-title-text" translate="no">zenso.ink</span>
 	</a>
-	<a href="/docs/" class="docs-home-pill" title="Documentation Home">Docs</a>
+	<a href={docsHomeHref} class="docs-home-pill" title="Documentation Home">Docs</a>
 </div>
 
 <style>

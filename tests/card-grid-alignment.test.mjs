@@ -6,7 +6,10 @@ import path from 'node:path';
 const ROOT_DIR = path.resolve(import.meta.dirname, '..');
 
 test('Landing page CardGrid displays cards aligned without stagger offset artifact', () => {
-	const indexMdx = fs.readFileSync(path.join(ROOT_DIR, 'src/content/docs/index.mdx'), 'utf-8');
+	const indexPath = fs.existsSync(path.join(ROOT_DIR, 'src/content/docs/docs/index.mdx'))
+		? path.join(ROOT_DIR, 'src/content/docs/docs/index.mdx')
+		: path.join(ROOT_DIR, 'src/content/docs/index.mdx');
+	const indexMdx = fs.readFileSync(indexPath, 'utf-8');
 
 	// CardGrid should not have stagger attribute which offsets the second column by 5rem
 	// and conflicts with hover translateY animations

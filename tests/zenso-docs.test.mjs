@@ -46,8 +46,10 @@ test('Build distribution contains styled documentation landing page', () => {
 	const distDir = path.join(ROOT_DIR, 'dist');
 	assert.ok(fs.existsSync(distDir), 'dist/ directory must exist from build');
 
-	const indexHtmlPath = path.join(distDir, 'index.html');
-	assert.ok(fs.existsSync(indexHtmlPath), 'Landing page dist/index.html must exist');
+	const indexHtmlPath = fs.existsSync(path.join(distDir, 'docs/index.html'))
+		? path.join(distDir, 'docs/index.html')
+		: path.join(distDir, 'index.html');
+	assert.ok(fs.existsSync(indexHtmlPath), 'Landing page HTML must exist');
 	const content = fs.readFileSync(indexHtmlPath, 'utf-8');
 	assert.ok(content.length > 500, 'Landing page must not be empty');
 	assert.match(content, /Zenso Documentation/, 'Must render page title');

@@ -26,3 +26,8 @@ pnpm-debug.log*
 
 # documentation backup (private / untracked)
 docs_backup/
+
+# generated i18n docs (compiled from src/templates/ + src/i18n/)
+src/content/docs/docs/
+src/content/docs/pl/
+src/content/docs/ja/
