@@ -199,6 +199,12 @@ h3,
 	box-shadow: 4px 4px 0 0 var(--dither-shadow-color) !important;
 }
 
+/* Preserve vertical offset on staggered cards if stagger is used */
+.stagger > .card:nth-child(2n):hover,
+.stagger > .starlight-card:nth-child(2n):hover {
+	transform: translateY(calc(var(--stagger-height, 5rem) - 2px));
+}
+
 /* Starlight Action Buttons matching zenso-website buttons */
 .sl-link-button.primary {
 	background-color: var(--sl-color-text) !important;
