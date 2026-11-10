@@ -1,6 +1,7 @@
 // @ts-check
 import fs from 'node:fs';
 import path from 'node:path';
+import { LOCALE_CODES } from '../lib/routing.ts';
 
 /**
  * Retrieve nested object property by dot path
@@ -64,7 +65,7 @@ export function compileAllTemplates({
 	templatesDir = path.resolve('src/templates'),
 	i18nDir = path.resolve('src/i18n'),
 	outputDocsDir = path.resolve('src/content/docs'),
-	locales = ['en', 'pl', 'ja'],
+	locales = [...LOCALE_CODES],
 } = {}) {
 	const enDictPath = path.join(i18nDir, 'en.json');
 	if (!fs.existsSync(enDictPath)) {
@@ -109,6 +110,8 @@ export function compileAllTemplates({
 	if (!fs.existsSync(templatesDir)) return;
 	const templateFiles = findTemplateFiles(templatesDir);
 
+	const srcDir = path.dirname(templatesDir);
+
 	for (const { fullPath, relPath } of templateFiles) {
 		const rawTemplate = fs.readFileSync(fullPath, 'utf-8');
 		const targetRelativeName = relPath.replace(/\.template\.mdx$/, '.mdx');
@@ -116,13 +119,14 @@ export function compileAllTemplates({
 		for (const loc of locales) {
 			const dict = dictionaries[loc] || {};
 			const destRelPath = `${loc}/${targetRelativeName}`;
-			const segments = destRelPath.split('/');
-			const assetsPrefix = '../'.repeat(segments.length + 1);
+			const destFullPath = path.join(outputDocsDir, destRelPath);
+			const destDir = path.dirname(destFullPath);
+			const relToSrc = path.relative(destDir, srcDir).replace(/\\/g, '/');
+			const assetsPrefix = relToSrc ? `${relToSrc}/` : '';
 
 			const compiledContent = compileTemplateContent(rawTemplate, dict, enDict, assetsPrefix);
-			const destFullPath = path.join(outputDocsDir, destRelPath);
 
-			fs.mkdirSync(path.dirname(destFullPath), { recursive: true });
+			fs.mkdirSync(destDir, { recursive: true });
 			fs.writeFileSync(destFullPath, compiledContent, 'utf-8');
 		}
 	}

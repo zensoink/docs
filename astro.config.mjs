@@ -5,6 +5,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwindcss from '@tailwindcss/vite';
 import templateI18nCompiler from './src/plugins/template-i18n-compiler.js';
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from './src/lib/routing.ts';
+
+const starlightLocales = Object.fromEntries(
+	SUPPORTED_LOCALES.map((loc) => [loc.code, { label: loc.starlightLabel, lang: loc.lang }])
+);
 
 /**
  * Creates static docs-sitemap.xml pointing to docs-sitemap-0.xml
@@ -48,21 +53,8 @@ export default defineConfig({
 		templateI18nCompiler(),
 		starlight({
 			title: 'Zenso',
-			defaultLocale: 'en',
-			locales: {
-				en: {
-					label: 'English',
-					lang: 'en',
-				},
-				pl: {
-					label: 'Polski',
-					lang: 'pl',
-				},
-				ja: {
-					label: '日本語',
-					lang: 'ja',
-				},
-			},
+			defaultLocale: DEFAULT_LOCALE,
+			locales: starlightLocales,
 			logo: {
 				src: './src/assets/logo.svg',
 				alt: 'Zenso Logo',

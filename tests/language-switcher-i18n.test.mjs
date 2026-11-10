@@ -10,12 +10,12 @@ test('astro.config.mjs configures Starlight defaultLocale and locales for en, pl
 
 	assert.match(
 		astroConfig,
-		/defaultLocale:\s*['"]en['"]/,
+		/defaultLocale:\s*(?:['"]en['"]|DEFAULT_LOCALE)/,
 		'astro.config.mjs must configure defaultLocale: "en"'
 	);
 	assert.match(
 		astroConfig,
-		/locales:\s*\{[\s\S]*?en:[\s\S]*?pl:[\s\S]*?ja:[\s\S]*?\}/,
+		/locales:\s*(?:\{[\s\S]*?en:[\s\S]*?pl:[\s\S]*?ja:[\s\S]*?\}|starlightLocales)/,
 		'astro.config.mjs must configure locales with en, pl, and ja'
 	);
 });
@@ -40,18 +40,18 @@ test('LanguageSwitcher handles live navigation for en, pl, and ja locales under 
 	const langPath = path.join(ROOT_DIR, 'src/components/LanguageSwitcher.astro');
 	const content = fs.readFileSync(langPath, 'utf-8');
 
-	// Must compute localized paths or navigate for all supported locales (not only en)
+	// Must compute localized paths or navigate for all supported locales via Route Navigator
 	assert.match(
 		content,
-		/localizedUrl|computeLocalizedPath|data-href|window\.location\.pathname\s*=/i,
+		/localizePath|computeLocalizedPath|data-href|window\.location\.pathname\s*=/i,
 		'LanguageSwitcher must compute localized paths for navigation'
 	);
 
-	// Must format target paths according to /{lang}/docs pattern
+	// Must import and delegate to routing module
 	assert.match(
 		content,
-		/\/\$\{targetLang\}\$\{cleanPath\}/,
-		'LanguageSwitcher must format paths as /{lang}/docs'
+		/from\s+['"]\.\.\/lib\/routing['"]/,
+		'LanguageSwitcher must delegate route calculations to the Route Navigator module'
 	);
 
 	// Must not have the old bug where only code === "en" triggers navigation
