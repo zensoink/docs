@@ -5,23 +5,24 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://zenso.ink',
+	base: '/docs',
 	integrations: [
 		starlight({
-			title: 'Docs with Tailwind',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
-			sidebar: [
-				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
-				},
-				{
-					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
-				},
+			title: 'Zenso',
+			logo: {
+				src: './src/assets/logo.svg',
+				alt: 'Zenso Logo',
+			},
+			components: {
+				SiteTitle: './src/components/SiteTitle.astro',
+			},
+			social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/zensoink' },
+				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/vTjzkwz3XV' },
+				{ icon: 'external', label: 'Zenso.ink', href: 'https://zenso.ink' },
 			],
+			sidebar: [],
 			customCss: ['./src/styles/global.css'],
 		}),
 	],

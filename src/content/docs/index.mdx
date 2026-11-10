@@ -1,50 +1,44 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: Zenso Documentation
+description: Canonical source of truth and complete technical guide for the Zenso 7-color e-paper ecosystem.
+template: splash
 hero:
-  title: |
-    Welcome to Starlight with
-    <span
-      class="font-black text-transparent
-        bg-clip-text bg-gradient-to-b
-        from-accent-700 to-accent-400
-        dark:from-accent-500 dark:to-accent-200"
-    >
-      Tailwind
-    </span>
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: The complete source of truth for Zenso — cordless 7-color e-paper smart frame, ESP32 firmware, web panel, self-hosted Docker stack, and open plugin SDK.
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/logo.svg
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Visit Zenso.ink
+      link: https://zenso.ink
+      icon: external
+    - text: GitHub Organization
+      link: https://github.com/zensoink
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+      variant: secondary
+    - text: Join Discord
+      link: https://discord.gg/vTjzkwz3XV
       icon: external
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## Explore the Ecosystem
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="Open Source & Community" icon="github">
+		Zenso is built with an open ecosystem in mind. Discover public repositories, container images, and community tools.
+		[View GitHub &rarr;](https://github.com/zensoink)
 	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
+	<Card title="Design System & Tokens" icon="pencil">
+		Calm computing design principles: authentic 7-pigment ACeP palettes, warm paper tones, Newsreader serif, and dither textures.
+		[Learn more on Zenso.ink &rarr;](https://zenso.ink)
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="Community Discord" icon="discord">
+		Connect with creators, ask questions about hardware & homelab self-hosting, and share your widget ideas.
+		[Join the Discord &rarr;](https://discord.gg/vTjzkwz3XV)
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="Documentation in Progress" icon="document">
+		Technical guides for Docker self-hosting, firmware flashing, and widget plugin SDK are coming soon.
+		[Follow updates &rarr;](https://github.com/zensoink)
 	</Card>
 </CardGrid>

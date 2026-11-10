@@ -1,17 +1,296 @@
+@import '@fontsource-variable/newsreader/standard.css';
+@import '@fontsource-variable/newsreader/standard-italic.css';
+@import '@fontsource-variable/plus-jakarta-sans/index.css';
+
 @layer base, starlight, theme, components, utilities;
 
 @import '@astrojs/starlight-tailwind';
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' layer(utilities);
 
-@theme {
-	/*
-	Configure your Tailwind theme that will be used by Starlight.
-	https://starlight.astro.build/guides/css-and-tailwind/#styling-starlight-with-tailwind
-	*/
+:root {
+	--sl-font: 'Plus Jakarta Sans Variable', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	--sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+	/* ACeP 7-Color Pigment Tokens */
+	--acep-black: #1a1a18;
+	--acep-white: #f5f4f0;
+	--acep-red: #b85c4c;
+	--acep-green: #6b8e7a;
+	--acep-blue: #4a6fa5;
+	--acep-yellow: #c4a77d;
+	--acep-brown: #8b7355;
+
+	/* Wood Craft Tokens */
+	--wood-oak: #c4a77d;
+	--wood-walnut: #6b5344;
+	--wood-inner: #8b7355;
 }
 
-/*
-Add additional Tailwind styles to this file:
-https://tailwindcss.com/docs/adding-custom-styles#using-custom-css
-*/
+/* Light Mode (Warm Paper) */
+:root[data-theme='light'] {
+	color-scheme: light;
+	--sl-color-accent-low: #f0eee9;
+	--sl-color-accent: #8b7355;
+	--sl-color-accent-high: #4a3627;
+
+	--sl-color-white: #1a1a18;
+	--sl-color-gray-1: #262420;
+	--sl-color-gray-2: #443f36;
+	--sl-color-gray-3: #6b6b66;
+	--sl-color-gray-4: #8b8680;
+	--sl-color-gray-5: #d9d6cf;
+	--sl-color-gray-6: #f0eee9;
+	--sl-color-gray-7: #f9f8f6;
+	--sl-color-black: #ffffff;
+
+	--sl-color-bg: #f9f8f6;
+	--sl-color-bg-nav: #f9f8f6;
+	--sl-color-bg-sidebar: #f5f4f0;
+	--sl-color-bg-inline-code: #e8e6e1;
+	--sl-color-hairline: #d9d6cf;
+	--sl-color-hairline-light: #e8e6e1;
+	--sl-color-text: #1a1a18;
+	--sl-color-text-accent: #8b7355;
+
+	/* Dither texture tokens */
+	--dither-color: rgb(26 26 24 / 15%);
+	--dither-color-dense: rgb(26 26 24 / 20%);
+	--dither-dot-color: #1a1a18;
+	--dither-shadow-color: rgb(26 26 24 / 8%);
+
+	--card-bg: #ffffff;
+	--card-border: #d9d6cf;
+}
+
+/* Dark Mode (Charcoal Ink) */
+:root[data-theme='dark'] {
+	color-scheme: dark;
+	--sl-color-accent-low: #3b372f;
+	--sl-color-accent: #c4a77d;
+	--sl-color-accent-high: #e8d5c4;
+
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #f4efe8;
+	--sl-color-gray-2: #d9d6cf;
+	--sl-color-gray-3: #b5aba0;
+	--sl-color-gray-4: #6b6b66;
+	--sl-color-gray-5: #443f36;
+	--sl-color-gray-6: #2e2b26;
+	--sl-color-gray-7: #201e1b;
+	--sl-color-black: #14120f;
+
+	--sl-color-bg: #262420;
+	--sl-color-bg-nav: #262420;
+	--sl-color-bg-sidebar: #22201d;
+	--sl-color-bg-inline-code: #322f29;
+	--sl-color-hairline: #443f36;
+	--sl-color-hairline-light: #322f29;
+	--sl-color-text: #f4efe8;
+	--sl-color-text-accent: #c4a77d;
+
+	/* Dither texture tokens */
+	--dither-color: rgb(244 239 232 / 8%);
+	--dither-color-dense: rgb(244 239 232 / 12%);
+	--dither-dot-color: #f4efe8;
+	--dither-shadow-color: rgb(20 18 15 / 40%);
+
+	--card-bg: #322f29;
+	--card-border: #443f36;
+}
+
+/* E-Ink Paper Texture Background */
+html,
+body {
+	background-color: var(--sl-color-bg);
+	color: var(--sl-color-text);
+	position: relative;
+	min-height: 100vh;
+}
+
+/* Body E-Ink Dither Background Effect that smoothly fades out on scroll */
+body::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+	z-index: 0;
+	background-image: radial-gradient(circle, var(--dither-color) 0.5px, transparent 0.5px);
+	background-size: 4px 4px;
+	opacity: var(--body-dither-opacity, 0.45);
+	mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 80vh);
+	-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 80vh);
+	transition: opacity 0.1s ease-out;
+}
+
+/* Ensure content sits cleanly above the body dither overlay */
+.page {
+	position: relative;
+	z-index: 1;
+}
+
+/* Translucent Frosted Glass Header matching zenso-website */
+.header {
+	background-color: color-mix(in srgb, var(--sl-color-bg-nav) 82%, transparent) !important;
+	backdrop-filter: blur(8px) !important;
+	-webkit-backdrop-filter: blur(8px) !important;
+	border-bottom: 1px solid var(--sl-color-hairline) !important;
+}
+
+/* Sidebar Styling */
+@media (min-width: 50rem) {
+	.sidebar-pane {
+		background-color: color-mix(in srgb, var(--sl-color-bg-sidebar) 85%, transparent) !important;
+		backdrop-filter: blur(8px) !important;
+		-webkit-backdrop-filter: blur(8px) !important;
+		border-inline-end: 1px solid var(--sl-color-hairline) !important;
+	}
+}
+
+/* Editorial Serif Headings matching zenso-website */
+h1,
+h2,
+h3,
+.site-title,
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3 {
+	font-family: 'Newsreader Variable', Georgia, serif;
+	letter-spacing: -0.015em;
+	font-weight: 500;
+}
+
+/* Custom Navigation Badges & Polish */
+.site-title {
+	font-weight: 600;
+	letter-spacing: -0.02em;
+}
+
+.sl-markdown-content a {
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+}
+
+/* Badge & Callout Styling */
+.sl-badge {
+	font-family: 'Plus Jakarta Sans Variable', system-ui, sans-serif;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	font-size: 0.72rem;
+}
+
+/* Zenso Card Styling (Print/Paper Aesthetic with Hard Offset Shadow) */
+.card,
+.starlight-card {
+	background-color: var(--card-bg) !important;
+	border: 1px solid var(--card-border) !important;
+	border-radius: 4px !important;
+	box-shadow: 2px 2px 0 0 var(--dither-shadow-color) !important;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover,
+.starlight-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 4px 4px 0 0 var(--dither-shadow-color) !important;
+}
+
+/* Starlight Action Buttons matching zenso-website buttons */
+.sl-link-button.primary {
+	background-color: var(--sl-color-text) !important;
+	color: var(--sl-color-bg) !important;
+	border-radius: 4px !important;
+	border: 1px solid var(--sl-color-text) !important;
+	font-weight: 500 !important;
+	transition: opacity 0.2s ease, transform 0.15s ease !important;
+}
+
+.sl-link-button.primary:hover {
+	opacity: 0.88 !important;
+	transform: translateY(-1px) !important;
+}
+
+.sl-link-button.secondary {
+	background-color: color-mix(in srgb, var(--sl-color-bg) 60%, transparent) !important;
+	color: var(--sl-color-text) !important;
+	border: 1px solid var(--sl-color-hairline) !important;
+	border-radius: 4px !important;
+	font-weight: 500 !important;
+	transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease !important;
+}
+
+.sl-link-button.secondary:hover {
+	background-color: color-mix(in srgb, var(--sl-color-text) 6%, transparent) !important;
+	border-color: var(--sl-color-text-accent) !important;
+	transform: translateY(-1px) !important;
+}
+
+.sl-link-button.minimal {
+	color: var(--sl-color-text) !important;
+	border-radius: 4px !important;
+	font-weight: 500 !important;
+}
+
+/* Smooth Theme Switch Transitions & Ensō Ink Ripple View Transitions */
+html {
+	transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation: none;
+	mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+	z-index: 1;
+}
+
+::view-transition-new(root) {
+	z-index: 9999;
+}
+
+/* E-Ink Dithering Pattern Utility Classes */
+.dither-pattern {
+	background-image: radial-gradient(circle, var(--dither-dot-color) 0.5px, transparent 0.5px);
+	background-size: 4px 4px;
+}
+
+.dither-pattern-light {
+	background-image: radial-gradient(circle, var(--dither-color) 0.5px, transparent 0.5px);
+	background-size: 4px 4px;
+}
+
+.dither-pattern-dense {
+	background-image: radial-gradient(circle, var(--dither-color-dense) 0.4px, transparent 0.4px);
+	background-size: 3px 3px;
+}
+
+.bg-foreground-5 {
+	background-color: color-mix(in srgb, var(--sl-color-text) 5%, transparent);
+}
+
+/* e-ink section-enter refresh flash (opacity [0.3, 0], 0.65s ease-out) */
+.eink-flash {
+	animation: zenow-eink-flash 0.65s ease-out forwards;
+}
+
+@keyframes zenow-eink-flash {
+	from {
+		opacity: 0.3;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.eink-flash {
+		animation: none !important;
+		opacity: 0 !important;
+	}
+}
