@@ -1,0 +1,202 @@
+---
+/**
+ * Zenso Documentation Header Component
+ * Custom override matching zenso-website navigation architecture:
+ * Left: Logo mark + zenso.ink + Docs pill badge
+ * Center: E-paper styled search trigger bar with ⌘K badge
+ * Right: Language switcher (EN · PL · JA) · Theme toggle · External links (GitHub · Discord · Zenso Web)
+ */
+import config from 'virtual:starlight/user-config';
+import Search from 'virtual:starlight/components/Search';
+import SiteTitle from './SiteTitle.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import ExternalLinks from './ExternalLinks.astro';
+
+const shouldRenderSearch =
+	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+---
+
+<div class="zen-header">
+	<div class="zen-header-left">
+		<SiteTitle />
+	</div>
+
+	<div class="zen-header-center print:hidden">
+		{shouldRenderSearch && <Search />}
+	</div>
+
+	<div class="zen-header-right print:hidden">
+		<LanguageSwitcher />
+		<span aria-hidden="true" class="zen-header-sep">·</span>
+		<ThemeToggle />
+		<span aria-hidden="true" class="zen-header-sep">·</span>
+		<ExternalLinks />
+	</div>
+</div>
+
+<style>
+	.zen-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		height: 100%;
+		gap: 1rem;
+	}
+
+	.zen-header-left {
+		display: flex;
+		align-items: center;
+		min-width: 0;
+		flex-shrink: 0;
+	}
+
+	.zen-header-center {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 1;
+		max-width: 26rem;
+		margin: 0 auto;
+	}
+
+	.zen-header-right {
+		display: none;
+		align-items: center;
+		gap: 0.65rem;
+		flex-shrink: 0;
+	}
+
+	.zen-header-sep {
+		user-select: none;
+		color: var(--sl-color-hairline);
+		font-size: 0.8rem;
+		opacity: 0.8;
+	}
+
+	/* Search Input Bar Customization (Calm E-Paper Aesthetic) */
+	.zen-header-center :global(site-search) {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+	}
+
+	.zen-header-center :global(button[data-open-modal]) {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		height: 2.15rem;
+		width: 100%;
+		max-width: 24rem;
+		padding: 0 0.75rem;
+		background-color: color-mix(in srgb, var(--sl-color-bg) 65%, transparent);
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 4px;
+		color: var(--sl-color-gray-3);
+		font-size: 0.8125rem;
+		font-family: var(--sl-font);
+		cursor: pointer;
+		transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+	}
+
+	.zen-header-center :global(button[data-open-modal]:hover) {
+		border-color: var(--sl-color-text-accent);
+		background-color: var(--sl-color-bg);
+		color: var(--sl-color-text);
+		box-shadow: 1px 1px 0 0 var(--dither-shadow-color);
+	}
+
+	.zen-header-center :global(button[data-open-modal] svg) {
+		width: 0.95rem;
+		height: 0.95rem;
+		stroke-width: 2;
+		color: var(--sl-color-gray-3);
+		transition: color 0.15s ease;
+	}
+
+	.zen-header-center :global(button[data-open-modal]:hover svg) {
+		color: var(--sl-color-text-accent);
+	}
+
+	.zen-header-center :global(button[data-open-modal] > kbd) {
+		margin-inline-start: auto;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.15rem;
+		font-family: var(--sl-font-mono);
+		font-size: 0.6875rem;
+		line-height: 1;
+		padding: 0.15rem 0.35rem;
+		background-color: var(--sl-color-accent-low);
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 3px;
+		color: var(--sl-color-gray-2);
+	}
+
+	.zen-header-center :global(button[data-open-modal] > kbd kbd) {
+		border: none !important;
+		background: transparent !important;
+		padding: 0 !important;
+		font-family: inherit !important;
+		font-size: inherit !important;
+		color: inherit !important;
+		box-shadow: none !important;
+	}
+
+	@media (min-width: 50rem) {
+		.zen-header-right {
+			display: flex;
+		}
+	}
+
+	@media (max-width: 49.99rem) {
+		.zen-header {
+			justify-content: space-between;
+			gap: 0.5rem;
+		}
+
+		.zen-header-center {
+			justify-content: flex-end;
+			margin: 0;
+			max-width: none;
+		}
+
+		.zen-header-center :global(button[data-open-modal]) {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			height: 2.15rem;
+			width: 100%;
+			max-width: 14rem;
+			padding: 0 0.75rem;
+			background-color: color-mix(in srgb, var(--sl-color-bg) 65%, transparent);
+			border: 1px solid var(--sl-color-hairline);
+			border-radius: 4px;
+			color: var(--sl-color-gray-3);
+			font-size: 0.8125rem;
+			box-shadow: 1px 1px 0 0 var(--dither-shadow-color);
+		}
+
+		.zen-header-center :global(button[data-open-modal] span) {
+			display: inline !important;
+			color: var(--sl-color-gray-3);
+			font-size: 0.8125rem;
+			font-family: var(--sl-font);
+		}
+
+		.zen-header-center :global(button[data-open-modal]:hover) {
+			border-color: var(--sl-color-text-accent);
+			background-color: var(--sl-color-bg);
+			color: var(--sl-color-text);
+		}
+
+		.zen-header-center :global(button[data-open-modal]:hover span) {
+			color: var(--sl-color-text);
+		}
+
+		.zen-header-center :global(button[data-open-modal] > kbd) {
+			display: none !important;
+		}
+	}
+</style>

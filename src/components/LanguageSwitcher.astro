@@ -1,0 +1,137 @@
+---
+/**
+ * Zen Typographic Language Switcher Component
+ * Exact parity with zenso-website ZenLanguageSwitcher:
+ * Pure letterspaced typography with subtle editorial dot separators (EN · PL · JA)
+ * Persists to localStorage key 'zenso.lang'
+ */
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const langs = [
+	{ code: 'en', label: 'EN' },
+	{ code: 'pl', label: 'PL' },
+	{ code: 'ja', label: 'JA' },
+];
+
+const pathname = Astro.url.pathname;
+let currentLang = 'en';
+if (pathname.includes('/pl/') || pathname.endsWith('/pl')) {
+	currentLang = 'pl';
+} else if (pathname.includes('/ja/') || pathname.endsWith('/ja')) {
+	currentLang = 'ja';
+}
+---
+
+<div
+	class:list={['zen-language-switcher', className]}
+	role="group"
+	aria-label="Language selector"
+	data-zen-lang-switcher
+>
+	{
+		langs.map((item, index) => (
+			<>
+				{index > 0 && <span aria-hidden="true" class="zen-sep">·</span>}
+				<button
+					type="button"
+					data-lang={item.code}
+					class:list={['zen-lang-btn', { active: item.code === currentLang }]}
+					aria-label={`Switch language to ${item.label}`}
+					aria-current={item.code === currentLang ? 'page' : undefined}
+					lang={item.code}
+				>
+					{item.label}
+				</button>
+			</>
+		))
+	}
+</div>
+
+<style>
+	.zen-language-switcher {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+		font-family: var(--sl-font-mono);
+		font-size: 11px;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.zen-sep {
+		user-select: none;
+		color: var(--sl-color-hairline);
+		opacity: 0.8;
+	}
+
+	.zen-lang-btn {
+		cursor: pointer;
+		border: none;
+		background: transparent;
+		border-radius: 2px;
+		padding: 0.125rem 0.25rem;
+		font-family: inherit;
+		font-size: inherit;
+		letter-spacing: inherit;
+		color: var(--sl-color-gray-3);
+		transition: color 0.15s ease, font-weight 0.15s ease;
+	}
+
+	.zen-lang-btn:hover {
+		color: var(--sl-color-text);
+	}
+
+	.zen-lang-btn.active {
+		font-weight: 700;
+		color: var(--sl-color-text);
+	}
+
+	.zen-lang-btn:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+		outline-offset: 1px;
+	}
+</style>
+
+<script>
+	function initLanguageSwitchers() {
+		const LANG_KEY = 'zenso.lang';
+
+		function setStoredLang(code: string) {
+			try {
+				localStorage.setItem(LANG_KEY, code);
+			} catch {}
+		}
+
+		document.querySelectorAll<HTMLElement>('[data-zen-lang-switcher]').forEach((container) => {
+			if (container.dataset.initialized) return;
+			container.dataset.initialized = 'true';
+
+			container.querySelectorAll<HTMLButtonElement>('[data-lang]').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					const code = btn.getAttribute('data-lang') || 'en';
+					setStoredLang(code);
+
+					// When translations become available, navigate to the localized path
+					if (code === 'en') {
+						const currentPath = window.location.pathname;
+						if (currentPath.includes('/pl/') || currentPath.includes('/ja/')) {
+							const cleanPath = currentPath.replace(/\/docs\/(pl|ja)\//, '/docs/');
+							window.location.pathname = cleanPath;
+						}
+					}
+				});
+			});
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initLanguageSwitchers);
+	} else {
+		initLanguageSwitchers();
+	}
+	document.addEventListener('astro:page-load', initLanguageSwitchers);
+</script>

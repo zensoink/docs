@@ -16,6 +16,10 @@ export default defineConfig({
 			},
 			components: {
 				SiteTitle: './src/components/SiteTitle.astro',
+				Header: './src/components/Header.astro',
+				PageFrame: './src/components/PageFrame.astro',
+				MobileMenuFooter: './src/components/MobileMenuFooter.astro',
+				MobileMenuToggle: './src/components/MobileMenuToggle.astro',
 			},
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/zensoink' },
