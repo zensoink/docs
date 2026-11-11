@@ -103,13 +103,13 @@ const { class: className } = Astro.props;
 </style>
 
 <script>
-	function initThemeToggles() {
-		const STORAGE_KEY = 'starlight-theme';
+	import { STARLIGHT_THEME_STORAGE_KEY, THEME_STORAGE_KEY } from '../lib/constants';
 
+	function initThemeToggles() {
 		function getCurrentTheme(): 'dark' | 'light' {
 			const rootTheme = document.documentElement.getAttribute('data-theme');
 			if (rootTheme === 'dark' || rootTheme === 'light') return rootTheme;
-			const stored = localStorage.getItem(STORAGE_KEY);
+			const stored = localStorage.getItem(STARLIGHT_THEME_STORAGE_KEY);
 			if (stored === 'dark' || stored === 'light') return stored;
 			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 		}
@@ -119,8 +119,8 @@ const { class: className } = Astro.props;
 			document.documentElement.classList.toggle('dark', theme === 'dark');
 			document.documentElement.style.colorScheme = theme;
 			try {
-				localStorage.setItem(STORAGE_KEY, theme);
-				localStorage.setItem('zenso.theme', theme);
+				localStorage.setItem(STARLIGHT_THEME_STORAGE_KEY, theme);
+				localStorage.setItem(THEME_STORAGE_KEY, theme);
 			} catch {}
 
 			document.querySelectorAll<HTMLButtonElement>('[data-zen-theme-toggle]').forEach((btn) => {

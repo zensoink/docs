@@ -39,7 +39,7 @@ test('wrangler.jsonc configures Cloudflare Workers Static Assets with strict, le
 		'zenso.ink/docs*',
 		'zenso.ink/_docs_assets/*',
 		'zenso.ink/pagefind/*',
-		'zenso.ink/docs-sitemap*.xml',
+		'zenso.ink/docs-sitemap*',
 	];
 
 	for (const expected of expectedPatterns) {
@@ -76,14 +76,14 @@ test('Static build outputs docs-sitemap files matching wrangler.jsonc route patt
 	const indexContent = fs.readFileSync(docsSitemapPath, 'utf-8');
 	assert.match(
 		indexContent,
-		/https:\/\/zenso\.ink\/docs-sitemap-0\.xml/,
+		/https:\/\/(www\.)?zenso\.ink\/docs-sitemap-0\.xml/,
 		'docs-sitemap.xml must point to docs-sitemap-0.xml'
 	);
 
 	const urlsetContent = fs.readFileSync(docsSitemap0Path, 'utf-8');
-	assert.match(urlsetContent, /https:\/\/zenso\.ink\/en\/docs\//);
-	assert.match(urlsetContent, /https:\/\/zenso\.ink\/pl\/docs\//);
-	assert.match(urlsetContent, /https:\/\/zenso\.ink\/ja\/docs\//);
+	assert.match(urlsetContent, /https:\/\/(www\.)?zenso\.ink\/en\/docs\//);
+	assert.match(urlsetContent, /https:\/\/(www\.)?zenso\.ink\/pl\/docs\//);
+	assert.match(urlsetContent, /https:\/\/(www\.)?zenso\.ink\/ja\/docs\//);
 
 	// Redundant sitemaps must be removed to prevent duplicates
 	assert.ok(

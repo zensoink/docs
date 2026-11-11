@@ -1,14 +1,15 @@
 ---
 import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
-import { getDocsHome, resolveLocale } from '../lib/routing';
+import { getDocsHome, getMainSiteUrl, resolveLocale } from '../lib/routing';
 const { siteTitle } = Astro.locals.starlightRoute;
 const locale = resolveLocale(Astro.url.pathname);
 const docsHomeHref = getDocsHome(locale);
+const mainSiteHref = getMainSiteUrl(locale);
 ---
 
 <div class="site-title-container sl-flex">
-	<a href="https://zenso.ink" class="site-title sl-flex" title={`Visit ${siteTitle} main website`}>
+	<a href={mainSiteHref} class="site-title sl-flex" title={`Visit ${siteTitle} main website`}>
 		{config.logo && logos.dark && (
 			<>
 				<img
