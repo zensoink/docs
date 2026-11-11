@@ -41,8 +41,8 @@
     "title": "Quick Start (Onboarding)",
     "description": "Step-by-step unboxing and onboarding guide to get your Zenso frame up and running.",
     "intro": "Setting up your Zenso frame requires zero coding and takes less than two minutes.",
-    "step1_title": "Power On",
-    "step1_desc": "Turn on the power switch located on the rear panel. The e-paper display will cycle through an initial waveform wipe and present the onboarding screen.",
+    "step1_title": "Unbox and Power On",
+    "step1_desc": "Slide the power switch on the rear panel to the ON position. The e-paper display will cycle through a clean waveform wipe and present the onboarding welcome screen.",
     "step2_title": "Connect to Wi-Fi",
     "step2_desc": "On your smartphone, open your Wi-Fi settings:\n1. Connect to the temporary hotspot broadcast by the frame (SSID: `Zenso-Setup`).\n2. A captive portal will appear automatically.\n3. Select your home 2.4 GHz Wi-Fi network and enter your network password.\n   *(Note: 5 GHz-only bands are not supported by the 802.11 b/g/n radio).* ",
     "step3_title": "Scan the Pairing QR Code",
@@ -53,9 +53,15 @@
     "step5_desc": "Your frame will update quietly according to your preferred schedule (e.g., hourly during the day, asleep overnight) and immediately enter ultra-low power deep sleep (< 15 µA) between refreshes, preserving battery and home tranquility."
   },
   "overview": {
-    "title": "Overview",
+    "title": "Zenso Documentation",
     "description": "Zenso is a cordless 7-color e-paper smart frame that stays out of your way — no light, no noise, months of battery life.",
     "intro": "Zenso is a cordless 7-color e-paper smart frame designed to fit quietly into your home. It displays family photos, weather, and calendar events without emitting a single photon of light — just like a print on the wall. When the battery runs out, the last image stays on the screen indefinitely. Plug in USB-C when you're ready to refresh.",
+    "philosophy_title": "The Spirit of Japandi & Calm Living",
+    "philosophy_body": "Modern living spaces are saturated with bright LED and OLED screens competing for human attention. Zenso embodies the Japanese concept of *Ma* (negative space) and Scandinavian functionalism. It harmonizes with your interior, acting as a piece of digital furniture that breathes with your daily rhythm.",
+    "display_title": "Advanced 7-Color Electronic Paper",
+    "display_body": "At the heart of every frame lies an Advanced Color e-Paper (ACeP) display featuring physical color microcapsules. By moving red, green, blue, yellow, black, and white pigments with microscopic voltage pulses, the screen reflects natural ambient light. It emits **zero photons**, produces zero blue light in the dark, and causes zero eyestrain.",
+    "craftsmanship_title": "Natural European Solid Oak",
+    "craftsmanship_body": "Every frame enclosure is CNC-machined from solid European oak and finished by hand with natural protective oils. There are no visible wires, no intrusive plastic bezels, and no glowing status LEDs on the front face.",
     "refresh_title": "Updates that follow your rhythm",
     "refresh_desc": "Set your own schedule in the web panel — hourly updates during the day, complete silence overnight. The frame wakes up only when needed and immediately goes back to sleep, so it never disrupts your home.",
     "local_title": "Your data stays yours",
@@ -74,30 +80,6 @@
     "a4": "**Yes.**\n\nYou can share your frame's private invite link or pairing QR code with trusted family members through [panel.zenso.ink](https://panel.zenso.ink) so they can contribute photos to your shared album without needing technical knowledge."
   },
   "user_guide": {
-    "overview": {
-      "title": "Overview & Philosophy",
-      "description": "Discover the calm technology, Japandi aesthetics, and paper-like tranquility of the Zenso smart frame.",
-      "lead": "Zenso was created to bring information and art into your home without the stress, bright glow, and constant notifications of conventional displays. Built around the principles of **calm technology**, Zenso stays out of your way until you choose to look at it.",
-      "philosophy_title": "The Spirit of Japandi & Calm Living",
-      "philosophy_body": "Modern living spaces are saturated with bright LED and OLED screens competing for human attention. Zenso embodies the Japanese concept of *Ma* (negative space) and Scandinavian functionalism. It harmonizes with your interior, acting as a piece of digital furniture that breathes with your daily rhythm.",
-      "display_title": "Advanced 7-Color Electronic Paper",
-      "display_body": "At the heart of every frame lies an Advanced Color e-Paper (ACeP) display featuring physical color microcapsules. By moving red, green, blue, yellow, black, and white pigments with microscopic voltage pulses, the screen reflects natural ambient light. It emits **zero photons**, produces zero blue light in the dark, and causes zero eyestrain.",
-      "craftsmanship_title": "Natural European Solid Oak",
-      "craftsmanship_body": "Every frame enclosure is CNC-machined from solid European oak and finished by hand with natural protective oils. There are no visible wires, no intrusive plastic bezels, and no glowing status LEDs on the front face."
-    },
-    "quickstart": {
-      "title": "Unboxing & Wi-Fi Setup",
-      "description": "Get your Zenso frame unboxed, connected to Wi-Fi via captive portal, and paired in under three minutes.",
-      "lead": "Setting up your Zenso frame requires no technical background and takes less than three minutes using any smartphone or laptop.",
-      "step1_title": "Unbox and Power On",
-      "step1_body": "Slide the power switch on the rear panel to the **ON** position. The e-paper display will cycle through a clean waveform wipe and present the onboarding welcome screen.",
-      "step2_title": "Connect to the Temporary Hotspot",
-      "step2_body": "On your smartphone or computer, open your Wi-Fi network settings and connect to the temporary network named **`Zenso-Setup`**.",
-      "step3_title": "Select Your Home 2.4 GHz Network",
-      "step3_body": "A captive portal web page will open automatically. Choose your home 2.4 GHz Wi-Fi network from the list, enter your password, and save. *(Note: 5 GHz-only bands are not supported by the hardware radio).*",
-      "step4_title": "Scan the Pairing QR Code",
-      "step4_body": "Once connected to the internet, the frame will fetch authorization and display an authentic pairing QR code. Scan it with your phone's camera to claim the frame in your Zenso Web Panel."
-    },
     "panel_basics": {
       "title": "Managing Your Frame",
       "description": "Learn how to use the Zenso Web Panel to monitor frame battery levels, network status, and screen assignments.",
@@ -294,7 +276,7 @@
       "hardware_protocol": "Hardware & BYOD"
     },
     "items": {
-      "overview": "Overview",
+      "overview": "Overview & Philosophy",
       "quickstart": "Quick Start",
       "faq": "FAQ"
     }

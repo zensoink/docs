@@ -56,8 +56,8 @@ test('Build distribution contains styled documentation landing page with full si
 	// Verify template: splash / hero is eliminated
 	assert.doesNotMatch(content, /<div class="hero/i, 'Docs landing must not have hero splash banner');
 
-	// Verify desktop/mobile sidebar is present with Overview as active page
-	assert.match(content, /<a href="\/en\/docs\/" aria-current="page"[^>]*><span[^>]*>Overview<\/span><\/a>/, 'Sidebar must render Overview as active page');
+	// Verify desktop/mobile sidebar is present with Overview & Philosophy as active page
+	assert.match(content, /<a href="\/en\/docs\/" aria-current="page"[^>]*><span[^>]*>Overview &amp; Philosophy<\/span><\/a>/, 'Sidebar must render Overview & Philosophy as active page');
 	assert.match(content, /Start Here/, 'Sidebar must render Start Here section');
 });
 

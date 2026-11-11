@@ -114,6 +114,12 @@ export default defineConfig({
 		'/en/docs/getting-started/overview': '/en/docs/',
 		'/pl/docs/getting-started/overview': '/pl/docs/',
 		'/ja/docs/getting-started/overview': '/ja/docs/',
+		'/en/docs/user-guide/overview': '/en/docs/',
+		'/pl/docs/user-guide/overview': '/pl/docs/',
+		'/ja/docs/user-guide/overview': '/ja/docs/',
+		'/en/docs/user-guide/quickstart': '/en/docs/getting-started/quickstart/',
+		'/pl/docs/user-guide/quickstart': '/pl/docs/getting-started/quickstart/',
+		'/ja/docs/user-guide/quickstart': '/ja/docs/getting-started/quickstart/',
 	},
 	integrations: [
 		templateI18nCompiler(),
@@ -169,8 +175,6 @@ export default defineConfig({
 						ja: jaDict.sidebar.sections.user_guide,
 					},
 					items: [
-						createSidebarItem('docs/user-guide/overview', enDict.user_guide.overview.title, plDict.user_guide.overview.title, jaDict.user_guide.overview.title),
-						createSidebarItem('docs/user-guide/quickstart', enDict.user_guide.quickstart.title, plDict.user_guide.quickstart.title, jaDict.user_guide.quickstart.title),
 						createSidebarItem('docs/user-guide/panel-basics', enDict.user_guide.panel_basics.title, plDict.user_guide.panel_basics.title, jaDict.user_guide.panel_basics.title),
 						createSidebarItem('docs/user-guide/screens-and-layouts', enDict.user_guide.screens_and_layouts.title, plDict.user_guide.screens_and_layouts.title, jaDict.user_guide.screens_and_layouts.title),
 						createSidebarItem('docs/user-guide/refresh-and-battery', enDict.user_guide.refresh_and_battery.title, plDict.user_guide.refresh_and_battery.title, jaDict.user_guide.refresh_and_battery.title),
