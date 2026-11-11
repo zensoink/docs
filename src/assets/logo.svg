@@ -1,0 +1,11 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="11" y="11" width="138" height="138" fill="#1c1c1b" />
+  <rect x="26" y="26" width="108" height="108" fill="#ffffff" />
+  <rect x="37" y="37" width="86" height="86" fill="#d0d0cf" />
+  <rect x="37" y="37" width="86" height="86" fill="url(#zenso-mark-dots)" />
+  <defs>
+    <pattern id="zenso-mark-dots" width="21.5" height="21.5" patternUnits="userSpaceOnUse" patternTransform="translate(37 37)">
+      <circle cx="10.75" cy="10.75" r="3.6" fill="#6f6f6d" />
+    </pattern>
+  </defs>
+</svg>

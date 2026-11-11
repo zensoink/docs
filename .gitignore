@@ -17,5 +17,18 @@ pnpm-debug.log*
 .env
 .env.production
 
+# IDE files
+.idea/
+.vscode/
+
 # macOS-specific files
 .DS_Store
+
+# documentation backup (private / untracked)
+docs_backup/
+
+# generated i18n docs (compiled from src/templates/ + src/i18n/)
+src/content/docs/en/
+src/content/docs/pl/
+src/content/docs/ja/
+src/content/docs/docs/

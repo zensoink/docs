@@ -1,0 +1,133 @@
+---
+import { logos } from 'virtual:starlight/user-images';
+import config from 'virtual:starlight/user-config';
+const { siteTitle } = Astro.locals.starlightRoute;
+const locale = Astro.currentLocale || 'en';
+const docsHomeHref = `/${locale}/docs/`;
+---
+
+<div class="site-title-container sl-flex">
+	<a href="https://zenso.ink" class="site-title sl-flex" title={`Visit ${siteTitle} main website`}>
+		{config.logo && logos.dark && (
+			<>
+				<img
+					class:list={{ 'light:sl-hidden print:hidden': !('src' in config.logo) }}
+					alt={config.logo.alt}
+					src={logos.dark.src}
+					width={logos.dark.width}
+					height={logos.dark.height}
+				/>
+				{!('src' in config.logo) && (
+					<img
+						class="dark:sl-hidden print:block"
+						alt={config.logo.alt}
+						src={logos.light?.src}
+						width={logos.light?.width}
+						height={logos.light?.height}
+					/>
+				)}
+			</>
+		)}
+		<span class="site-title-text" translate="no">zenso.ink</span>
+	</a>
+	<a href={docsHomeHref} class="docs-home-pill" title="Documentation Home">Docs</a>
+</div>
+
+<style>
+	.site-title-container {
+		align-items: center;
+		gap: 0.75rem;
+		min-width: 0;
+	}
+
+	.site-title {
+		align-items: center;
+		gap: 0.625rem;
+		font-weight: 500;
+		color: var(--sl-color-text);
+		text-decoration: none;
+		white-space: nowrap;
+		min-width: 0;
+	}
+
+	.site-title:hover {
+		opacity: 0.9;
+	}
+
+	.site-title-text {
+		overflow: hidden;
+		font-family: 'Newsreader Variable', Georgia, serif;
+		font-size: 1.125rem;
+		line-height: 1;
+		letter-spacing: -0.025em;
+		margin-top: 0.125rem;
+		color: var(--sl-color-text);
+	}
+
+	img {
+		width: 28px;
+		height: 28px;
+		max-width: 28px;
+		max-height: 28px;
+		flex-shrink: 0;
+		object-fit: contain;
+	}
+
+	.docs-home-pill {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.15rem 0.5rem;
+		border-radius: 9999px;
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		background: var(--sl-color-accent-low);
+		color: var(--sl-color-text-accent);
+		border: 1px solid var(--sl-color-hairline);
+		text-decoration: none;
+		transition: all 0.15s ease;
+	}
+
+	.docs-home-pill:hover {
+		background: var(--sl-color-accent);
+		color: var(--sl-color-bg);
+		border-color: var(--sl-color-accent);
+	}
+</style>
+
+<script>
+	function setupBodyDitherScroll() {
+		const maxScroll = 300;
+		const baseOpacity = 0.45;
+		let ticking = false;
+
+		function update() {
+			const scrollY = window.scrollY || 0;
+			const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
+			const currentOpacity = (baseOpacity * (1 - progress)).toFixed(3);
+			document.documentElement.style.setProperty('--body-dither-opacity', currentOpacity);
+			ticking = false;
+		}
+
+		window.addEventListener(
+			'scroll',
+			() => {
+				if (!ticking) {
+					window.requestAnimationFrame(update);
+					ticking = true;
+				}
+			},
+			{ passive: true }
+		);
+
+		update();
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', setupBodyDitherScroll);
+	} else {
+		setupBodyDitherScroll();
+	}
+	document.addEventListener('astro:page-load', setupBodyDitherScroll);
+</script>

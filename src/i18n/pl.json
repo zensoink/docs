@@ -1,0 +1,39 @@
+{
+  "site": {
+    "title": "Dokumentacja Zenso",
+    "description": "Kanoniczne źródło wiedzy i kompletny przewodnik techniczny po ekosystemie 7-kolorowego e-papieru Zenso."
+  },
+  "hero": {
+    "tagline": "Kompletne źródło wiedzy o Zenso — bezprzewodowa ramka ze smart e-papierem 7-kolorowym, firmware ESP32, panel webowy, self-hosted Docker stack oraz otwarte SDK pluginów.",
+    "actions": {
+      "zenso_web": "Odwiedź Zenso.ink",
+      "github": "Organizacja GitHub",
+      "discord": "Dołącz do Discorda"
+    }
+  },
+  "ecosystem": {
+    "section_title": "Poznaj ekosystem",
+    "cards": {
+      "opensource": {
+        "title": "Open Source i społeczność",
+        "desc": "Zenso tworzone jest z myślą o otwartym ekosystemie. Odkryj publiczne repozytoria, obrazy kontenerów oraz narzędzia społeczności.",
+        "link": "Zobacz GitHub →"
+      },
+      "design_system": {
+        "title": "System projektowania i tokeny",
+        "desc": "Zasady spokojnego projektowania (calm computing): autentyczna 7-kolorowa paleta ACeP, ciepłe odcienie papieru, krój szeryfowy Newsreader i tekstury dither.",
+        "link": "Dowiedz się więcej na Zenso.ink →"
+      },
+      "discord": {
+        "title": "Społeczność Discord",
+        "desc": "Połącz się z twórcami, zadawaj pytania o sprzęt i self-hosting we własnym homelabie oraz dziel się pomysłami na widgety.",
+        "link": "Dołącz do Discorda →"
+      },
+      "in_progress": {
+        "title": "Dokumentacja w trakcie prac",
+        "desc": "Przewodniki techniczne dotyczące self-hostingu Docker, wgrywania firmware i SDK widgetów są w przygotowaniu.",
+        "link": "Śledź aktualizacje →"
+      }
+    }
+  }
+}

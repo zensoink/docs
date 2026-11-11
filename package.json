@@ -7,14 +7,24 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "check": "astro check",
+    "test": "astro check && node --test tests/*.test.mjs",
+    "deploy": "wrangler deploy",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.42.10",
     "@astrojs/starlight-tailwind": "^5.0.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^7.3.6",
     "sharp": "^0.35.3",
     "tailwindcss": "^4.2.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "typescript": "^5.7.3",
+    "wrangler": "^4.160.0"
   }
 }

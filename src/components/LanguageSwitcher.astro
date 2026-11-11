@@ -1,0 +1,236 @@
+---
+/**
+ * Zen Typographic Language Switcher Component
+ * Exact parity with zenso-website ZenLanguageSwitcher:
+ * Pure letterspaced typography with subtle editorial dot separators (EN · PL · JA)
+ * Persists to localStorage key 'zenso.lang', preserves scroll position, and provides live route switching
+ * Supports /{lang}/docs URL pattern (/docs for EN, /pl/docs for PL, /ja/docs for JA)
+ */
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const langs = [
+	{ code: 'en', label: 'EN' },
+	{ code: 'pl', label: 'PL' },
+	{ code: 'ja', label: 'JA' },
+];
+
+function getLocaleFromPath(pathname: string): string {
+	if (pathname.startsWith('/pl/') || pathname === '/pl' || pathname.startsWith('/pl/docs')) {
+		return 'pl';
+	}
+	if (pathname.startsWith('/ja/') || pathname === '/ja' || pathname.startsWith('/ja/docs')) {
+		return 'ja';
+	}
+	return 'en';
+}
+
+function computeLocalizedPath(pathname: string, targetLang: string): string {
+	let cleanPath = pathname;
+	if (cleanPath.startsWith('/pl/') || cleanPath === '/pl') {
+		cleanPath = cleanPath.slice(3) || '/';
+	} else if (cleanPath.startsWith('/ja/') || cleanPath === '/ja') {
+		cleanPath = cleanPath.slice(3) || '/';
+	} else if (cleanPath.startsWith('/en/') || cleanPath === '/en') {
+		cleanPath = cleanPath.slice(3) || '/';
+	}
+
+	if (!cleanPath.startsWith('/')) {
+		cleanPath = '/' + cleanPath;
+	}
+
+	if (!cleanPath.startsWith('/docs')) {
+		cleanPath = '/docs' + (cleanPath === '/' ? '/' : cleanPath);
+	}
+
+	return `/${targetLang}${cleanPath}`;
+}
+
+const currentPath = Astro.url.pathname;
+const currentLang = getLocaleFromPath(currentPath);
+---
+
+<div
+	class:list={['zen-language-switcher', className]}
+	role="group"
+	aria-label="Language selector"
+	data-zen-lang-switcher
+>
+	{
+		langs.map((item, index) => {
+			const targetHref = computeLocalizedPath(currentPath, item.code);
+			return (
+				<>
+					{index > 0 && <span aria-hidden="true" class="zen-sep">·</span>}
+					<button
+						type="button"
+						data-lang={item.code}
+						data-href={targetHref}
+						class:list={['zen-lang-btn', { active: item.code === currentLang }]}
+						aria-label={`Switch language to ${item.label}`}
+						aria-current={item.code === currentLang ? 'page' : undefined}
+						lang={item.code}
+					>
+						{item.label}
+					</button>
+				</>
+			);
+		})
+	}
+</div>
+
+<style>
+	.zen-language-switcher {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+		font-family: var(--sl-font-mono);
+		font-size: 11px;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.zen-sep {
+		user-select: none;
+		color: var(--sl-color-hairline);
+		opacity: 0.8;
+	}
+
+	.zen-lang-btn {
+		cursor: pointer;
+		border: none;
+		background: transparent;
+		border-radius: 2px;
+		padding: 0.125rem 0.25rem;
+		font-family: inherit;
+		font-size: inherit;
+		letter-spacing: inherit;
+		color: var(--sl-color-gray-3);
+		transition: color 0.15s ease, font-weight 0.15s ease;
+	}
+
+	.zen-lang-btn:hover {
+		color: var(--sl-color-text);
+	}
+
+	.zen-lang-btn.active {
+		font-weight: 700;
+		color: var(--sl-color-text);
+	}
+
+	.zen-lang-btn:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+		outline-offset: 1px;
+	}
+</style>
+
+<script>
+	const LANG_KEY = 'zenso.lang';
+	const SCROLL_KEY = 'zenso.lang_switch_scroll';
+
+	function getLocaleFromPath(pathname: string): string {
+		if (pathname.startsWith('/pl/') || pathname === '/pl' || pathname.startsWith('/pl/docs')) {
+			return 'pl';
+		}
+		if (pathname.startsWith('/ja/') || pathname.startsWith('/ja/docs') || pathname === '/ja') {
+			return 'ja';
+		}
+		return 'en';
+	}
+
+	function computeLocalizedPath(pathname: string, targetLang: string): string {
+		let cleanPath = pathname;
+		if (cleanPath.startsWith('/pl/') || cleanPath === '/pl') {
+			cleanPath = cleanPath.slice(3) || '/';
+		} else if (cleanPath.startsWith('/ja/') || cleanPath === '/ja') {
+			cleanPath = cleanPath.slice(3) || '/';
+		} else if (cleanPath.startsWith('/en/') || cleanPath === '/en') {
+			cleanPath = cleanPath.slice(3) || '/';
+		}
+
+		if (!cleanPath.startsWith('/')) {
+			cleanPath = '/' + cleanPath;
+		}
+
+		if (!cleanPath.startsWith('/docs')) {
+			cleanPath = '/docs' + (cleanPath === '/' ? '/' : cleanPath);
+		}
+
+		return `/${targetLang}${cleanPath}`;
+	}
+
+	function restoreScrollPosition() {
+		try {
+			const saved = sessionStorage.getItem(SCROLL_KEY);
+			if (saved !== null) {
+				sessionStorage.removeItem(SCROLL_KEY);
+				const top = parseInt(saved, 10);
+				if (!Number.isNaN(top) && top > 0) {
+					if ('scrollRestoration' in history) {
+						history.scrollRestoration = 'manual';
+					}
+					window.scrollTo({ top, behavior: 'instant' });
+					requestAnimationFrame(() => {
+						window.scrollTo({ top, behavior: 'instant' });
+					});
+				}
+			}
+		} catch {}
+	}
+
+	function syncActiveState() {
+		const activeCode = getLocaleFromPath(window.location.pathname);
+		document.querySelectorAll<HTMLElement>('[data-zen-lang-switcher]').forEach((container) => {
+			container.querySelectorAll<HTMLButtonElement>('[data-lang]').forEach((btn) => {
+				const isCurrent = btn.getAttribute('data-lang') === activeCode;
+				btn.classList.toggle('active', isCurrent);
+				if (isCurrent) {
+					btn.setAttribute('aria-current', 'page');
+				} else {
+					btn.removeAttribute('aria-current');
+				}
+			});
+		});
+	}
+
+	function initLanguageSwitchers() {
+		restoreScrollPosition();
+		syncActiveState();
+
+		document.querySelectorAll<HTMLElement>('[data-zen-lang-switcher]').forEach((container) => {
+			if (container.dataset.initialized) return;
+			container.dataset.initialized = 'true';
+
+			container.querySelectorAll<HTMLButtonElement>('[data-lang]').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					const code = btn.getAttribute('data-lang') || 'en';
+					try {
+						localStorage.setItem(LANG_KEY, code);
+					} catch {}
+
+					const currentLang = getLocaleFromPath(window.location.pathname);
+					if (code === currentLang) return;
+
+					// Preserve current scroll position across language change
+					try {
+						const scrollY = window.scrollY ?? document.documentElement.scrollTop ?? 0;
+						sessionStorage.setItem(SCROLL_KEY, String(scrollY));
+					} catch {}
+
+					const targetPath = computeLocalizedPath(window.location.pathname, code);
+					window.location.pathname = targetPath;
+				});
+			});
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initLanguageSwitchers);
+	} else {
+		initLanguageSwitchers();
+	}
+	document.addEventListener('astro:page-load', initLanguageSwitchers);
+</script>

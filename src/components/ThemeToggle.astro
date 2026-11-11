@@ -1,0 +1,193 @@
+---
+/**
+ * Zen Theme Toggle Component
+ * Exact parity with zenso-website ThemeService:
+ * Sun/Moon icon toggle with circular clip-path view-transition ripple
+ */
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<button
+	type="button"
+	class:list={['zen-theme-toggle', className]}
+	data-zen-theme-toggle
+	aria-label="Switch theme"
+	title="Toggle theme (Light / Dark)"
+>
+	<svg
+		class="zen-theme-icon sun-icon"
+		xmlns="http://www.w3.org/2000/svg"
+		width="16"
+		height="16"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+	>
+		<circle cx="12" cy="12" r="4"></circle>
+		<path d="M12 2v2"></path>
+		<path d="M12 20v2"></path>
+		<path d="m4.93 4.93 1.41 1.41"></path>
+		<path d="m17.66 17.66 1.41 1.41"></path>
+		<path d="M2 12h2"></path>
+		<path d="M20 12h2"></path>
+		<path d="m6.34 17.66-1.41 1.41"></path>
+		<path d="m19.07 4.93-1.41 1.41"></path>
+	</svg>
+	<svg
+		class="zen-theme-icon moon-icon"
+		xmlns="http://www.w3.org/2000/svg"
+		width="16"
+		height="16"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+	>
+		<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+	</svg>
+</button>
+
+<style>
+	.zen-theme-toggle {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.375rem;
+		border-radius: 4px;
+		background: transparent;
+		border: 1px solid transparent;
+		color: var(--sl-color-gray-3);
+		cursor: pointer;
+		transition: color 0.15s ease, background-color 0.15s ease;
+	}
+
+	.zen-theme-toggle:hover {
+		color: var(--sl-color-text);
+		background-color: var(--sl-color-accent-low);
+	}
+
+	.zen-theme-toggle:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+		outline-offset: 2px;
+	}
+
+	.zen-theme-icon {
+		width: 1rem;
+		height: 1rem;
+		display: block;
+	}
+
+	/* Show Moon in Light Mode (to toggle to dark), Show Sun in Dark Mode (to toggle to light) */
+	:global([data-theme='light']) .sun-icon {
+		display: none;
+	}
+	:global([data-theme='light']) .moon-icon {
+		display: block;
+	}
+
+	:global([data-theme='dark']) .moon-icon {
+		display: none;
+	}
+	:global([data-theme='dark']) .sun-icon {
+		display: block;
+	}
+</style>
+
+<script>
+	function initThemeToggles() {
+		const STORAGE_KEY = 'starlight-theme';
+
+		function getCurrentTheme(): 'dark' | 'light' {
+			const rootTheme = document.documentElement.getAttribute('data-theme');
+			if (rootTheme === 'dark' || rootTheme === 'light') return rootTheme;
+			const stored = localStorage.getItem(STORAGE_KEY);
+			if (stored === 'dark' || stored === 'light') return stored;
+			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+		}
+
+		function applyTheme(theme: 'dark' | 'light') {
+			document.documentElement.setAttribute('data-theme', theme);
+			document.documentElement.classList.toggle('dark', theme === 'dark');
+			document.documentElement.style.colorScheme = theme;
+			try {
+				localStorage.setItem(STORAGE_KEY, theme);
+				localStorage.setItem('zenso.theme', theme);
+			} catch {}
+
+			document.querySelectorAll<HTMLButtonElement>('[data-zen-theme-toggle]').forEach((btn) => {
+				btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+			});
+		}
+
+		function toggleWithAnimation(originEvent?: MouseEvent) {
+			const currentTheme = getCurrentTheme();
+			const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+			const doc = document as Document & {
+				startViewTransition?: (cb: () => void) => { ready: Promise<void> };
+			};
+
+			if (
+				typeof doc.startViewTransition !== 'function' ||
+				window.matchMedia('(prefers-reduced-motion: reduce)').matches
+			) {
+				applyTheme(nextTheme);
+				return;
+			}
+
+			let x = window.innerWidth / 2;
+			let y = window.innerHeight / 2;
+
+			if (originEvent) {
+				x = originEvent.clientX;
+				y = originEvent.clientY;
+			}
+
+			const endRadius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+
+			const transition = doc.startViewTransition(() => {
+				applyTheme(nextTheme);
+			});
+
+			transition.ready
+				.then(() => {
+					document.documentElement.animate(
+						{
+							clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`],
+						},
+						{
+							duration: 480,
+							easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+							pseudoElement: '::view-transition-new(root)',
+						}
+					);
+				})
+				.catch(() => {});
+		}
+
+		document.querySelectorAll<HTMLButtonElement>('[data-zen-theme-toggle]').forEach((btn) => {
+			// Avoid duplicate event listeners
+			if (btn.dataset.initialized) return;
+			btn.dataset.initialized = 'true';
+			btn.addEventListener('click', (event) => {
+				toggleWithAnimation(event);
+			});
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initThemeToggles);
+	} else {
+		initThemeToggles();
+	}
+	document.addEventListener('astro:page-load', initThemeToggles);
+</script>

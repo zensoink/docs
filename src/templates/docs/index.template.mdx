@@ -1,0 +1,44 @@
+---
+title: {{site.title}}
+description: {{site.description}}
+template: splash
+hero:
+  tagline: {{hero.tagline}}
+  image:
+    file: {{assets_prefix}}assets/logo.svg
+  actions:
+    - text: {{hero.actions.zenso_web}}
+      link: https://zenso.ink
+      icon: external
+    - text: {{hero.actions.github}}
+      link: https://github.com/zensoink
+      icon: right-arrow
+      variant: secondary
+    - text: {{hero.actions.discord}}
+      link: https://discord.gg/vTjzkwz3XV
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## {{ecosystem.section_title}}
+
+<CardGrid>
+	<Card title="{{ecosystem.cards.opensource.title}}" icon="github">
+		{{ecosystem.cards.opensource.desc}}
+		[{{ecosystem.cards.opensource.link}}](https://github.com/zensoink)
+	</Card>
+	<Card title="{{ecosystem.cards.design_system.title}}" icon="pencil">
+		{{ecosystem.cards.design_system.desc}}
+		[{{ecosystem.cards.design_system.link}}](https://zenso.ink)
+	</Card>
+	<Card title="{{ecosystem.cards.discord.title}}" icon="discord">
+		{{ecosystem.cards.discord.desc}}
+		[{{ecosystem.cards.discord.link}}](https://discord.gg/vTjzkwz3XV)
+	</Card>
+	<Card title="{{ecosystem.cards.in_progress.title}}" icon="document">
+		{{ecosystem.cards.in_progress.desc}}
+		[{{ecosystem.cards.in_progress.link}}](https://github.com/zensoink)
+	</Card>
+</CardGrid>
