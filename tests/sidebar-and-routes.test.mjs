@@ -78,21 +78,6 @@ test('astro.config.mjs configures all 3 main sections and Start Here sourced fro
 	assert.equal(jaDict.sidebar.items.overview, '概要と哲学');
 });
 
-test('Astro config registers redirects for consolidated User Guide routes', () => {
-	const astroConfig = fs.readFileSync(path.join(ROOT_DIR, 'astro.config.mjs'), 'utf-8');
-
-	for (const loc of LOCALES) {
-		assert.ok(
-			astroConfig.includes(`'/${loc}/docs/user-guide/overview': '/${loc}/docs/'`),
-			`Redirect for /${loc}/docs/user-guide/overview must be configured`
-		);
-		assert.ok(
-			astroConfig.includes(`'/${loc}/docs/user-guide/quickstart': '/${loc}/docs/getting-started/quickstart/'`),
-			`Redirect for /${loc}/docs/user-guide/quickstart must be configured`
-		);
-	}
-});
-
 test('All expected routes exist in astro.config.mjs sidebar and consolidated routes are removed', () => {
 	const astroConfig = fs.readFileSync(path.join(ROOT_DIR, 'astro.config.mjs'), 'utf-8');
 

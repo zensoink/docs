@@ -61,35 +61,13 @@ test('Build distribution contains styled documentation landing page with full si
 	assert.match(content, /Start Here/, 'Sidebar must render Start Here section');
 });
 
-test('Legacy overview localized routes redirect to canonical documentation paths', () => {
+test('Root redirect routes to canonical documentation path', () => {
 	const distDir = path.join(ROOT_DIR, 'dist');
 	if (!fs.existsSync(distDir)) return;
 
-	const enOverview = path.join(distDir, 'en/docs/getting-started/overview/index.html');
-	const plOverview = path.join(distDir, 'pl/docs/getting-started/overview/index.html');
-	const jaOverview = path.join(distDir, 'ja/docs/getting-started/overview/index.html');
+	const rootHtml = path.join(distDir, 'index.html');
+	const docsHtml = path.join(distDir, 'docs/index.html');
 
-	assert.ok(fs.existsSync(enOverview), 'en overview redirect must exist');
-	assert.ok(fs.existsSync(plOverview), 'pl overview redirect must exist');
-	assert.ok(fs.existsSync(jaOverview), 'ja overview redirect must exist');
-
-	assert.match(fs.readFileSync(enOverview, 'utf-8'), /url=\/en\/docs\//);
-	assert.match(fs.readFileSync(plOverview, 'utf-8'), /url=\/pl\/docs\//);
-	assert.match(fs.readFileSync(jaOverview, 'utf-8'), /url=\/ja\/docs\//);
-});
-
-test('Consolidated User Guide localized routes redirect to canonical documentation paths', () => {
-	const distDir = path.join(ROOT_DIR, 'dist');
-	if (!fs.existsSync(distDir)) return;
-
-	for (const loc of ['en', 'pl', 'ja']) {
-		const userOverview = path.join(distDir, `${loc}/docs/user-guide/overview/index.html`);
-		const userQuickstart = path.join(distDir, `${loc}/docs/user-guide/quickstart/index.html`);
-
-		assert.ok(fs.existsSync(userOverview), `${loc} user-guide overview redirect must exist in dist`);
-		assert.ok(fs.existsSync(userQuickstart), `${loc} user-guide quickstart redirect must exist in dist`);
-
-		assert.match(fs.readFileSync(userOverview, 'utf-8'), new RegExp(`url=/${loc}/docs/`));
-		assert.match(fs.readFileSync(userQuickstart, 'utf-8'), new RegExp(`url=/${loc}/docs/getting-started/quickstart/`));
-	}
+	assert.ok(fs.existsSync(rootHtml), 'root redirect must exist');
+	assert.ok(fs.existsSync(docsHtml), 'docs redirect must exist');
 });

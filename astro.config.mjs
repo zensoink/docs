@@ -111,15 +111,6 @@ export default defineConfig({
 	redirects: {
 		'/': '/en/docs/',
 		'/docs': '/en/docs/',
-		'/en/docs/getting-started/overview': '/en/docs/',
-		'/pl/docs/getting-started/overview': '/pl/docs/',
-		'/ja/docs/getting-started/overview': '/ja/docs/',
-		'/en/docs/user-guide/overview': '/en/docs/',
-		'/pl/docs/user-guide/overview': '/pl/docs/',
-		'/ja/docs/user-guide/overview': '/ja/docs/',
-		'/en/docs/user-guide/quickstart': '/en/docs/getting-started/quickstart/',
-		'/pl/docs/user-guide/quickstart': '/pl/docs/getting-started/quickstart/',
-		'/ja/docs/user-guide/quickstart': '/ja/docs/getting-started/quickstart/',
 	},
 	integrations: [
 		templateI18nCompiler(),
