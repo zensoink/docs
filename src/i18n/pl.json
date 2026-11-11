@@ -1,10 +1,10 @@
 {
   "site": {
     "title": "Dokumentacja Zenso",
-    "description": "Wszystko, czego potrzebujesz, żeby skonfigurować, spersonalizować i w pełni cieszyć się ramką Zenso z 7-kolorowym e-papierem."
+    "description": "Wszystko, czego potrzebujesz, żeby skonfigurować, spersonalizować i w pełni cieszyć się ramką Zenso z wielokolorowym e-papierem."
   },
   "hero": {
-    "tagline": "Kompletne źródło wiedzy o Zenso — bezprzewodowa ramka ze smart e-papierem 7-kolorowym, firmware ESP32, panel webowy, self-hosted Docker stack oraz otwarte SDK pluginów.",
+    "tagline": "Kompletne źródło wiedzy o Zenso — bezprzewodowa ramka ze smart e-papierem wielokolorowym, firmware ESP32, panel webowy, self-hosted Docker stack oraz otwarte SDK pluginów.",
     "actions": {
       "get_started": "Rozpocznij",
       "zenso_web": "Odwiedź Zenso.ink",
@@ -53,10 +53,10 @@
     "step5_desc": "Twoja ramka aktualizuje się bezgłośnie według wybranego harmonogramu (np. co godzinę w dzień, uśpiona w nocy) i natychmiast przechodzi w tryb ultra-głębokiego uśpienia (< 15 µA), chroniąc baterię i domowy spokój."
   },
   "overview": {
-    "intro": "Zenso to bezprzewodowa ramka z 7-kolorowym e-papierem stworzona po to, aby cicho wtopić się w Twój dom. Wyświetla zdjęcia rodziny, pogodę i wydarzenia z kalendarza bez emitowania ani jednego fotonu światła — jak wydruk na ścianie. Gdy bateria się rozładuje, ostatni obraz pozostaje na ekranie bez końca. Wystarczy podłączyć USB-C, kiedy chcesz to zmienić.",
+    "intro": "Zenso to bezprzewodowa ramka z wielokolorowym e-papierem stworzona po to, aby cicho wtopić się w Twój dom. Wyświetla zdjęcia rodziny, pogodę i wydarzenia z kalendarza bez emitowania ani jednego fotonu światła — jak wydruk na ścianie. Gdy bateria się rozładuje, ostatni obraz pozostaje na ekranie bez końca. Wystarczy podłączyć USB-C, kiedy chcesz to zmienić.",
     "philosophy_title": "Filozofia Japandi i spokojnego życia",
     "philosophy_body": "Współczesne wnętrza są przesycone ekranami LED i OLED, które walczą o uwagę wzroku. Zenso łączy japońską ideę *Ma* (harmonijnej przestrzeni) ze skandynawską funkcjonalnością. Jest cyfrowym meblem, który naturalnie współgra z rytmem Twojego dnia.",
-    "display_title": "7-kolorowy elektroniczny papier ACeP",
+    "display_title": "Zaawansowany wielokolorowy papier elektroniczny",
     "display_body": "W ramce zastosowano zaawansowany wyświetlacz e-paper ACeP z fizycznymi mikrokapsułkami barwnika. Przemieszczanie pigmentów pod wpływem mikroskopijnych impulsów napięciowych pozwala na naturalne odbijanie światła. Ekran emituje **zero światła**, nie męczy wzroku i w nocy jest całkowicie ciemny.",
     "craftsmanship_title": "Naturalny europejski dąb",
     "craftsmanship_body": "Każda obudowa jest precyzyjnie frezowana z litego drewna dębowego i ręcznie wykańczana naturalnymi olejami. Brak wystających kabli, plastikowych ramek czy świecących diod na froncie podkreśla organiczny charakter produktu.",
@@ -113,14 +113,14 @@
     },
     "plugins_image": {
       "title": "Wtyczka ramki zdjęć",
-      "description": "Wyświetlaj rodzinne fotografie i galerie dzieł sztuki z dopasowaniem cover/contain i ditheringiem 7-barwnym.",
+      "description": "Wyświetlaj rodzinne fotografie i galerie dzieł sztuki z dopasowaniem cover/contain i zoptymalizowanym ditheringiem wielobarwnym.",
       "lead": "Oficjalna wtyczka zdjęć zamienia ramkę Zenso w elegancką wystawę rodzinnych wspomnień i fotografii.",
       "config_title": "Konfiguracja źródła zdjęć",
       "config_body": "Wklej bezpośredni adres URL do zdjęcia lub wybierz album w panelu. Wtyczka automatycznie zoptymalizuje plik pod kątem e-papieru.",
       "fitting_title": "Tryby skalowania: Cover i Contain",
       "fitting_body": "- **Cover (Wypełnienie)**: Wypełnia cały slot bez czarnych pasów, delikatnie przycinając krawędzie.\n- **Contain (Dopasowanie)**: Skaluje całe zdjęcie wewnątrz slotu, zachowując 100% oryginalnego kadru.",
-      "dithering_title": "Zaawansowany dithering 7 barw",
-      "dithering_body": "Zdjęcia przechodzą proces kwantyzacji barw dopasowany do pigmentów ACeP. Dostępny jest także tryb czarno-biały o podwyższonym kontraście."
+      "dithering_title": "Zoptymalizowany dithering wielobarwny",
+      "dithering_body": "Zdjęcia przechodzą proces kwantyzacji barw dopasowany do wybranej palety kolorów Twojego ekranu (od 2 do 7 barw). Dostępny jest także tryb czarno-biały o podwyższonym kontraście."
     },
     "plugins_calendar": {
       "title": "Wtyczka kalendarza",
@@ -250,7 +250,7 @@
       "build_title": "Kompilacja i wgrywanie w PlatformIO",
       "build_body": "Sklonuj oficjalne repozytorium i otwórz je w środowisku PlatformIO:\n\n```bash\ngit clone https://github.com/zensoink/zenso-firmware.git\ncd zenso-firmware\npio run -t upload\n```\n\nPodłącz ramkę przewodem USB-C (w razie potrzeby przytrzymaj przycisk BOOT podczas podłączania).",
       "serial_title": "Konsola diagnostyczna na porcie szeregowym",
-      "serial_body": "Uruchom monitor portu szeregowego z prędkością 115200 baud (`pio device monitor`), aby uzyskać dostęp do interaktywnego menu:\n- `h`: Wyświetlenie listy poleceń\n- `c`: Wyczyszczenie zapisanych danych Wi-Fi z pamięci LittleFS\n- `r`: Restart urządzenia\n- `1`: Wyświetlenie planszy testowej 7 kolorów\n- `2`: Testowe czyszczenie ekranu białym przebiegiem\n- `4`: Odczyt napięcia akumulatora z przetwornika ADC",
+      "serial_body": "Uruchom monitor portu szeregowego z prędkością 115200 baud (`pio device monitor`), aby uzyskać dostęp do interaktywnego menu:\n- `h`: Wyświetlenie listy poleceń\n- `c`: Wyczyszczenie zapisanych danych Wi-Fi z pamięci LittleFS\n- `r`: Restart urządzenia\n- `1`: Wyświetlenie podstawowej planszy testowej kolorów\n- `2`: Testowe czyszczenie ekranu białym przebiegiem\n- `4`: Odczyt napięcia akumulatora z przetwornika ADC",
       "license_title": "Wolność otwartego oprogramowania GNU GPLv3",
       "license_body": "Możesz swobodnie modyfikować i rozwijać kod oprogramowania. Zgodnie z GPLv3, w przypadku dystrybucji zmodyfikowanych binariów, musisz udostępnić odpowiedni kod źródłowy."
     },
