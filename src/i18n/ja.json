@@ -175,16 +175,16 @@
       "licensing_title": "透明性の高いオープンエコシステム",
       "licensing_body": "サーバー側システムは無料の公式Dockerイメージとして提供されます。一方、マイコンファームウェア（GPLv3）、公開スキーマ（Apache 2.0）、Viteプラグイン（MIT）、テンプレート（MIT）はすべてオープンソースです。",
       "stack_title": "アーキテクチャの3層構造",
-      "stack_body": "Zensoは3つのモジュールで構成されています："
+      "stack_body": "Zensoは3つのモジュールで構成されています：\n1. **バックエンド（API）**：デバイスセッション、レイアウト描画、画像量子化を行う高パフォーマンスエンジン。\n2. **Webパネル**：ブラウザからアクセス可能なレスポンシブな管理インターフェース。\n3. **ファームウェア＆ウィジェット**：マイコン制御プログラムおよびLiquidJSベースのウィジェット群。"
     },
     "docker_setup": {
       "title": "Dockerとセルフホスティング",
       "description": "Docker Composeを使用して、ご自宅のHomeLabやNASに公式Zenso APIおよびパネルをデプロイします。",
       "lead": "Docker Composeを使用すれば、わずか2分でご自宅のサーバーやNASに完全なプライベート環境を構築できます。",
       "compose_title": "基本の docker-compose.yml",
-      "compose_body": "作業用ディレクトリを作成し、以下の設定ファイルを配置します：",
+      "compose_body": "作業用ディレクトリを作成し、以下の設定ファイルを配置します：\n\n```yaml\nservices:\n  postgres:\n    image: postgres:16-alpine\n    restart: unless-stopped\n    environment:\n      POSTGRES_DB: zenso\n      POSTGRES_USER: zenso\n      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme_secure_password}\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n\n  zenso-api:\n    image: ghcr.io/zensoink/zenso-api:latest\n    restart: unless-stopped\n    ports:\n      - \"3000:3000\"\n    environment:\n      PORT: 3000\n      DATABASE_URL: postgresql://zenso:${DB_PASSWORD:-changeme_secure_password}@postgres:5432/zenso\n      FRONTEND_URL: http://${HOST_IP:-localhost}:8080\n      ZENSO_ALLOW_PRIVATE_NETWORKS: \"true\"\n    depends_on:\n      - postgres\n\n  zenso-panel:\n    image: ghcr.io/zensoink/zenso-panel:latest\n    restart: unless-stopped\n    ports:\n      - \"8080:80\"\n    depends_on:\n      - zenso-api\n\nvolumes:\n  postgres_data:\n```",
       "run_title": "コンテナの起動",
-      "run_body": "以下のコマンドでバックグラウンド起動します：",
+      "run_body": "以下のコマンドでバックグラウンド起動します：\n\n```bash\ndocker compose up -d\n```\n\n`docker compose ps` でコンテナが正常に動作しているか確認します。",
       "storage_title": "データの永続化とバックアップ",
       "storage_body": "ユーザー設定やレイアウト情報はDockerボリューム `postgres_data` に保存されます。このボリュームをバックアップすることで、サーバー移行も容易に行えます。"
     },
@@ -193,18 +193,18 @@
       "description": "ポート設定、データベースURL、CORS、ローカルLANアクセスのための.env設定項目一覧。",
       "lead": "`.env` ファイルを使用してZensoコンテナの詳細設定を行います。",
       "core_title": "主要な環境変数",
-      "core_body": "| 変数名 | デフォルト値 | 説明 |",
+      "core_body": "| 変数名 | デフォルト値 | 説明 |\n| :--- | :--- | :--- |\n| `PORT` | `3000` | APIサーバーが待ち受けるポート番号。 |\n| `DATABASE_URL` | — | PostgreSQL接続文字列。 |\n| `FRONTEND_URL` | `http://localhost:8080` | パネルの正規URL（CORS検証および招待URL用）。 |\n| `SESSION_SECRET` | — | セッショントークン署名用の安全な乱数文字列。 |",
       "network_title": "ローカルネットワークアクセス許可",
-      "network_body": "| 変数名 | デフォルト値 | 説明 |"
+      "network_body": "| 変数名 | デフォルト値 | 説明 |\n| :--- | :--- | :--- |\n| `ZENSO_ALLOW_PRIVATE_NETWORKS` | `false` | `true` に設定すると、ウィジェットが宅内LAN上の機器（Home Assistant等）にSSRFブロックを受けることなくアクセスできるようになります。 |"
     },
     "cold_boot_setup": {
       "title": "初回セットアップウィザード",
       "description": "Dockerログに記録される初期セットアップトークンを使用して、安全に管理者アカウントを作成します。",
       "lead": "新規インスタンス起動時、第三者による乗っ取りを防ぐためワンタイムトークンによる本人認証が行われます。",
       "token_title": "セットアップトークンの確認",
-      "token_body": "APIコンテナのログから発行されたトークンを取得します：",
+      "token_body": "APIコンテナのログから発行されたトークンを取得します：\n\n```bash\ndocker compose logs zenso-api | grep \"SETUP TOKEN\"\n```\n\n`ZENSO_SETUP_TOKEN: zenso_sec_9f81a7b...` のような文字列が出力されます。",
       "wizard_title": "ブラウザでウィザードを開く",
-      "wizard_body": "ブラウザで以下にアクセスします：",
+      "wizard_body": "ブラウザで以下にアクセスします：\n\n`http://<サーバーIP>:8080/setup`\n\nトークンを入力し、「インスタンスを認証」をクリックします。",
       "claim_title": "管理者アカウントの作成",
       "claim_body": "管理者のメールアドレスと強固なパスワードを設定します。登録完了後トークンは破棄され、ダッシュボードへログインできます。"
     },
@@ -215,7 +215,7 @@
       "rendering_title": "サーバーサイド・ヘッドレス描画",
       "rendering_body": "省電力マイコンに重いブラウザを載せる代わりに、サーバー側でLiquidテンプレートにデータを埋め込んで描画し、電子ペーパーに最適なカラービットマップへ変換します。",
       "structure_title": "プラグインのファイル構成",
-      "structure_body": "ウィジェットの標準ディレクトリ構成：",
+      "structure_body": "ウィジェットの標準ディレクトリ構成：\n\n```\nmy-zenso-widget/\n├── manifest.json      # メタデータ、設定スキーマ、データソース定義\n├── index.liquid       # Liquidプレースホルダーを含むテンプレート\n├── style.css          # スタイルシート\n└── mock/              # ローカル確認用モックデータ\n    └── plugin.json\n```",
       "data_flow_title": "データソースの宣言と分離",
       "data_flow_body": "テンプレート内で直接外部通信を行う必要はありません。必要なデータソース（画像やICS等）をマニフェストに宣言すれば、サーバーが安全にフェッチしてテンプレートに渡します。"
     },
@@ -224,9 +224,9 @@
       "description": "公式プラグインテンプレートとViteプラグインを使い、数分でカスタムウィジェットを開発・プレビューします。",
       "lead": "わずか5分でホットリロード対応のウィジェット開発環境を立ち上げることができます。",
       "step1_title": "スターターテンプレートのクローン",
-      "step1_body": "公式テンプレートリポジトリを取得します：",
+      "step1_body": "公式テンプレートリポジトリを取得します：\n\n```bash\ngit clone https://github.com/zensoink/zenso-plugin-template.git my-widget\ncd my-widget\npnpm install\n```",
       "step2_title": "開発サーバーの起動",
-      "step2_body": "`@zenso/vite-plugin` を使用した開発サーバーを立ち上げます：",
+      "step2_body": "`@zenso/vite-plugin` を使用した開発サーバーを立ち上げます：\n\n```bash\npnpm dev\n```\n\nブラウザで `http://localhost:5173` を開くと、電子ペーパー画面を模したライブプレビューが表示されます。",
       "step3_title": "モックデータによる動作検証",
       "step3_body": "`mock/plugin.json` を編集することで、予定が多い場合や写真がない場合のレイアウト崩れを事前に検証できます。"
     },
@@ -235,9 +235,9 @@
       "description": "schemas.zenso.ink の公開スキーマに従い、設定フォーム、フィールド型、データソースを定義します。",
       "lead": "`manifest.json` はプラグインの情報を定義し、ユーザー設定画面を自動生成するためのファイルです。",
       "manifest_title": "JSONスキーマ仕様への準拠",
-      "manifest_body": "すべてのプラグインは `https://schemas.zenso.ink/v1/plugin-manifest.schema.json` の仕様に準拠して検証されます。",
+      "manifest_body": "すべてのプラグインは `https://schemas.zenso.ink/v1/plugin-manifest.schema.json` の仕様に準拠して検証されます。\n\n```json\n{\n  \"$schema\": \"https://schemas.zenso.ink/v1/plugin-manifest.schema.json\",\n  \"id\": \"com.example.greeting\",\n  \"name\": \"Daily Greeting\",\n  \"version\": \"1.0.0\",\n  \"entrypoint\": \"index.liquid\"\n}\n```",
       "fields_title": "利用可能な設定フィールド型",
-      "fields_body": "`config_schema` で宣言可能な入力タイプ：",
+      "fields_body": "`config_schema` で宣言可能な入力タイプ：\n- `text`: 1行テキスト入力\n- `boolean`: トグルスイッチ\n- `number`: 最小値・最大値制限付き数値入力\n- `color`: 電子ペーパーパレットに対応したカラー選択\n- `select`: ドロップダウン選択肢",
       "sources_title": "外部データソースの宣言",
       "sources_body": "`data_sources` ブロックで外部連携を定義します。サーバー側で安全にフェッチされるため、CORSエラーや認証情報漏洩を防ぐことができます。"
     },
@@ -246,9 +246,9 @@
       "description": "ウィジェットを配布用の plugin.zip にビルドし、Zensoパネルにアップロードして画面に配置します。",
       "lead": "ウィジェットの開発が完了したら、配布用パッケージにまとめてパネルにインストールします。",
       "build_title": "配布パッケージの生成",
-      "build_body": "ビルドコマンドを実行します：",
+      "build_body": "ビルドコマンドを実行します：\n\n```bash\npnpm build\n```\n\nスキーマ検証が行われ、`dist/` フォルダ内に `plugin.zip` が生成されます。",
       "upload_title": "Webパネルへのアップロード",
-      "upload_body": "1. Zenso Webパネルの **プラグイン（Plugins）** 画面を開きます。"
+      "upload_body": "1. Zenso Webパネルの **プラグイン（Plugins）** 画面を開きます。\n2. **プラグインをアップロード** をクリックし、`plugin.zip` を選択します。\n3. 自動検証後、直ちに任意の画面スロットにウィジェットを配置できるようになります。"
     }
   },
   "hardware_protocol": {

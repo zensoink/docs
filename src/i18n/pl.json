@@ -175,16 +175,16 @@
       "licensing_title": "Otwarty ekosystem i przejrzyste zasady",
       "licensing_body": "Dostarczamy bezpłatne, gotowe obrazy Docker dla całego stosu serwerowego. Jednocześnie oprogramowanie mikrokontrolera (GPLv3), publiczne schematy (Apache 2.0), plugin deweloperski Vite (MIT) oraz szablony wtyczek (MIT) są w pełni otwarte.",
       "stack_title": "Trzy warstwy architektury",
-      "stack_body": "Architektura Zenso składa się z trzech współpracujących modułów:"
+      "stack_body": "Architektura Zenso składa się z trzech współpracujących modułów:\n1. **Usługi centralne (API)**: Wydajny backend zarządzający sesjami urządzeń, renderowaniem układów i kwantyzacją obrazu.\n2. **Panel zarządzania**: Responsywna aplikacja webowa dostępna w przeglądarce na komputerach i smartfonach.\n3. **Firmware i widgety**: Oprogramowanie mikrokontrolera oraz szablony wtyczek oparte na LiquidJS."
     },
     "docker_setup": {
       "title": "Instalacja Docker i Self-Hosting",
       "description": "Uruchom oficjalny stos Zenso API i Panel na serwerze domowym lub NAS za pomocą Docker Compose.",
       "lead": "Uruchomienie kompletnego stosu Zenso na własnym serwerze lub NAS zajmuje mniej niż dwie minuty dzięki Docker Compose.",
       "compose_title": "Plik konfiguracyjny docker-compose.yml",
-      "compose_body": "Stwórz katalog dla projektu i zapisz w nim poniższy plik:",
+      "compose_body": "Stwórz katalog dla projektu i zapisz w nim poniższy plik:\n\n```yaml\nservices:\n  postgres:\n    image: postgres:16-alpine\n    restart: unless-stopped\n    environment:\n      POSTGRES_DB: zenso\n      POSTGRES_USER: zenso\n      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme_secure_password}\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n\n  zenso-api:\n    image: ghcr.io/zensoink/zenso-api:latest\n    restart: unless-stopped\n    ports:\n      - \"3000:3000\"\n    environment:\n      PORT: 3000\n      DATABASE_URL: postgresql://zenso:${DB_PASSWORD:-changeme_secure_password}@postgres:5432/zenso\n      FRONTEND_URL: http://${HOST_IP:-localhost}:8080\n      ZENSO_ALLOW_PRIVATE_NETWORKS: \"true\"\n    depends_on:\n      - postgres\n\n  zenso-panel:\n    image: ghcr.io/zensoink/zenso-panel:latest\n    restart: unless-stopped\n    ports:\n      - \"8080:80\"\n    depends_on:\n      - zenso-api\n\nvolumes:\n  postgres_data:\n```",
       "run_title": "Uruchomienie kontenerów",
-      "run_body": "Wystartuj stos w tle poleceniem:",
+      "run_body": "Wystartuj stos w tle poleceniem:\n\n```bash\ndocker compose up -d\n```\n\nSprawdź poprawność działania kontenerów za pomocą `docker compose ps`.",
       "storage_title": "Trwałość danych i kopie zapasowe",
       "storage_body": "Wszystkie ustawienia, ekrany i konfiguracje widgetów zapisywane są w wolumenie `postgres_data`. Regularny backup wolumenu pozwala na łatwe przenoszenie instancji między serwerami."
     },
@@ -193,18 +193,18 @@
       "description": "Tabela zmiennych konfiguracyjnych .env: porty, baza danych, CORS i dostęp do sieci prywatnej LAN.",
       "lead": "Skonfiguruj instancję Zenso za pomocą zmiennych środowiskowych umieszczonych w pliku `.env`.",
       "core_title": "Główne zmienne konfiguracyjne",
-      "core_body": "| Zmienna | Domyślnie | Zastosowanie |",
+      "core_body": "| Zmienna | Domyślnie | Zastosowanie |\n| :--- | :--- | :--- |\n| `PORT` | `3000` | Port, na którym API nasłuchuje połączeń od panelu i urządzeń. |\n| `DATABASE_URL` | — | Pełny ciąg połączeniowy do bazy PostgreSQL. |\n| `FRONTEND_URL` | `http://localhost:8080` | Kanoniczny adres URL panelu używany do walidacji CORS i zaproszeń. |\n| `SESSION_SECRET` | — | Bezpieczny ciąg znaków do podpisywania sesji użytkowników. |",
       "network_title": "Dostęp do sieci domowej (LAN)",
-      "network_body": "| Zmienna | Domyślnie | Opis |"
+      "network_body": "| Zmienna | Domyślnie | Opis |\n| :--- | :--- | :--- |\n| `ZENSO_ALLOW_PRIVATE_NETWORKS` | `false` | Ustawienie na `true` zezwala wtyczkom na odpytywanie urządzeń w sieci lokalnej (np. Home Assistant pod `192.168.1.50`) bez blokad bezpieczeństwa SSRF. |"
     },
     "cold_boot_setup": {
       "title": "Kreator pierwszego uruchomienia",
       "description": "Zainicjalizuj instancję za pomocą jednorazowego tokenu instalacyjnego odczytanego z logów Dockera.",
       "lead": "Przy pierwszym starcie nowa instancja Zenso wymaga podania jednorazowego tokenu zabezpieczającego, co uniemożliwia nieautoryzowane przejęcie instancji.",
       "token_title": "Odczytanie Setup Tokenu",
-      "token_body": "Przejrzyj logi kontenera API, aby odnaleźć wygenerowany token instalatora:",
+      "token_body": "Przejrzyj logi kontenera API, aby odnaleźć wygenerowany token instalatora:\n\n```bash\ndocker compose logs zenso-api | grep \"SETUP TOKEN\"\n```\n\nZobaczysz wpis w formacie: `ZENSO_SETUP_TOKEN: zenso_sec_9f81a7b...`",
       "wizard_title": "Uruchomienie kreatora w przeglądarce",
-      "wizard_body": "Otwórz przeglądarkę pod adresem:",
+      "wizard_body": "Otwórz przeglądarkę pod adresem:\n\n`http://<IP_SERWERA>:8080/setup`\n\nWklej token instalacyjny i kliknij **Weryfikuj instancję**.",
       "claim_title": "Utworzenie konta właściciela",
       "claim_body": "Wprowadź adres e-mail administratora oraz bezpieczne hasło. Po zatwierdzeniu token zostaje bezpowrotnie unieważniony, a Ty zyskujesz pełny dostęp do panelu."
     },
@@ -215,7 +215,7 @@
       "rendering_title": "Renderowanie serwerowe headless",
       "rendering_body": "Zamiast obciążać energooszczędny mikrokontroler pełnym silnikiem przeglądarki, rendering odbywa się po stronie serwera. Serwer wypełnia szablon Liquid danymi, aplikuje style CSS i przetwarza obraz w gotową mapę bitową zoptymalizowaną pod wyświetlacz e-paper.",
       "structure_title": "Struktura katalogów wtyczki",
-      "structure_body": "Prawidłowa wtyczka Zenso zawiera następujące pliki:",
+      "structure_body": "Prawidłowa wtyczka Zenso zawiera następujące pliki:\n\n```\nmy-zenso-widget/\n├── manifest.json      # Metadane, schemat konfiguracji i źródła danych\n├── index.liquid       # Szablon wizualny ze znacznikami Liquid\n├── style.css          # Style CSS widgetu\n└── mock/              # Przykładowe dane do podglądu lokalnego\n    └── plugin.json\n```",
       "data_flow_title": "Źródła danych i bezpieczeństwo",
       "data_flow_body": "Widgety nie wykonują bezpośrednich zapytań sieciowych w kodzie szablonu. Wymagane źródła danych (np. kalendarze ICS, obrazy) deklarowane są w manifeście i bezpiecznie pobierane przez serwer."
     },
@@ -224,9 +224,9 @@
       "description": "Stwórz i przetestuj swój pierwszy widget w kilka minut za pomocą szablonu wtyczki i pluginu Vite.",
       "lead": "Rozpocznij tworzenie własnych widgetów z natychmiastowym podglądem na żywo w mniej niż 5 minut.",
       "step1_title": "Sklonuj oficjalny szablon",
-      "step1_body": "Pobierz oficjalne repozytorium szablonu startowego:",
+      "step1_body": "Pobierz oficjalne repozytorium szablonu startowego:\n\n```bash\ngit clone https://github.com/zensoink/zenso-plugin-template.git my-widget\ncd my-widget\npnpm install\n```",
       "step2_title": "Uruchom lokalny serwer deweloperski",
-      "step2_body": "Uruchom środowisko deweloperskie oparte na `@zenso/vite-plugin`:",
+      "step2_body": "Uruchom środowisko deweloperskie oparte na `@zenso/vite-plugin`:\n\n```bash\npnpm dev\n```\n\nOtwórz `http://localhost:5173` w przeglądarce, aby zobaczyć podgląd symulujący rzeczywisty ekran e-papieru.",
       "step3_title": "Przetestuj z danymi mockowymi",
       "step3_body": "Edytuj plik `mock/plugin.json`, aby przetestować różne scenariusze (np. długie tytuły, brak zdjęć). Zmiany w `index.liquid` i `style.css` odświeżają się natychmiastowo."
     },
@@ -235,9 +235,9 @@
       "description": "Definiuj pola formularzy i źródła danych zgodnie z publicznymi kontraktami na schemas.zenso.ink.",
       "lead": "Plik `manifest.json` opisuje wtyczkę dla systemu Zenso i pozwala na automatyczne wygenerowanie formularzy ustawień w panelu.",
       "manifest_title": "Zgodność ze schematami JSON",
-      "manifest_body": "Każda wtyczka jest walidowana względem publicznych schematów pod adresem `https://schemas.zenso.ink/v1/plugin-manifest.schema.json`.",
+      "manifest_body": "Każda wtyczka jest walidowana względem publicznych schematów pod adresem `https://schemas.zenso.ink/v1/plugin-manifest.schema.json`.\n\n```json\n{\n  \"$schema\": \"https://schemas.zenso.ink/v1/plugin-manifest.schema.json\",\n  \"id\": \"com.example.greeting\",\n  \"name\": \"Daily Greeting\",\n  \"version\": \"1.0.0\",\n  \"entrypoint\": \"index.liquid\"\n}\n```",
       "fields_title": "Dostępne typy pól konfiguracyjnych",
-      "fields_body": "W sekcji `config_schema` możesz zadeklarować pola dla użytkownika:",
+      "fields_body": "W sekcji `config_schema` możesz zadeklarować pola dla użytkownika:\n- `text`: Pole tekstowe\n- `boolean`: Przełącznik tak/nie\n- `number`: Pole liczbowe z opcjonalnymi limitami `min` i `max`\n- `color`: Wybór koloru z palety barw e-papieru\n- `select`: Lista rozwijana z predefiniowanymi opcjami",
       "sources_title": "Deklarowanie zewnętrznych źródeł danych",
       "sources_body": "W bloku `data_sources` definiuj kanały zewnętrzne. Serwer pobiera je samodzielnie, eliminując problemy z CORS i bezpiecznie przechowując klucze dostępowe."
     },
@@ -246,9 +246,9 @@
       "description": "Buduj paczkę produkcyjną plugin.zip i wgrywaj ją bezpośrednio do Panelu Zenso.",
       "lead": "Gdy wtyczka jest gotowa, spakuj ją do pliku produkcyjnego i wgraj do swojego panelu webowego.",
       "build_title": "Generowanie archiwum produkcyjnego",
-      "build_body": "Uruchom polecenie budujące:",
+      "build_body": "Uruchom polecenie budujące:\n\n```bash\npnpm build\n```\n\nNarzędzie zwaliduje manifest względem `schemas.zenso.ink` i utworzy gotowy plik `plugin.zip` w katalogu `dist/`.",
       "upload_title": "Instalacja w Panelu Zenso",
-      "upload_body": "1. W panelu webowym Zenso przejdź do zakładki **Wtyczki (Plugins)**."
+      "upload_body": "1. W panelu webowym Zenso przejdź do zakładki **Wtyczki (Plugins)**.\n2. Kliknij **Wgraj wtyczkę** i wskaż plik `plugin.zip`.\n3. Po weryfikacji wtyczka staje się natychmiast dostępna do przypisania do slotów ekranowych."
     }
   },
   "hardware_protocol": {
