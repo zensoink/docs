@@ -29,10 +29,12 @@ function docsSitemapGenerator() {
 					const indexContent = fs.readFileSync(sitemapIndexPath, 'utf-8');
 					const rewrittenIndex = indexContent.replaceAll('sitemap-0.xml', 'docs-sitemap-0.xml');
 					fs.writeFileSync(path.join(outDir, 'docs-sitemap.xml'), rewrittenIndex, 'utf-8');
+					fs.unlinkSync(sitemapIndexPath);
 				}
 
 				if (fs.existsSync(sitemap0Path)) {
 					fs.copyFileSync(sitemap0Path, path.join(outDir, 'docs-sitemap-0.xml'));
+					fs.unlinkSync(sitemap0Path);
 				}
 			},
 		},
@@ -48,6 +50,9 @@ export default defineConfig({
 	redirects: {
 		'/': '/en/docs',
 		'/docs': '/en/docs',
+		'/en/docs/getting-started/overview': '/en/docs',
+		'/pl/docs/getting-started/overview': '/pl/docs',
+		'/ja/docs/getting-started/overview': '/ja/docs',
 	},
 	integrations: [
 		templateI18nCompiler(),
@@ -73,8 +78,23 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: 'Getting Started',
-					items: [{ autogenerate: { directory: 'docs/getting-started' } }],
+					label: 'Start Here',
+					translations: {
+						pl: 'Pierwsze kroki',
+						ja: 'はじめに',
+					},
+					items: [
+						{
+							slug: 'docs',
+							label: 'Overview',
+							translations: {
+								pl: 'Przegląd',
+								ja: '概要',
+							},
+						},
+						{ slug: 'docs/getting-started/quickstart' },
+						{ slug: 'docs/getting-started/faq' },
+					],
 				},
 			],
 			customCss: ['./src/styles/global.css'],

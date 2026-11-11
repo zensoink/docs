@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Dokumentacja Zenso",
-    "description": "Kanoniczne źródło wiedzy i kompletny przewodnik techniczny po ekosystemie 7-kolorowego e-papieru Zenso."
+    "description": "Wszystko, czego potrzebujesz, żeby skonfigurować, spersonalizować i w pełni cieszyć się ramką Zenso z 7-kolorowym e-papierem."
   },
   "hero": {
     "tagline": "Kompletne źródło wiedzy o Zenso — bezprzewodowa ramka ze smart e-papierem 7-kolorowym, firmware ESP32, panel webowy, self-hosted Docker stack oraz otwarte SDK pluginów.",
@@ -20,19 +20,19 @@
         "desc": "Instrukcja krok po kroku: rozpakowanie, parowanie Wi-Fi i wybór widgetów w dwie minuty.",
         "link": "Rozpocznij wdrożenie →"
       },
-      "overview": {
-        "title": "Architektura systemu",
-        "desc": "Dowiedz się, jak Zenso renderuje bufor e-papieru po stronie serwera, oszczędzając baterię.",
-        "link": "Poznaj architekturę →"
+      "panel": {
+        "title": "Panel webowy Zenso",
+        "desc": "Konfiguruj widgety, wgrywaj zdjęcia do albumów i dopasowuj harmonogramy odświeżania ramki.",
+        "link": "Otwórz panel webowy →"
       },
       "faq": {
         "title": "Często zadawane pytania",
         "desc": "Odpowiedzi na pytania o czas pracy na baterii, brak emisji światła w nocy i sieci Wi-Fi.",
         "link": "Zobacz FAQ →"
       },
-      "opensource": {
-        "title": "Open Source i społeczność",
-        "desc": "Zenso tworzone jest z myślą o otwartym ekosystemie. Odkryj publiczne repozytoria i narzędzia.",
+      "selfhost": {
+        "title": "Samodzielny hosting na Twoim sprzęcie",
+        "desc": "Firmware i SDK wtyczek są open source. Interfejs API i panel są własnościowe, ale dostępne jako bezpłatne obrazy Docker — uruchom cały stos na dowolnym serwerze, NAS-ie lub Raspberry Pi, które już masz.",
         "link": "Zobacz GitHub →"
       }
     }
@@ -53,18 +53,13 @@
     "step5_desc": "Twoja ramka aktualizuje się bezgłośnie według wybranego harmonogramu (np. co godzinę w dzień, uśpiona w nocy) i natychmiast przechodzi w tryb ultra-głębokiego uśpienia (< 15 µA), chroniąc baterię i domowy spokój."
   },
   "overview": {
-    "title": "Architektura systemu i renderowanie",
-    "description": "Jak Zenso renderuje widgety w chmurze lub serwerze lokalnym i przesyła zbuforowany obraz do energooszczędnych ramek e-papierowych.",
-    "intro": "W przeciwieństwie do tradycyjnych tabletów i cyfrowych ramek zasilanych energochłonnymi systemami i podświetleniem ekranu, Zenso wykorzystuje wydajny **proces renderowania po stronie serwera**. Ramka pozostaje w głębokim uśpieniu i budzi się zaledwie na ułamki sekund, aby sprawdzić aktualizacje.",
-    "flow_title": "Przepływ renderowania po stronie serwera",
-    "flow_content": "Dane widgetów i szablony\n  → Silnik szablonów Liquid (modularne widgety)\n  → Beheadlesowy potok renderowania (High-DPI Chromium z Cairo)\n  → Kwantyzacja kolorów i dithering (paleta 7 pigmentów ACeP)\n  → Kompresja 4bpp RAW Bitmap\n  → Bezpieczna transmisja przez Wi-Fi\n  → Ramka rysuje bufor na e-papierze i zasypia (< 15 µA)",
-    "energy_title": "Optymalizacja energii i buforowanie",
-    "etag_title": "Nagłówki HTTP ETag i 304 Not Modified",
-    "etag_desc": "Gdy urządzenie wybudza się według harmonogramu, wysyła warunkowe zapytanie HTTP z nagłówkiem `ETag` bufora `/display.raw`. Jeśli układ ani dane nie uległy zmianie:\n1. Serwer natychmiast odpowiada pustym statusem `HTTP 304 Not Modified`.\n2. Ramka całkowicie pomija odświeżenie ekranu.\n3. Mikrokontroler powraca do uśpienia w czasie poniżej sekundy, oszczędzając baterię.",
-    "refresh_title": "Adaptacyjne harmonogramy odświeżania",
-    "refresh_desc": "Odstępy między odświeżeniami można dopasować w panelu zarządzania do własnego rytmu dnia (np. odświeżanie pogody co godzinę między 7:00 a 22:00 i całkowite uśpienie w nocy).",
-    "local_title": "Filozofia 100% Local-First",
-    "local_desc": "Ekrany Zenso zaprojektowano z myślą o pełnej prywatności. Możesz korzystać z oficjalnej chmury Zenso Cloud lub uruchomić własny lekki stos Docker w sieci domowej — bez telemetrii i zależności od chmury."
+    "title": "Przegląd",
+    "description": "Zenso to bezprzewodowa ramka smart z 7-kolorowym e-papierem, która żyje na uboczu — bez światła, bez hałasu, z baterią na wiele miesięcy.",
+    "intro": "Zenso to bezprzewodowa ramka z 7-kolorowym e-papierem stworzona po to, aby cicho wtopić się w Twój dom. Wyświetla zdjęcia rodziny, pogodę i wydarzenia z kalendarza bez emitowania ani jednego fotonu światła — jak wydruk na ścianie. Gdy bateria się rozładuje, ostatni obraz pozostaje na ekranie bez końca. Wystarczy podłączyć USB-C, kiedy chcesz to zmienić.",
+    "refresh_title": "Aktualizacje dostosowane do Twojego rytmu",
+    "refresh_desc": "Ustaw własny harmonogram w panelu webowym — aktualizacje co godzinę w ciągu dnia, całkowita cisza w nocy. Ramka budzi się tylko wtedy, gdy trzeba, i natychmiast wraca do uśpienia, żeby nigdy nie zakłócać spokoju domu.",
+    "local_title": "Twoje dane pozostają Twoje",
+    "local_desc": "Zenso działa z oficjalną chmurą Zenso Cloud od razu po uruchomieniu lub możesz postawić własny stack w sieci domowej z gotowym obrazem Docker — zero telemetrii, żadnych subskrypcji, pełna prywatność."
   },
   "faq": {
     "title": "Często zadawane pytania (FAQ) i codzienne użytkowanie",

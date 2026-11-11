@@ -42,17 +42,35 @@ test('Astro components keep background effect on body and not in hero sections',
 	assert.match(siteTitleAstro, /setupBodyDitherScroll/, 'SiteTitle must bundle scroll fade handler');
 });
 
-test('Build distribution contains styled documentation landing page', () => {
+test('Build distribution contains styled documentation landing page with full sidebar and no splash hero', () => {
 	const distDir = path.join(ROOT_DIR, 'dist');
 	assert.ok(fs.existsSync(distDir), 'dist/ directory must exist from build');
 
-	const indexHtmlPath = fs.existsSync(path.join(distDir, 'en/docs/index.html'))
-		? path.join(distDir, 'en/docs/index.html')
-		: fs.existsSync(path.join(distDir, 'docs/index.html'))
-		? path.join(distDir, 'docs/index.html')
-		: path.join(distDir, 'index.html');
+	const indexHtmlPath = path.join(distDir, 'en/docs/index.html');
 	assert.ok(fs.existsSync(indexHtmlPath), 'Landing page HTML must exist');
 	const content = fs.readFileSync(indexHtmlPath, 'utf-8');
 	assert.ok(content.length > 500, 'Landing page must not be empty');
 	assert.match(content, /Zenso Documentation/, 'Must render page title');
+
+	// Verify template: splash / hero is eliminated
+	assert.doesNotMatch(content, /<div class="hero/i, 'Docs landing must not have hero splash banner');
+
+	// Verify desktop/mobile sidebar is present with Overview as active page
+	assert.match(content, /<a href="\/en\/docs\/" aria-current="page"[^>]*><span[^>]*>Overview<\/span><\/a>/, 'Sidebar must render Overview as active page');
+	assert.match(content, /Start Here/, 'Sidebar must render Start Here section');
+});
+
+test('Legacy overview URLs redirect to canonical doc roots', () => {
+	const distDir = path.join(ROOT_DIR, 'dist');
+	const enOverview = path.join(distDir, 'en/docs/getting-started/overview/index.html');
+	const plOverview = path.join(distDir, 'pl/docs/getting-started/overview/index.html');
+	const jaOverview = path.join(distDir, 'ja/docs/getting-started/overview/index.html');
+
+	assert.ok(fs.existsSync(enOverview), 'en overview redirect must exist');
+	assert.ok(fs.existsSync(plOverview), 'pl overview redirect must exist');
+	assert.ok(fs.existsSync(jaOverview), 'ja overview redirect must exist');
+
+	assert.match(fs.readFileSync(enOverview, 'utf-8'), /url=\/en\/docs/);
+	assert.match(fs.readFileSync(plOverview, 'utf-8'), /url=\/pl\/docs/);
+	assert.match(fs.readFileSync(jaOverview, 'utf-8'), /url=\/ja\/docs/);
 });

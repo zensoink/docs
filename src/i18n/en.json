@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Zenso Documentation",
-    "description": "Canonical source of truth and complete technical guide for the Zenso 7-color e-paper ecosystem."
+    "description": "Everything you need to set up, personalise, and get the most out of your Zenso 7-color e-paper smart frame."
   },
   "hero": {
     "tagline": "The complete source of truth for Zenso — cordless 7-color e-paper smart frame, ESP32 firmware, web panel, self-hosted Docker stack, and open plugin SDK.",
@@ -20,19 +20,19 @@
         "desc": "Step-by-step unboxing, Wi-Fi pairing, and widget selection to get your frame up and running.",
         "link": "Get Started →"
       },
-      "overview": {
-        "title": "System Architecture",
-        "desc": "Learn how Zenso renders dithered e-paper buffers on the server to maximize battery life.",
-        "link": "Read Architecture →"
+      "panel": {
+        "title": "Zenso Web Panel",
+        "desc": "Configure dynamic widgets, upload family photo albums, and fine-tune refresh schedules.",
+        "link": "Open Web Panel →"
       },
       "faq": {
         "title": "Frequently Asked Questions",
         "desc": "Find answers about battery longevity, zero-light night performance, and Wi-Fi networks.",
         "link": "View FAQ →"
       },
-      "opensource": {
-        "title": "Open Source & Community",
-        "desc": "Zenso is built with an open ecosystem in mind. Discover public repositories, container images, and community tools.",
+      "selfhost": {
+        "title": "Self-Host on Your Hardware",
+        "desc": "The firmware and plugin SDK are open source. The API and panel are proprietary but ship as free Docker images — run the full stack on any server, NAS, or Raspberry Pi you already own.",
         "link": "View GitHub →"
       }
     }
@@ -53,18 +53,13 @@
     "step5_desc": "Your frame will update quietly according to your preferred schedule (e.g., hourly during the day, asleep overnight) and immediately enter ultra-low power deep sleep (< 15 µA) between refreshes, preserving battery and home tranquility."
   },
   "overview": {
-    "title": "System Architecture & Rendering",
-    "description": "How Zenso renders widgets in the cloud or local server and streams dithered buffers to low-power e-paper frames.",
-    "intro": "Unlike typical tablets or digital photo frames that run power-hungry operating systems, local web browsers, and backlights, Zenso utilizes an efficient **server-side rendering pipeline**. The frame remains in deep sleep mode and only wakes for brief seconds to check for updates.",
-    "flow_title": "Server-Side Rendering Flow",
-    "flow_content": "Widget Data & Templates\n  → Liquid Template Engine (Modular Widgets)\n  → Headless Render Pipeline (High-DPI Chromium with Cairo)\n  → Color Quantization & Dithering (ACeP 7-Color Palette)\n  → 4bpp RAW Bitmap Compression\n  → Secure delivery over Wi-Fi\n  → Frame draws to e-paper & enters deep sleep (< 15 µA)",
-    "energy_title": "Energy Optimization & Caching",
-    "etag_title": "HTTP ETags & 304 Not Modified",
-    "etag_desc": "When the device wakes on its scheduled timer, it issues an HTTP conditional request sending the `ETag` of its currently cached `/display.raw` buffer. If the layout or widget data has not changed:\n1. The server immediately returns an empty `HTTP 304 Not Modified` header.\n2. The frame skips display refresh entirely.\n3. The microcontroller returns to deep sleep in less than a second, saving battery.",
-    "refresh_title": "Adaptive Refresh Scheduling",
-    "refresh_desc": "Refresh intervals can be tailored in the management portal to suit your daily rhythm (e.g., refresh weather hourly between 07:00 and 22:00, and sleep completely overnight).",
-    "local_title": "100% Local-First Philosophy",
-    "local_desc": "Zenso displays are engineered for complete privacy. You can use the official Zenso Cloud, or run your own lightweight Docker container stack on your home network with zero telemetry and no cloud dependency."
+    "title": "Overview",
+    "description": "Zenso is a cordless 7-color e-paper smart frame that stays out of your way — no light, no noise, months of battery life.",
+    "intro": "Zenso is a cordless 7-color e-paper smart frame designed to fit quietly into your home. It displays family photos, weather, and calendar events without emitting a single photon of light — just like a print on the wall. When the battery runs out, the last image stays on the screen indefinitely. Plug in USB-C when you're ready to refresh.",
+    "refresh_title": "Updates that follow your rhythm",
+    "refresh_desc": "Set your own schedule in the web panel — hourly updates during the day, complete silence overnight. The frame wakes up only when needed and immediately goes back to sleep, so it never disrupts your home.",
+    "local_title": "Your data stays yours",
+    "local_desc": "Zenso works with the official Zenso Cloud out of the box, or you can run your own self-hosted stack on your home network using the provided Docker image — zero telemetry, no subscriptions, complete privacy."
   },
   "faq": {
     "title": "Non-Technical FAQ & Daily Experience",

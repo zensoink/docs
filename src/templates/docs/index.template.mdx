@@ -1,27 +1,19 @@
 ---
 title: {{site.title}}
 description: {{site.description}}
-template: splash
-hero:
-  tagline: {{hero.tagline}}
-  image:
-    file: {{assets_prefix}}assets/logo.svg
-  actions:
-    - text: {{hero.actions.get_started}}
-      link: {{docs_prefix}}getting-started/quickstart/
-      icon: right-arrow
-      variant: primary
-    - text: {{hero.actions.zenso_web}}
-      link: https://zenso.ink
-      icon: external
-      variant: secondary
-    - text: {{hero.actions.github}}
-      link: https://github.com/zensoink
-      icon: github
-      variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+
+{{overview.intro}}
+
+## {{overview.refresh_title}}
+
+{{overview.refresh_desc}}
+
+## {{overview.local_title}}
+
+{{overview.local_desc}}
 
 ## {{ecosystem.section_title}}
 
@@ -30,16 +22,16 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 		{{ecosystem.cards.quickstart.desc}}
 		[{{ecosystem.cards.quickstart.link}}]({{docs_prefix}}getting-started/quickstart/)
 	</Card>
-	<Card title="{{ecosystem.cards.overview.title}}" icon="open-book">
-		{{ecosystem.cards.overview.desc}}
-		[{{ecosystem.cards.overview.link}}]({{docs_prefix}}getting-started/overview/)
+	<Card title="{{ecosystem.cards.panel.title}}" icon="laptop">
+		{{ecosystem.cards.panel.desc}}
+		[{{ecosystem.cards.panel.link}}](https://panel.zenso.ink)
 	</Card>
 	<Card title="{{ecosystem.cards.faq.title}}" icon="information">
 		{{ecosystem.cards.faq.desc}}
 		[{{ecosystem.cards.faq.link}}]({{docs_prefix}}getting-started/faq/)
 	</Card>
-	<Card title="{{ecosystem.cards.opensource.title}}" icon="github">
-		{{ecosystem.cards.opensource.desc}}
-		[{{ecosystem.cards.opensource.link}}](https://github.com/zensoink)
+	<Card title="{{ecosystem.cards.selfhost.title}}" icon="server">
+		{{ecosystem.cards.selfhost.desc}}
+		[{{ecosystem.cards.selfhost.link}}](https://github.com/zensoink)
 	</Card>
 </CardGrid>

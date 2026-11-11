@@ -57,10 +57,22 @@ test('compileAllTemplates reads src/templates and generates docs, pl/docs, ja/do
 	assert.match(plContent, /title:\s*Dokumentacja Zenso/);
 	assert.match(jaContent, /title:\s*Zenso ドキュメント/);
 
-	// Verify correct relative asset depth
-	assert.match(enContent, /file:\s*\.\.\/\.\.\/\.\.\/\.\.\/assets\/logo\.svg/);
-	assert.match(plContent, /file:\s*\.\.\/\.\.\/\.\.\/\.\.\/assets\/logo\.svg/);
-	assert.match(jaContent, /file:\s*\.\.\/\.\.\/\.\.\/\.\.\/assets\/logo\.svg/);
+	// Verify user-facing overview content and navigation cards are compiled
+	assert.match(enContent, /Updates that follow your rhythm/);
+	assert.match(plContent, /Aktualizacje dostosowane do Twojego rytmu/);
+	assert.match(jaContent, /あなたのリズムに合わせた更新/);
+	assert.match(enContent, /Your data stays yours/);
+	assert.match(plContent, /Twoje dane pozostają Twoje/);
+	assert.match(jaContent, /データはあなたのもの/);
+	assert.match(enContent, /Zenso Web Panel/);
+	assert.match(plContent, /Panel webowy Zenso/);
+	assert.match(jaContent, /Zenso Web パネル/);
+	assert.match(enContent, /Self-Host on Your Hardware/);
+	assert.match(plContent, /Samodzielny hosting na Twoim sprzęcie/);
+	assert.match(jaContent, /自分のハードウェアでセルフホスト/);
+	assert.doesNotMatch(enContent, /Open Source & Community/);
+	assert.doesNotMatch(plContent, /Open Source i społeczność/);
+	assert.doesNotMatch(jaContent, /オープンソースとコミュニティ/);
 
 	// Verify Getting Started documentation pages are compiled
 	const enQuickstartPath = path.join(outputDocsDir, 'en/docs/getting-started/quickstart.mdx');
@@ -70,4 +82,7 @@ test('compileAllTemplates reads src/templates and generates docs, pl/docs, ja/do
 	assert.ok(fs.existsSync(enQuickstartPath), 'en/docs/getting-started/quickstart.mdx must exist');
 	assert.ok(fs.existsSync(plQuickstartPath), 'pl/docs/getting-started/quickstart.mdx must exist');
 	assert.ok(fs.existsSync(jaQuickstartPath), 'ja/docs/getting-started/quickstart.mdx must exist');
+
+	// Verify standalone overview.mdx is removed (merged into index)
+	assert.ok(!fs.existsSync(path.join(outputDocsDir, 'en/docs/getting-started/overview.mdx')), 'Standalone overview.mdx must be removed');
 });
