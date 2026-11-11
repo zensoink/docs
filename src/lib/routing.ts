@@ -5,35 +5,65 @@
  * path localization, and route invariants across SSR and client runtimes.
  */
 
-export interface LocaleConfig {
-	readonly code: 'en' | 'pl' | 'ja';
-	readonly label: string;
-	readonly starlightLabel: string;
-	readonly lang: string;
-}
+import {
+	SUPPORTED_LOCALES,
+	DEFAULT_LOCALE,
+	LOCALE_CODES,
+	LOCALE_STORAGE_KEY,
+	SCROLL_STORAGE_KEY,
+	THEME_STORAGE_KEY,
+	STARLIGHT_THEME_STORAGE_KEY,
+	ECOSYSTEM_URLS,
+	SITE_URL,
+	MAIN_SITE_BASE_URL,
+	GITHUB_URL,
+	DISCORD_URL,
+	PANEL_URL,
+	STORAGE_KEYS,
+	SITE_CONFIG,
+	SITE_TITLE,
+	DOCS_ASSETS_DIR,
+	LOGO_CONFIG,
+	STARLIGHT_SOCIAL_LINKS,
+	isSupportedLocale,
+	getMainSiteUrl,
+	getExternalLinks,
+	type Locale,
+	type LocaleConfig,
+	type ExternalLinkItem,
+	type StarlightSocialIcon,
+	type StarlightSocialLink,
+} from './constants.ts';
 
-export const SUPPORTED_LOCALES = [
-	{ code: 'en', label: 'EN', starlightLabel: 'English', lang: 'en' },
-	{ code: 'pl', label: 'PL', starlightLabel: 'Polski', lang: 'pl' },
-	{ code: 'ja', label: 'JA', starlightLabel: '日本語', lang: 'ja' },
-] as const satisfies readonly LocaleConfig[];
-
-export type Locale = (typeof SUPPORTED_LOCALES)[number]['code'];
-
-export const DEFAULT_LOCALE: Locale = 'en';
-
-export const LOCALE_CODES: readonly Locale[] = SUPPORTED_LOCALES.map((item) => item.code);
-
-export const LOCALE_STORAGE_KEY = 'zenso.lang';
-export const SCROLL_STORAGE_KEY = 'zenso.lang_switch_scroll';
-
-/**
- * Check if a given string is a supported locale code
- */
-export function isSupportedLocale(candidate: string | null | undefined): candidate is Locale {
-	if (!candidate) return false;
-	return LOCALE_CODES.includes(candidate as Locale);
-}
+export {
+	SUPPORTED_LOCALES,
+	DEFAULT_LOCALE,
+	LOCALE_CODES,
+	LOCALE_STORAGE_KEY,
+	SCROLL_STORAGE_KEY,
+	THEME_STORAGE_KEY,
+	STARLIGHT_THEME_STORAGE_KEY,
+	ECOSYSTEM_URLS,
+	SITE_URL,
+	MAIN_SITE_BASE_URL,
+	GITHUB_URL,
+	DISCORD_URL,
+	PANEL_URL,
+	STORAGE_KEYS,
+	SITE_CONFIG,
+	SITE_TITLE,
+	DOCS_ASSETS_DIR,
+	LOGO_CONFIG,
+	STARLIGHT_SOCIAL_LINKS,
+	isSupportedLocale,
+	getMainSiteUrl,
+	getExternalLinks,
+	type Locale,
+	type LocaleConfig,
+	type ExternalLinkItem,
+	type StarlightSocialIcon,
+	type StarlightSocialLink,
+};
 
 /**
  * Resolve the active locale from a URL pathname

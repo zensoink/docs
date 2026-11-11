@@ -1,7 +1,7 @@
 // @ts-check
 import fs from 'node:fs';
 import path from 'node:path';
-import { LOCALE_CODES } from '../lib/routing.ts';
+import { DEFAULT_LOCALE, LOCALE_CODES } from '../lib/constants.ts';
 
 /**
  * Retrieve nested object property by dot path
@@ -33,7 +33,7 @@ export function getNestedValue(obj, dotPath) {
  * @param {string} [locale]
  * @returns {string}
  */
-export function compileTemplateContent(templateContent, dict, fallbackDict, assetsPrefix, locale = 'en') {
+export function compileTemplateContent(templateContent, dict, fallbackDict, assetsPrefix, locale = DEFAULT_LOCALE) {
 	const docsPrefix = `/${locale}/docs/`;
 
 	// First replace built-in path/locale tokens

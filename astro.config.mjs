@@ -5,7 +5,15 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwindcss from '@tailwindcss/vite';
 import templateI18nCompiler from './src/plugins/template-i18n-compiler.js';
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from './src/lib/routing.ts';
+import {
+	DEFAULT_LOCALE,
+	SUPPORTED_LOCALES,
+	SITE_URL,
+	DOCS_ASSETS_DIR,
+	SITE_TITLE,
+	LOGO_CONFIG,
+	STARLIGHT_SOCIAL_LINKS,
+} from './src/lib/constants.ts';
 
 const starlightLocales = Object.fromEntries(
 	SUPPORTED_LOCALES.map((loc) => [loc.code, { label: loc.starlightLabel, lang: loc.lang }])
@@ -43,9 +51,9 @@ function docsSitemapGenerator() {
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://zenso.ink',
+	site: SITE_URL,
 	build: {
-		assets: '_docs_assets',
+		assets: DOCS_ASSETS_DIR,
 	},
 	redirects: {
 		'/': '/en/docs/',
@@ -57,13 +65,10 @@ export default defineConfig({
 	integrations: [
 		templateI18nCompiler(),
 		starlight({
-			title: 'Zenso',
+			title: SITE_TITLE,
 			defaultLocale: DEFAULT_LOCALE,
 			locales: starlightLocales,
-			logo: {
-				src: './src/assets/logo.svg',
-				alt: 'Zenso Logo',
-			},
+			logo: LOGO_CONFIG,
 			components: {
 				SiteTitle: './src/components/SiteTitle.astro',
 				Header: './src/components/Header.astro',
@@ -71,11 +76,7 @@ export default defineConfig({
 				MobileMenuFooter: './src/components/MobileMenuFooter.astro',
 				MobileMenuToggle: './src/components/MobileMenuToggle.astro',
 			},
-			social: [
-				{ icon: 'github', label: 'GitHub', href: 'https://github.com/zensoink' },
-				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/vTjzkwz3XV' },
-				{ icon: 'external', label: 'Zenso.ink', href: 'https://zenso.ink' },
-			],
+			social: STARLIGHT_SOCIAL_LINKS,
 			sidebar: [
 				{
 					label: 'Start Here',

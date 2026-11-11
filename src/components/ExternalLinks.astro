@@ -4,32 +4,16 @@
  * Matching zenso-website calm e-paper aesthetic:
  * GitHub · Discord · Zenso Web (zenso.ink)
  */
+import { resolveLocale } from '../lib/routing';
+import { getExternalLinks } from '../lib/constants';
+
 interface Props {
 	class?: string;
 }
 
 const { class: className } = Astro.props;
-
-const links = [
-	{
-		label: 'GitHub',
-		href: 'https://github.com/zensoink',
-		icon: 'github',
-		title: 'Zenso GitHub Organization',
-	},
-	{
-		label: 'Discord',
-		href: 'https://discord.gg/vTjzkwz3XV',
-		icon: 'discord',
-		title: 'Zenso Community Discord',
-	},
-	{
-		label: 'zenso.ink',
-		href: 'https://zenso.ink',
-		icon: 'external',
-		title: 'Zenso Main Website',
-	},
-];
+const locale = resolveLocale(Astro.url.pathname);
+const links = getExternalLinks(locale);
 ---
 
 <div class:list={['zen-external-links', className]} role="group" aria-label="External resources">
@@ -39,8 +23,8 @@ const links = [
 				{index > 0 && <span aria-hidden="true" class="zen-sep">·</span>}
 				<a
 					href={link.href}
-					target="_blank"
-					rel="noopener noreferrer"
+					target={link.external ? '_blank' : undefined}
+					rel={link.external ? 'noopener noreferrer' : undefined}
 					class="zen-ext-link"
 					aria-label={link.label}
 					title={link.title}

@@ -37,7 +37,8 @@ test('Astro components keep background effect on body and not in hero sections',
 	assert.doesNotMatch(astroConfig, /ContentPanel:\s*'\.\/src\/components\/ContentPanel\.astro'/, 'ContentPanel must not be wrapped with dots');
 
 	const siteTitleAstro = fs.readFileSync(path.join(ROOT_DIR, 'src/components/SiteTitle.astro'), 'utf-8');
-	assert.match(siteTitleAstro, /href="https:\/\/zenso\.ink"/, 'SiteTitle must link brand to zenso.ink');
+	assert.match(siteTitleAstro, /href=\{mainSiteHref\}/, 'SiteTitle must link brand to localized main website');
+	assert.match(siteTitleAstro, /getMainSiteUrl\(locale\)/, 'SiteTitle must resolve mainSiteHref via getMainSiteUrl');
 	assert.match(siteTitleAstro, /docs-home-pill/, 'SiteTitle must include Docs home pill');
 	assert.match(siteTitleAstro, /setupBodyDitherScroll/, 'SiteTitle must bundle scroll fade handler');
 });

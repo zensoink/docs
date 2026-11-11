@@ -57,16 +57,14 @@ test('ThemeToggle supports circular view-transition animation and toggles dark/l
 	assert.match(content, /data-theme/, 'Must set data-theme attribute');
 });
 
-test('ExternalLinks renders GitHub, Discord, and Zenso Web with rel=noopener', () => {
+test('ExternalLinks renders GitHub, Discord, and localized Zenso Web via getExternalLinks', () => {
 	const extPath = path.join(ROOT_DIR, 'src/components/ExternalLinks.astro');
 	assert.ok(fs.existsSync(extPath), 'src/components/ExternalLinks.astro must exist');
 	const content = fs.readFileSync(extPath, 'utf-8');
 
-	assert.match(content, /github\.com\/zensoink/, 'Must link to GitHub');
-	assert.match(content, /discord\.gg/, 'Must link to Discord');
-	assert.match(content, /zenso\.ink/, 'Must link to Zenso Web');
-	assert.match(content, /rel=["']noopener/, 'Must include rel="noopener"');
-	assert.match(content, /target=["']_blank["']/, 'Must include target="_blank"');
+	assert.match(content, /getExternalLinks\(locale\)/, 'Must delegate links to getExternalLinks');
+	assert.match(content, /noopener noreferrer/, 'Must include noopener for external links');
+	assert.match(content, /_blank/, 'Must include _blank for external links');
 });
 
 test('MobileMenuFooter renders language switcher, theme toggle, and external links for mobile drawer', () => {

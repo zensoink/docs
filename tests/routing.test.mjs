@@ -10,6 +10,8 @@ import {
 	resolveLocale,
 	localizePath,
 	getDocsHome,
+	getMainSiteUrl,
+	MAIN_SITE_BASE_URL,
 } from '../src/lib/routing.ts';
 
 test('Route Navigator exports invariants and configuration', () => {
@@ -67,4 +69,13 @@ test('getDocsHome returns canonical docs landing route', () => {
 	assert.equal(getDocsHome('pl'), '/pl/docs/');
 	assert.equal(getDocsHome('ja'), '/ja/docs/');
 	assert.equal(getDocsHome('invalid'), '/en/docs/');
+});
+
+test('getMainSiteUrl returns localized canonical main site route', () => {
+	assert.equal(MAIN_SITE_BASE_URL, 'https://www.zenso.ink');
+	assert.equal(getMainSiteUrl('en'), 'https://www.zenso.ink/en/');
+	assert.equal(getMainSiteUrl('pl'), 'https://www.zenso.ink/pl/');
+	assert.equal(getMainSiteUrl('ja'), 'https://www.zenso.ink/ja/');
+	assert.equal(getMainSiteUrl('invalid'), 'https://www.zenso.ink/en/');
+	assert.equal(getMainSiteUrl(), 'https://www.zenso.ink/en/');
 });
