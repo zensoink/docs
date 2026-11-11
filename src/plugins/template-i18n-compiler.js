@@ -25,20 +25,28 @@ export function getNestedValue(obj, dotPath) {
 }
 
 /**
- * Interpolate {{key.subkey}} and {{assets_prefix}} into template content
+ * Interpolate {{key.subkey}}, {{assets_prefix}}, {{docs_prefix}}, and {{locale}} into template content
  * @param {string} templateContent
  * @param {Record<string, unknown>} dict
  * @param {Record<string, unknown>} fallbackDict
  * @param {string} assetsPrefix
+ * @param {string} [locale]
  * @returns {string}
  */
-export function compileTemplateContent(templateContent, dict, fallbackDict, assetsPrefix) {
-	// First replace {{assets_prefix}}
-	let result = templateContent.replace(/\{\{\s*assets_prefix\s*\}\}/g, assetsPrefix);
+export function compileTemplateContent(templateContent, dict, fallbackDict, assetsPrefix, locale = 'en') {
+	const docsPrefix = `/${locale}/docs/`;
+
+	// First replace built-in path/locale tokens
+	let result = templateContent
+		.replace(/\{\{\s*assets_prefix\s*\}\}/g, assetsPrefix)
+		.replace(/\{\{\s*docs_prefix\s*\}\}/g, docsPrefix)
+		.replace(/\{\{\s*locale\s*\}\}/g, locale);
 
 	// Then replace any other {{namespace.key}} tokens
 	result = result.replace(/\{\{\s*([a-zA-Z0-9_.]+)\s*\}\}/g, (match, token) => {
 		if (token === 'assets_prefix') return assetsPrefix;
+		if (token === 'docs_prefix') return docsPrefix;
+		if (token === 'locale') return locale;
 		const value = getNestedValue(dict, token);
 		if (value !== undefined) return value;
 		const fallbackValue = getNestedValue(fallbackDict, token);
@@ -124,7 +132,7 @@ export function compileAllTemplates({
 			const relToSrc = path.relative(destDir, srcDir).replace(/\\/g, '/');
 			const assetsPrefix = relToSrc ? `${relToSrc}/` : '';
 
-			const compiledContent = compileTemplateContent(rawTemplate, dict, enDict, assetsPrefix);
+			const compiledContent = compileTemplateContent(rawTemplate, dict, enDict, assetsPrefix, loc);
 
 			fs.mkdirSync(destDir, { recursive: true });
 			fs.writeFileSync(destFullPath, compiledContent, 'utf-8');

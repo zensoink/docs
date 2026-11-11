@@ -6,6 +6,7 @@
   "hero": {
     "tagline": "The complete source of truth for Zenso — cordless 7-color e-paper smart frame, ESP32 firmware, web panel, self-hosted Docker stack, and open plugin SDK.",
     "actions": {
+      "get_started": "Get Started",
       "zenso_web": "Visit Zenso.ink",
       "github": "GitHub Organization",
       "discord": "Join Discord"
@@ -14,25 +15,25 @@
   "ecosystem": {
     "section_title": "Explore the Ecosystem",
     "cards": {
+      "quickstart": {
+        "title": "Quick Start Guide",
+        "desc": "Step-by-step unboxing, Wi-Fi pairing, and widget selection to get your frame up and running.",
+        "link": "Get Started →"
+      },
+      "overview": {
+        "title": "System Architecture",
+        "desc": "Learn how Zenso renders dithered e-paper buffers on the server to maximize battery life.",
+        "link": "Read Architecture →"
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "desc": "Find answers about battery longevity, zero-light night performance, and Wi-Fi networks.",
+        "link": "View FAQ →"
+      },
       "opensource": {
         "title": "Open Source & Community",
         "desc": "Zenso is built with an open ecosystem in mind. Discover public repositories, container images, and community tools.",
         "link": "View GitHub →"
-      },
-      "design_system": {
-        "title": "Design System & Tokens",
-        "desc": "Calm computing design principles: authentic 7-pigment ACeP palettes, warm paper tones, Newsreader serif, and dither textures.",
-        "link": "Learn more on Zenso.ink →"
-      },
-      "discord": {
-        "title": "Community Discord",
-        "desc": "Connect with creators, ask questions about hardware & homelab self-hosting, and share your widget ideas.",
-        "link": "Join the Discord →"
-      },
-      "in_progress": {
-        "title": "Documentation in Progress",
-        "desc": "Technical guides for Docker self-hosting, firmware flashing, and widget plugin SDK are coming soon.",
-        "link": "Follow updates →"
       }
     }
   },
