@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 import {
 	SUPPORTED_LOCALES,
 	DEFAULT_LOCALE,
@@ -109,4 +111,15 @@ test('constants: getExternalLinks provides localized same-window zenso.ink and n
 	const enZensoWeb = enLinks.find((l) => l.label === 'zenso.ink');
 	assert.equal(enZensoWeb?.href, 'https://www.zenso.ink/en/');
 	assert.equal(enZensoWeb?.external, false);
+});
+
+test('favicon: authentic zenso-website icon assets exist in public/', () => {
+	const publicDir = path.join(import.meta.dirname, '../public');
+	assert.ok(fs.existsSync(path.join(publicDir, 'favicon.ico')), 'favicon.ico must exist');
+	assert.ok(fs.existsSync(path.join(publicDir, 'favicon-32x32.png')), 'favicon-32x32.png must exist');
+	assert.ok(fs.existsSync(path.join(publicDir, 'favicon.svg')), 'favicon.svg must exist');
+	assert.ok(fs.existsSync(path.join(publicDir, 'icon.svg')), 'icon.svg must exist');
+	assert.ok(fs.existsSync(path.join(publicDir, 'apple-touch-icon.png')), 'apple-touch-icon.png must exist');
+	assert.ok(fs.existsSync(path.join(publicDir, 'icon-192.png')), 'icon-192.png must exist');
+	assert.ok(fs.existsSync(path.join(publicDir, 'icon-512.png')), 'icon-512.png must exist');
 });

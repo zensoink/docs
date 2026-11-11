@@ -101,8 +101,9 @@ test('Static build outputs localized HTML pages with correct lang attributes and
 	assert.match(enHtml, /data-href="\/ja\/docs\/"/, 'EN switcher button for JA must point to /ja/docs/');
 	assert.match(plHtml, /data-href="\/en\/docs\/"/, 'PL switcher button for EN must point to /en/docs/');
 
-	// Verify /docs redirects to /en/docs
+	// Verify /docs redirects dynamically based on zenso.lang with static fallback
 	const docsRedirect = fs.readFileSync(path.join(ROOT_DIR, 'dist/docs/index.html'), 'utf-8');
+	assert.match(docsRedirect, /zenso\.lang/, '/docs redirect must check stored language zenso.lang');
 	assert.match(docsRedirect, /url=\/en\/docs/, '/docs must redirect to /en/docs');
 });
 

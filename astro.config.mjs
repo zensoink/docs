@@ -49,6 +49,37 @@ function docsSitemapGenerator() {
 	};
 }
 
+/**
+ * Injects client-side language preference resolver into root redirect pages (/ and /docs)
+ * while preserving static meta refresh fallback for bots and tests.
+ * @returns {import('astro').AstroIntegration}
+ */
+function entryRedirectEnhancer() {
+	return {
+		name: 'entry-redirect-enhancer',
+		hooks: {
+			'astro:build:done': ({ dir }) => {
+				const outDir = new URL(dir).pathname;
+				const redirectPaths = [
+					path.join(outDir, 'index.html'),
+					path.join(outDir, 'docs/index.html'),
+				];
+
+				const script = `<script>(function(){try{var s=localStorage.getItem('zenso.lang');var v=['en','pl','ja'].indexOf(s)!==-1?s:null;if(!v&&typeof navigator!=='undefined'){var ls=navigator.languages||[navigator.language];for(var i=0;i<ls.length;i++){var b=(ls[i]||'').split('-')[0].toLowerCase();if(['en','pl','ja'].indexOf(b)!==-1){v=b;break;}}}var t='/'+(v||'en')+'/docs/';if(window.location.pathname!==t){window.location.replace(t);}}catch(e){}})();</script>`;
+
+				for (const filePath of redirectPaths) {
+					if (fs.existsSync(filePath)) {
+						const original = fs.readFileSync(filePath, 'utf-8');
+						if (!original.includes('zenso.lang')) {
+							fs.writeFileSync(filePath, `${script}${original}`, 'utf-8');
+						}
+					}
+				}
+			},
+		},
+	};
+}
+
 // https://astro.build/config
 export default defineConfig({
 	site: SITE_URL,
@@ -65,6 +96,25 @@ export default defineConfig({
 	integrations: [
 		templateI18nCompiler(),
 		starlight({
+			head: [
+				{
+					tag: 'script',
+					content: `(function(){try{var t=localStorage.getItem('zenso.theme')||localStorage.getItem('starlight-theme');if(t==='light'||t==='dark'){localStorage.setItem('starlight-theme',t);localStorage.setItem('zenso.theme',t);document.documentElement.dataset.theme=t;document.documentElement.classList.toggle('dark',t==='dark');document.documentElement.style.colorScheme=t;}}catch(e){}})();`,
+				},
+				{
+					tag: 'link',
+					attrs: { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
+				},
+				{
+					tag: 'link',
+					attrs: { rel: 'icon', href: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+				},
+				{
+					tag: 'link',
+					attrs: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
+				},
+			],
+			favicon: '/favicon.svg',
 			title: SITE_TITLE,
 			defaultLocale: DEFAULT_LOCALE,
 			locales: starlightLocales,
@@ -101,6 +151,7 @@ export default defineConfig({
 			customCss: ['./src/styles/global.css'],
 		}),
 		docsSitemapGenerator(),
+		entryRedirectEnhancer(),
 	],
 	vite: {
 		plugins: [tailwindcss()],

@@ -55,6 +55,9 @@ test('ThemeToggle supports circular view-transition animation and toggles dark/l
 	assert.match(content, /startViewTransition/, 'Must support startViewTransition');
 	assert.match(content, /clipPath/, 'Must use circular clipPath animation');
 	assert.match(content, /data-theme/, 'Must set data-theme attribute');
+	assert.match(content, /storage/, 'Must listen to storage events for cross-tab sync');
+	assert.match(content, /THEME_STORAGE_KEY/, 'Must use THEME_STORAGE_KEY');
+	assert.match(content, /STARLIGHT_THEME_STORAGE_KEY/, 'Must use STARLIGHT_THEME_STORAGE_KEY');
 });
 
 test('ExternalLinks renders GitHub, Discord, and localized Zenso Web via getExternalLinks', () => {
