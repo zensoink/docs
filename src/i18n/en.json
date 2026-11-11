@@ -1,11 +1,12 @@
 {
   "site": {
     "title": "Zenso Documentation",
-    "description": "Canonical source of truth and complete technical guide for the Zenso 7-color e-paper ecosystem."
+    "description": "Everything you need to set up, personalise, and get the most out of your Zenso 7-color e-paper smart frame."
   },
   "hero": {
     "tagline": "The complete source of truth for Zenso — cordless 7-color e-paper smart frame, ESP32 firmware, web panel, self-hosted Docker stack, and open plugin SDK.",
     "actions": {
+      "get_started": "Get Started",
       "zenso_web": "Visit Zenso.ink",
       "github": "GitHub Organization",
       "discord": "Join Discord"
@@ -14,26 +15,62 @@
   "ecosystem": {
     "section_title": "Explore the Ecosystem",
     "cards": {
-      "opensource": {
-        "title": "Open Source & Community",
-        "desc": "Zenso is built with an open ecosystem in mind. Discover public repositories, container images, and community tools.",
+      "quickstart": {
+        "title": "Quick Start Guide",
+        "desc": "Step-by-step unboxing, Wi-Fi pairing, and widget selection to get your frame up and running.",
+        "link": "Get Started →"
+      },
+      "panel": {
+        "title": "Zenso Web Panel",
+        "desc": "Configure dynamic widgets, upload family photo albums, and fine-tune refresh schedules.",
+        "link": "Open Web Panel →"
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "desc": "Find answers about battery longevity, zero-light night performance, and Wi-Fi networks.",
+        "link": "View FAQ →"
+      },
+      "selfhost": {
+        "title": "Self-Host on Your Hardware",
+        "desc": "The firmware and plugin SDK are open source. The API and panel are proprietary but ship as free Docker images — run the full stack on any server, NAS, or Raspberry Pi you already own.",
         "link": "View GitHub →"
-      },
-      "design_system": {
-        "title": "Design System & Tokens",
-        "desc": "Calm computing design principles: authentic 7-pigment ACeP palettes, warm paper tones, Newsreader serif, and dither textures.",
-        "link": "Learn more on Zenso.ink →"
-      },
-      "discord": {
-        "title": "Community Discord",
-        "desc": "Connect with creators, ask questions about hardware & homelab self-hosting, and share your widget ideas.",
-        "link": "Join the Discord →"
-      },
-      "in_progress": {
-        "title": "Documentation in Progress",
-        "desc": "Technical guides for Docker self-hosting, firmware flashing, and widget plugin SDK are coming soon.",
-        "link": "Follow updates →"
       }
     }
+  },
+  "quickstart": {
+    "title": "Quick Start (Onboarding)",
+    "description": "Step-by-step unboxing and onboarding guide to get your Zenso frame up and running.",
+    "intro": "Setting up your Zenso frame requires zero coding and takes less than two minutes.",
+    "step1_title": "Power On",
+    "step1_desc": "Turn on the power switch located on the rear panel. The e-paper display will cycle through an initial waveform wipe and present the onboarding screen.",
+    "step2_title": "Connect to Wi-Fi",
+    "step2_desc": "On your smartphone, open your Wi-Fi settings:\n1. Connect to the temporary hotspot broadcast by the frame (SSID: `Zenso-Setup`).\n2. A captive portal will appear automatically.\n3. Select your home 2.4 GHz Wi-Fi network and enter your network password.\n   *(Note: 5 GHz-only bands are not supported by the 802.11 b/g/n radio).* ",
+    "step3_title": "Scan the Pairing QR Code",
+    "step3_desc": "Once connected to the internet, the frame fetches device authorization and displays an authentic pairing QR code on its 7.3\" screen. Scan it with any smartphone camera to open the Zenso management portal.",
+    "step4_title": "Select Your Widgets",
+    "step4_desc": "In the portal, pick what to display:\n- **Family Photo Albums**: Personal memories and curated artwork with automatic orientation and e-ink color dithering.\n- **Ambient Weather**: Live conditions, forecasts, and barometric trends.\n- **Calendar & Agenda**: Google Calendar or CalDAV events.\n- **Bento Grids**: Multi-widget layouts configured without writing a line of code.",
+    "step5_title": "Enjoy Calm Living",
+    "step5_desc": "Your frame will update quietly according to your preferred schedule (e.g., hourly during the day, asleep overnight) and immediately enter ultra-low power deep sleep (< 15 µA) between refreshes, preserving battery and home tranquility."
+  },
+  "overview": {
+    "title": "Overview",
+    "description": "Zenso is a cordless 7-color e-paper smart frame that stays out of your way — no light, no noise, months of battery life.",
+    "intro": "Zenso is a cordless 7-color e-paper smart frame designed to fit quietly into your home. It displays family photos, weather, and calendar events without emitting a single photon of light — just like a print on the wall. When the battery runs out, the last image stays on the screen indefinitely. Plug in USB-C when you're ready to refresh.",
+    "refresh_title": "Updates that follow your rhythm",
+    "refresh_desc": "Set your own schedule in the web panel — hourly updates during the day, complete silence overnight. The frame wakes up only when needed and immediately goes back to sleep, so it never disrupts your home.",
+    "local_title": "Your data stays yours",
+    "local_desc": "Zenso works with the official Zenso Cloud out of the box, or you can run your own self-hosted stack on your home network using the provided Docker image — zero telemetry, no subscriptions, complete privacy."
+  },
+  "faq": {
+    "title": "Non-Technical FAQ & Daily Experience",
+    "description": "Frequently asked questions about battery life, light emission, Wi-Fi networks, and everyday usage.",
+    "q1": "Does the frame emit light in the bedroom or at night?",
+    "a1": "**No, absolutely none.**\n\nZenso uses reflective electronic paper with physical color pigment microcapsules. It produces zero backlight, zero blue light, and zero glare, looking just like museum-grade archival paper print under ambient room lighting. At night when the room lights are off, the frame is completely dark.",
+    "q2": "What happens when the battery runs out?",
+    "a2": "**The image stays on the screen forever.**\n\nThe ACeP e-paper technology is bi-stable. This means the micro-pigments stay locked in position indefinitely with zero electrical power. The last displayed image or family photo remains crisp and visible forever until you plug in a standard USB-C charger.",
+    "q3": "Which Wi-Fi networks are supported?",
+    "a3": "**Standard 2.4 GHz 802.11 b/g/n networks.**\n\nZenso connects to standard 2.4 GHz Wi-Fi (supported by virtually all home broadband routers). 5 GHz-only bands are not supported by the hardware radio. If your home Wi-Fi broadcasts separate SSID names for 2.4 GHz and 5 GHz, connect to the 2.4 GHz network during initial onboarding.",
+    "q4": "Can multiple family members send photos to the frame?",
+    "a4": "**Yes.**\n\nYou can share your frame's private invite link or pairing QR code with trusted family members through [panel.zenso.ink](https://panel.zenso.ink) so they can contribute photos to your shared album without needing technical knowledge."
   }
 }

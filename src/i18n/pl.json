@@ -1,11 +1,12 @@
 {
   "site": {
     "title": "Dokumentacja Zenso",
-    "description": "Kanoniczne źródło wiedzy i kompletny przewodnik techniczny po ekosystemie 7-kolorowego e-papieru Zenso."
+    "description": "Wszystko, czego potrzebujesz, żeby skonfigurować, spersonalizować i w pełni cieszyć się ramką Zenso z 7-kolorowym e-papierem."
   },
   "hero": {
     "tagline": "Kompletne źródło wiedzy o Zenso — bezprzewodowa ramka ze smart e-papierem 7-kolorowym, firmware ESP32, panel webowy, self-hosted Docker stack oraz otwarte SDK pluginów.",
     "actions": {
+      "get_started": "Rozpocznij",
       "zenso_web": "Odwiedź Zenso.ink",
       "github": "Organizacja GitHub",
       "discord": "Dołącz do Discorda"
@@ -14,26 +15,62 @@
   "ecosystem": {
     "section_title": "Poznaj ekosystem",
     "cards": {
-      "opensource": {
-        "title": "Open Source i społeczność",
-        "desc": "Zenso tworzone jest z myślą o otwartym ekosystemie. Odkryj publiczne repozytoria, obrazy kontenerów oraz narzędzia społeczności.",
+      "quickstart": {
+        "title": "Szybki start (Wdrożenie)",
+        "desc": "Instrukcja krok po kroku: rozpakowanie, parowanie Wi-Fi i wybór widgetów w dwie minuty.",
+        "link": "Rozpocznij wdrożenie →"
+      },
+      "panel": {
+        "title": "Panel webowy Zenso",
+        "desc": "Konfiguruj widgety, wgrywaj zdjęcia do albumów i dopasowuj harmonogramy odświeżania ramki.",
+        "link": "Otwórz panel webowy →"
+      },
+      "faq": {
+        "title": "Często zadawane pytania",
+        "desc": "Odpowiedzi na pytania o czas pracy na baterii, brak emisji światła w nocy i sieci Wi-Fi.",
+        "link": "Zobacz FAQ →"
+      },
+      "selfhost": {
+        "title": "Samodzielny hosting na Twoim sprzęcie",
+        "desc": "Firmware i SDK wtyczek są open source. Interfejs API i panel są własnościowe, ale dostępne jako bezpłatne obrazy Docker — uruchom cały stos na dowolnym serwerze, NAS-ie lub Raspberry Pi, które już masz.",
         "link": "Zobacz GitHub →"
-      },
-      "design_system": {
-        "title": "System projektowania i tokeny",
-        "desc": "Zasady spokojnego projektowania (calm computing): autentyczna 7-kolorowa paleta ACeP, ciepłe odcienie papieru, krój szeryfowy Newsreader i tekstury dither.",
-        "link": "Dowiedz się więcej na Zenso.ink →"
-      },
-      "discord": {
-        "title": "Społeczność Discord",
-        "desc": "Połącz się z twórcami, zadawaj pytania o sprzęt i self-hosting we własnym homelabie oraz dziel się pomysłami na widgety.",
-        "link": "Dołącz do Discorda →"
-      },
-      "in_progress": {
-        "title": "Dokumentacja w trakcie prac",
-        "desc": "Przewodniki techniczne dotyczące self-hostingu Docker, wgrywania firmware i SDK widgetów są w przygotowaniu.",
-        "link": "Śledź aktualizacje →"
       }
     }
+  },
+  "quickstart": {
+    "title": "Szybki start (Wdrożenie)",
+    "description": "Przewodnik krok po kroku po rozpakowaniu i konfiguracji ramki Zenso.",
+    "intro": "Konfiguracja ramki Zenso nie wymaga programowania i zajmuje mniej niż dwie minuty.",
+    "step1_title": "Włączenie zasilania",
+    "step1_desc": "Włącz przełącznik zasilania umieszczony na tylnym panelu. Wyświetlacz e-papierowy wykona odświeżenie fali i wyświetli ekran powitalny.",
+    "step2_title": "Połączenie z Wi-Fi",
+    "step2_desc": "Na smartfonie otwórz ustawienia Wi-Fi:\n1. Połącz się z tymczasowym punktem dostępowym ramki (SSID: `Zenso-Setup`).\n2. Strona logowania (captive portal) otworzy się automatycznie.\n3. Wybierz domową sieć Wi-Fi 2.4 GHz i wprowadź hasło.\n   *(Uwaga: pasma wyłącznie 5 GHz nie są obsługiwane przez moduł 802.11 b/g/n).* ",
+    "step3_title": "Zeskanowanie kodu QR parowania",
+    "step3_desc": "Po połączeniu z siecią ramka pobiera autoryzację i wyświetla autentyczny kod QR parowania na 7.3-calowym ekranie. Zeskanuj go aparatem smartfona, aby otworzyć panel zarządzania Zenso.",
+    "step4_title": "Wybór widgetów",
+    "step4_desc": "W panelu wybierz elementy do wyświetlania:\n- **Rodzinne albumy zdjęć**: Osobiste wspomnienia i wyselekcjonowane dzieła sztuki z automatyczną orientacją i ditheringiem barw e-papieru.\n- **Pogoda i warunki**: Bieżąca pogoda, prognozy i trendy ciśnienia barometrycznego.\n- **Kalendarz i agenda**: Synchronizacja z Google Calendar oraz CalDAV.\n- **Układy Bento Grid**: Wieloelementowe układy konfigurowane bez pisania kodu.",
+    "step5_title": "Ciesz się spokojnym życiem",
+    "step5_desc": "Twoja ramka aktualizuje się bezgłośnie według wybranego harmonogramu (np. co godzinę w dzień, uśpiona w nocy) i natychmiast przechodzi w tryb ultra-głębokiego uśpienia (< 15 µA), chroniąc baterię i domowy spokój."
+  },
+  "overview": {
+    "title": "Przegląd",
+    "description": "Zenso to bezprzewodowa ramka smart z 7-kolorowym e-papierem, która żyje na uboczu — bez światła, bez hałasu, z baterią na wiele miesięcy.",
+    "intro": "Zenso to bezprzewodowa ramka z 7-kolorowym e-papierem stworzona po to, aby cicho wtopić się w Twój dom. Wyświetla zdjęcia rodziny, pogodę i wydarzenia z kalendarza bez emitowania ani jednego fotonu światła — jak wydruk na ścianie. Gdy bateria się rozładuje, ostatni obraz pozostaje na ekranie bez końca. Wystarczy podłączyć USB-C, kiedy chcesz to zmienić.",
+    "refresh_title": "Aktualizacje dostosowane do Twojego rytmu",
+    "refresh_desc": "Ustaw własny harmonogram w panelu webowym — aktualizacje co godzinę w ciągu dnia, całkowita cisza w nocy. Ramka budzi się tylko wtedy, gdy trzeba, i natychmiast wraca do uśpienia, żeby nigdy nie zakłócać spokoju domu.",
+    "local_title": "Twoje dane pozostają Twoje",
+    "local_desc": "Zenso działa z oficjalną chmurą Zenso Cloud od razu po uruchomieniu lub możesz postawić własny stack w sieci domowej z gotowym obrazem Docker — zero telemetrii, żadnych subskrypcji, pełna prywatność."
+  },
+  "faq": {
+    "title": "Często zadawane pytania (FAQ) i codzienne użytkowanie",
+    "description": "Najczęstsze pytania o czas pracy na baterii, emisję światła, sieci Wi-Fi i codzienną eksploatację.",
+    "q1": "Czy ramka emituje światło w sypialni lub w nocy?",
+    "a1": "**Nie, absolutnie żadnego.**\n\nZenso korzysta z refleksyjnego e-papieru z fizycznymi mikrokapsułkami pigmentu. Nie wytwarza podświetlenia, nie emituje niebieskiego światła ani odblasków, wyglądając jak muzealny wydruk na papierze archiwalnym. W nocy, przy zgaszonym świetle, ramka jest całkowicie ciemna.",
+    "q2": "Co się dzieje, gdy rozładuje się bateria?",
+    "a2": "**Obraz pozostaje na ekranie na zawsze.**\n\nTechnologia e-papieru ACeP jest bistabilna. Mikropigmenty pozostają zablokowane na swoich pozycjach bez konieczności zasilania elektrycznego. Ostatnio wyświetlone zdjęcie pozostaje ostre i czytelne do momentu podłączenia ładowarki USB-C.",
+    "q3": "Jakie sieci Wi-Fi są obsługiwane?",
+    "a3": "**Standardowe sieci 2.4 GHz 802.11 b/g/n.**\n\nZenso łączy się z typowym pasmem 2.4 GHz (obsługiwanym przez niemal wszystkie domowe routery). Pasma wyłącznie 5 GHz nie są obsługiwane przez moduł radiowy. Jeśli router nadaje osobne nazwy dla 2.4 i 5 GHz, połącz ramkę z siecią 2.4 GHz.",
+    "q4": "Czy inni członkowie rodziny mogą przesyłać zdjęcia na ramkę?",
+    "a4": "**Tak.**\n\nMożesz udostępnić zaufanym członkom rodziny prywatny link zaproszenia lub kod QR parowania za pośrednictwem [panel.zenso.ink](https://panel.zenso.ink), aby mogli dodawać zdjęcia do wspólnego albumu bez technicznej wiedzy."
   }
 }

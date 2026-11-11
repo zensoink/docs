@@ -13,6 +13,6 @@
     { "pattern": "zenso.ink/docs*", "zone_name": "zenso.ink" },
     { "pattern": "zenso.ink/_docs_assets/*", "zone_name": "zenso.ink" },
     { "pattern": "zenso.ink/pagefind/*", "zone_name": "zenso.ink" },
-    { "pattern": "zenso.ink/docs-sitemap*.xml", "zone_name": "zenso.ink" }
+    { "pattern": "zenso.ink/docs-sitemap*", "zone_name": "zenso.ink" }
   ]
 }

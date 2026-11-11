@@ -84,4 +84,14 @@ test('Static build outputs docs-sitemap files matching wrangler.jsonc route patt
 	assert.match(urlsetContent, /https:\/\/zenso\.ink\/en\/docs\//);
 	assert.match(urlsetContent, /https:\/\/zenso\.ink\/pl\/docs\//);
 	assert.match(urlsetContent, /https:\/\/zenso\.ink\/ja\/docs\//);
+
+	// Redundant sitemaps must be removed to prevent duplicates
+	assert.ok(
+		!fs.existsSync(path.join(ROOT_DIR, 'dist/sitemap-index.xml')),
+		'dist/sitemap-index.xml must be removed in favor of docs-sitemap.xml'
+	);
+	assert.ok(
+		!fs.existsSync(path.join(ROOT_DIR, 'dist/sitemap-0.xml')),
+		'dist/sitemap-0.xml must be removed in favor of docs-sitemap-0.xml'
+	);
 });

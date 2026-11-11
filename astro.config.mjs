@@ -5,6 +5,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwindcss from '@tailwindcss/vite';
 import templateI18nCompiler from './src/plugins/template-i18n-compiler.js';
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from './src/lib/routing.ts';
+
+const starlightLocales = Object.fromEntries(
+	SUPPORTED_LOCALES.map((loc) => [loc.code, { label: loc.starlightLabel, lang: loc.lang }])
+);
 
 /**
  * Creates static docs-sitemap.xml pointing to docs-sitemap-0.xml
@@ -24,10 +29,12 @@ function docsSitemapGenerator() {
 					const indexContent = fs.readFileSync(sitemapIndexPath, 'utf-8');
 					const rewrittenIndex = indexContent.replaceAll('sitemap-0.xml', 'docs-sitemap-0.xml');
 					fs.writeFileSync(path.join(outDir, 'docs-sitemap.xml'), rewrittenIndex, 'utf-8');
+					fs.unlinkSync(sitemapIndexPath);
 				}
 
 				if (fs.existsSync(sitemap0Path)) {
 					fs.copyFileSync(sitemap0Path, path.join(outDir, 'docs-sitemap-0.xml'));
+					fs.unlinkSync(sitemap0Path);
 				}
 			},
 		},
@@ -41,28 +48,18 @@ export default defineConfig({
 		assets: '_docs_assets',
 	},
 	redirects: {
-		'/': '/en/docs',
-		'/docs': '/en/docs',
+		'/': '/en/docs/',
+		'/docs': '/en/docs/',
+		'/en/docs/getting-started/overview': '/en/docs/',
+		'/pl/docs/getting-started/overview': '/pl/docs/',
+		'/ja/docs/getting-started/overview': '/ja/docs/',
 	},
 	integrations: [
 		templateI18nCompiler(),
 		starlight({
 			title: 'Zenso',
-			defaultLocale: 'en',
-			locales: {
-				en: {
-					label: 'English',
-					lang: 'en',
-				},
-				pl: {
-					label: 'Polski',
-					lang: 'pl',
-				},
-				ja: {
-					label: '日本語',
-					lang: 'ja',
-				},
-			},
+			defaultLocale: DEFAULT_LOCALE,
+			locales: starlightLocales,
 			logo: {
 				src: './src/assets/logo.svg',
 				alt: 'Zenso Logo',
@@ -81,8 +78,23 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: 'Documentation',
-					items: [{ autogenerate: { directory: 'docs' } }],
+					label: 'Start Here',
+					translations: {
+						pl: 'Pierwsze kroki',
+						ja: 'はじめに',
+					},
+					items: [
+						{
+							slug: 'docs',
+							label: 'Overview',
+							translations: {
+								pl: 'Przegląd',
+								ja: '概要',
+							},
+						},
+						{ slug: 'docs/getting-started/quickstart' },
+						{ slug: 'docs/getting-started/faq' },
+					],
 				},
 			],
 			customCss: ['./src/styles/global.css'],
