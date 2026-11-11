@@ -60,7 +60,7 @@ test('Build distribution contains styled documentation landing page with full si
 	assert.match(content, /Start Here/, 'Sidebar must render Start Here section');
 });
 
-test('Legacy overview URLs redirect to canonical doc roots', () => {
+test('Legacy overview localized routes redirect to canonical documentation paths', () => {
 	const distDir = path.join(ROOT_DIR, 'dist');
 	const enOverview = path.join(distDir, 'en/docs/getting-started/overview/index.html');
 	const plOverview = path.join(distDir, 'pl/docs/getting-started/overview/index.html');
@@ -70,7 +70,7 @@ test('Legacy overview URLs redirect to canonical doc roots', () => {
 	assert.ok(fs.existsSync(plOverview), 'pl overview redirect must exist');
 	assert.ok(fs.existsSync(jaOverview), 'ja overview redirect must exist');
 
-	assert.match(fs.readFileSync(enOverview, 'utf-8'), /url=\/en\/docs/);
-	assert.match(fs.readFileSync(plOverview, 'utf-8'), /url=\/pl\/docs/);
-	assert.match(fs.readFileSync(jaOverview, 'utf-8'), /url=\/ja\/docs/);
+	assert.match(fs.readFileSync(enOverview, 'utf-8'), /url=\/en\/docs\//);
+	assert.match(fs.readFileSync(plOverview, 'utf-8'), /url=\/pl\/docs\//);
+	assert.match(fs.readFileSync(jaOverview, 'utf-8'), /url=\/ja\/docs\//);
 });

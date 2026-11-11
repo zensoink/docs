@@ -48,11 +48,11 @@ export default defineConfig({
 		assets: '_docs_assets',
 	},
 	redirects: {
-		'/': '/en/docs',
-		'/docs': '/en/docs',
-		'/en/docs/getting-started/overview': '/en/docs',
-		'/pl/docs/getting-started/overview': '/pl/docs',
-		'/ja/docs/getting-started/overview': '/ja/docs',
+		'/': '/en/docs/',
+		'/docs': '/en/docs/',
+		'/en/docs/getting-started/overview': '/en/docs/',
+		'/pl/docs/getting-started/overview': '/pl/docs/',
+		'/ja/docs/getting-started/overview': '/ja/docs/',
 	},
 	integrations: [
 		templateI18nCompiler(),
