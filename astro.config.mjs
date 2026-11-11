@@ -19,6 +19,28 @@ const starlightLocales = Object.fromEntries(
 	SUPPORTED_LOCALES.map((loc) => [loc.code, { label: loc.starlightLabel, lang: loc.lang }])
 );
 
+const enDict = JSON.parse(fs.readFileSync(new URL('./src/i18n/en.json', import.meta.url), 'utf-8'));
+const plDict = JSON.parse(fs.readFileSync(new URL('./src/i18n/pl.json', import.meta.url), 'utf-8'));
+const jaDict = JSON.parse(fs.readFileSync(new URL('./src/i18n/ja.json', import.meta.url), 'utf-8'));
+
+/**
+ * Helper to build a localized sidebar navigation item from i18n dictionaries
+ * @param {string} slug
+ * @param {string} enLabel
+ * @param {string} plLabel
+ * @param {string} jaLabel
+ */
+function createSidebarItem(slug, enLabel, plLabel, jaLabel) {
+	return {
+		slug,
+		label: enLabel,
+		translations: {
+			pl: plLabel,
+			ja: jaLabel,
+		},
+	};
+}
+
 /**
  * Creates static docs-sitemap.xml pointing to docs-sitemap-0.xml
  * matching wrangler.jsonc route: zenso.ink/docs-sitemap*.xml
@@ -129,22 +151,61 @@ export default defineConfig({
 			social: STARLIGHT_SOCIAL_LINKS,
 			sidebar: [
 				{
-					label: 'Start Here',
+					label: enDict.sidebar.sections.start_here,
 					translations: {
-						pl: 'Pierwsze kroki',
-						ja: 'はじめに',
+						pl: plDict.sidebar.sections.start_here,
+						ja: jaDict.sidebar.sections.start_here,
 					},
 					items: [
-						{
-							slug: 'docs',
-							label: 'Overview',
-							translations: {
-								pl: 'Przegląd',
-								ja: '概要',
-							},
-						},
-						{ slug: 'docs/getting-started/quickstart' },
-						{ slug: 'docs/getting-started/faq' },
+						createSidebarItem('docs', enDict.sidebar.items.overview, plDict.sidebar.items.overview, jaDict.sidebar.items.overview),
+						createSidebarItem('docs/getting-started/quickstart', enDict.sidebar.items.quickstart, plDict.sidebar.items.quickstart, jaDict.sidebar.items.quickstart),
+						createSidebarItem('docs/getting-started/faq', enDict.sidebar.items.faq, plDict.sidebar.items.faq, jaDict.sidebar.items.faq),
+					],
+				},
+				{
+					label: enDict.sidebar.sections.user_guide,
+					translations: {
+						pl: plDict.sidebar.sections.user_guide,
+						ja: jaDict.sidebar.sections.user_guide,
+					},
+					items: [
+						createSidebarItem('docs/user-guide/overview', enDict.user_guide.overview.title, plDict.user_guide.overview.title, jaDict.user_guide.overview.title),
+						createSidebarItem('docs/user-guide/quickstart', enDict.user_guide.quickstart.title, plDict.user_guide.quickstart.title, jaDict.user_guide.quickstart.title),
+						createSidebarItem('docs/user-guide/panel-basics', enDict.user_guide.panel_basics.title, plDict.user_guide.panel_basics.title, jaDict.user_guide.panel_basics.title),
+						createSidebarItem('docs/user-guide/screens-and-layouts', enDict.user_guide.screens_and_layouts.title, plDict.user_guide.screens_and_layouts.title, jaDict.user_guide.screens_and_layouts.title),
+						createSidebarItem('docs/user-guide/refresh-and-battery', enDict.user_guide.refresh_and_battery.title, plDict.user_guide.refresh_and_battery.title, jaDict.user_guide.refresh_and_battery.title),
+						createSidebarItem('docs/user-guide/plugins-image', enDict.user_guide.plugins_image.title, plDict.user_guide.plugins_image.title, jaDict.user_guide.plugins_image.title),
+						createSidebarItem('docs/user-guide/plugins-calendar', enDict.user_guide.plugins_calendar.title, plDict.user_guide.plugins_calendar.title, jaDict.user_guide.plugins_calendar.title),
+						createSidebarItem('docs/user-guide/troubleshooting-faq', enDict.user_guide.troubleshooting_faq.title, plDict.user_guide.troubleshooting_faq.title, jaDict.user_guide.troubleshooting_faq.title),
+					],
+				},
+				{
+					label: enDict.sidebar.sections.developer_guide,
+					translations: {
+						pl: plDict.sidebar.sections.developer_guide,
+						ja: jaDict.sidebar.sections.developer_guide,
+					},
+					items: [
+						createSidebarItem('docs/developer-guide/overview', enDict.developer_guide.overview.title, plDict.developer_guide.overview.title, jaDict.developer_guide.overview.title),
+						createSidebarItem('docs/developer-guide/docker-setup', enDict.developer_guide.docker_setup.title, plDict.developer_guide.docker_setup.title, jaDict.developer_guide.docker_setup.title),
+						createSidebarItem('docs/developer-guide/environment-variables', enDict.developer_guide.environment_variables.title, plDict.developer_guide.environment_variables.title, jaDict.developer_guide.environment_variables.title),
+						createSidebarItem('docs/developer-guide/cold-boot-setup', enDict.developer_guide.cold_boot_setup.title, plDict.developer_guide.cold_boot_setup.title, jaDict.developer_guide.cold_boot_setup.title),
+						createSidebarItem('docs/developer-guide/plugin-architecture', enDict.developer_guide.plugin_architecture.title, plDict.developer_guide.plugin_architecture.title, jaDict.developer_guide.plugin_architecture.title),
+						createSidebarItem('docs/developer-guide/widget-sdk-quickstart', enDict.developer_guide.widget_sdk_quickstart.title, plDict.developer_guide.widget_sdk_quickstart.title, jaDict.developer_guide.widget_sdk_quickstart.title),
+						createSidebarItem('docs/developer-guide/manifest-and-schemas', enDict.developer_guide.manifest_and_schemas.title, plDict.developer_guide.manifest_and_schemas.title, jaDict.developer_guide.manifest_and_schemas.title),
+						createSidebarItem('docs/developer-guide/building-and-publishing', enDict.developer_guide.building_and_publishing.title, plDict.developer_guide.building_and_publishing.title, jaDict.developer_guide.building_and_publishing.title),
+					],
+				},
+				{
+					label: enDict.sidebar.sections.hardware_protocol,
+					translations: {
+						pl: plDict.sidebar.sections.hardware_protocol,
+						ja: jaDict.sidebar.sections.hardware_protocol,
+					},
+					items: [
+						createSidebarItem('docs/hardware-protocol/overview', enDict.hardware_protocol.overview.title, plDict.hardware_protocol.overview.title, jaDict.hardware_protocol.overview.title),
+						createSidebarItem('docs/hardware-protocol/zenso-firmware', enDict.hardware_protocol.zenso_firmware.title, plDict.hardware_protocol.zenso_firmware.title, jaDict.hardware_protocol.zenso_firmware.title),
+						createSidebarItem('docs/hardware-protocol/byod-guide', enDict.hardware_protocol.byod_guide.title, plDict.hardware_protocol.byod_guide.title, jaDict.hardware_protocol.byod_guide.title),
 					],
 				},
 			],

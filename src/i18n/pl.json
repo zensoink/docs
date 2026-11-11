@@ -72,5 +72,231 @@
     "a3": "**Standardowe sieci 2.4 GHz 802.11 b/g/n.**\n\nZenso łączy się z typowym pasmem 2.4 GHz (obsługiwanym przez niemal wszystkie domowe routery). Pasma wyłącznie 5 GHz nie są obsługiwane przez moduł radiowy. Jeśli router nadaje osobne nazwy dla 2.4 i 5 GHz, połącz ramkę z siecią 2.4 GHz.",
     "q4": "Czy inni członkowie rodziny mogą przesyłać zdjęcia na ramkę?",
     "a4": "**Tak.**\n\nMożesz udostępnić zaufanym członkom rodziny prywatny link zaproszenia lub kod QR parowania za pośrednictwem [panel.zenso.ink](https://panel.zenso.ink), aby mogli dodawać zdjęcia do wspólnego albumu bez technicznej wiedzy."
+  },
+  "user_guide": {
+    "overview": {
+      "title": "Przegląd i filozofia",
+      "description": "Odkryj spokojną technologię, estetykę Japandi i naturalny urok e-papieru w ramce Zenso.",
+      "lead": "Zenso powstało, aby wprowadzić informacje i sztukę do Twojego domu bez stresu, świecących ekranów i natłoku powiadomień. Oparte na zasadach **spokojnej technologii (calm technology)**, Zenso towarzyszy Ci dyskretnie, nie domagając się ciągłej uwagi.",
+      "philosophy_title": "Filozofia Japandi i spokojnego życia",
+      "philosophy_body": "Współczesne wnętrza są przesycone ekranami LED i OLED, które walczą o uwagę wzroku. Zenso łączy japońską ideę *Ma* (harmonijnej przestrzeni) ze skandynawską funkcjonalnością. Jest cyfrowym meblem, który naturalnie współgra z rytmem Twojego dnia.",
+      "display_title": "7-kolorowy elektroniczny papier ACeP",
+      "display_body": "W ramce zastosowano zaawansowany wyświetlacz e-paper ACeP z fizycznymi mikrokapsułkami barwnika. Przemieszczanie pigmentów pod wpływem mikroskopijnych impulsów napięciowych pozwala na naturalne odbijanie światła. Ekran emituje **zero światła**, nie męczy wzroku i w nocy jest całkowicie ciemny.",
+      "craftsmanship_title": "Naturalny europejski dąb",
+      "craftsmanship_body": "Każda obudowa jest precyzyjnie frezowana z litego drewna dębowego i ręcznie wykańczana naturalnymi olejami. Brak wystających kabli, plastikowych ramek czy świecących diod na froncie podkreśla organiczny charakter produktu."
+    },
+    "quickstart": {
+      "title": "Rozpakowanie i konfiguracja Wi-Fi",
+      "description": "Rozpakuj ramkę Zenso, połącz z Wi-Fi przez portal konfiguracyjny i sparuj urządzenie w 3 minuty.",
+      "lead": "Konfiguracja ramki Zenso jest prosta, nie wymaga wiedzy technicznej i trwa poniżej trzech minut z poziomu smartfona.",
+      "step1_title": "Włącz zasilanie",
+      "step1_body": "Przesuń przełącznik z tyłu obudowy w pozycję **ON**. Wyświetlacz wykona cykl czyszczenia ekranu i pokaże powitalny ekran konfiguracyjny.",
+      "step2_title": "Połącz się z siecią konfiguracyjną",
+      "step2_body": "W ustawieniach Wi-Fi swojego smartfona lub laptopa wybierz tymczasową sieć o nazwie **`Zenso-Setup`**.",
+      "step3_title": "Wskaż domowe Wi-Fi 2.4 GHz",
+      "step3_body": "W oknie portalu konfiguracyjnego wybierz domową sieć Wi-Fi 2.4 GHz i wpisz hasło. *(Uwaga: pasma 5 GHz nie są obsługiwane przez moduł radiowy).*",
+      "step4_title": "Zeskanuj kod QR i sparuj ramkę",
+      "step4_body": "Po połączeniu z siecią ramka pobierze autoryzację i wyświetli kod QR. Zeskanuj go aparatem smartfona, aby przypisać ramkę do swojego konta w panelu."
+    },
+    "panel_basics": {
+      "title": "Zarządzanie ramką w Panelu",
+      "description": "Dowiedz się, jak korzystać z panelu Zenso, aby sprawdzać stan baterii, zasięg Wi-Fi i przypisywać ekrany.",
+      "lead": "Panel webowy Zenso pod adresem [panel.zenso.ink](https://panel.zenso.ink) (lub Twoja lokalna instancja) to centrum sterowania Twoimi ramkami.",
+      "access_title": "Dostęp do pulpitu",
+      "access_body": "Zaloguj się danymi konta. Pulpit prezentuje wszystkie sparowane ramki wraz z ich stanem na żywo, nazwami i przypisanymi ekranami.",
+      "telemetry_title": "Telemetria baterii i sieci",
+      "telemetry_body": "Karta każdego urządzenia pokazuje aktualny procent baterii, szacowany czas pracy, poziom sygnału Wi-Fi RSSI oraz dokładny czas ostatniej synchronizacji.",
+      "screen_assignment_title": "Przypisywanie ekranów",
+      "screen_assignment_body": "Zmieniaj ekrany lub twórz harmonogramy ich rotacji. Zmiany są przesyłane do ramki przy jej najbliższym planowanym wybudzeniu."
+    },
+    "screens_and_layouts": {
+      "title": "Ekrany i układy slotów",
+      "description": "Łącz wiele widgetów na jednym ekranie dzięki gotowym układom slotów i rotacji obrazu.",
+      "lead": "Ekran to kompozycja wizualna wyświetlana na ramce. Zenso umożliwia dzielenie ekranu na niezależne sloty z widgetami.",
+      "layouts_title": "Gotowe szablony układów",
+      "layouts_body": "Wybieraj spośród zoptymalizowanych szablonów:",
+      "rotation_title": "Rotacja i orientacja ekranu",
+      "rotation_body": "Niezależnie od tego, czy ramka stoi w pionie na komodzie, czy wisi poziomo na ścianie, ustaw rotację (0°, 90°, 180°, 270°). Silnik automatycznie dostosuje proporcje.",
+      "preview_title": "Podgląd proporcji na żywo",
+      "preview_body": "Panel zapewnia podgląd w skali 1:1, pokazując dokładnie, jak dany układ i widget zaprezentują się na fizycznym ekranie."
+    },
+    "refresh_and_battery": {
+      "title": "Częstotliwość odświeżania i bateria",
+      "description": "Optymalizuj interwały odświeżania, harmonogram snu nocnego i ciesz się miesiącami pracy bez kabla.",
+      "lead": "Dzięki temu, że e-papier pobiera energię **wyłącznie w trakcie zmiany obrazu**, ramka Zenso działa miesiącami na jednym ładowaniu USB-C.",
+      "cadence_title": "Ustawianie częstotliwości odświeżania",
+      "cadence_body": "Dopasuj częstotliwość do treści. Dla zdjęć i kalendarza idealny interwał to 1 do 2 godzin, a dla pulpitu statusowego np. 15 minut.",
+      "sleep_title": "Harmonogram snu nocnego",
+      "sleep_body": "Włącz tryb uśpienia nocnego (np. od 23:00 do 07:00). W tych godzinach mikrokontroler pozostaje w głębokim śnie (< 15 µA), oszczędzając baterię.",
+      "charging_title": "Ładowanie USB-C",
+      "charging_body": "Gdy poziom baterii spadnie poniżej 15%, otrzymasz powiadomienie. Podłącz dowolną ładowarkę USB-C na 2–3 godziny, by zasilić ramkę na kolejne miesiące."
+    },
+    "plugins_image": {
+      "title": "Wtyczka ramki zdjęć",
+      "description": "Wyświetlaj rodzinne fotografie i galerie dzieł sztuki z dopasowaniem cover/contain i ditheringiem 7-barwnym.",
+      "lead": "Oficjalna wtyczka zdjęć zamienia ramkę Zenso w elegancką wystawę rodzinnych wspomnień i fotografii.",
+      "config_title": "Konfiguracja źródła zdjęć",
+      "config_body": "Wklej bezpośredni adres URL do zdjęcia lub wybierz album w panelu. Wtyczka automatycznie zoptymalizuje plik pod kątem e-papieru.",
+      "fitting_title": "Tryby skalowania: Cover i Contain",
+      "fitting_body": "- **Cover (Wypełnienie)**: Wypełnia cały slot bez czarnych pasów, delikatnie przycinając krawędzie.",
+      "dithering_title": "Zaawansowany dithering 7 barw",
+      "dithering_body": "Zdjęcia przechodzą proces kwantyzacji barw dopasowany do pigmentów ACeP. Dostępny jest także tryb czarno-biały o podwyższonym kontraście."
+    },
+    "plugins_calendar": {
+      "title": "Wtyczka kalendarza",
+      "description": "Synchronizuj kalendarze Google, Apple iCloud i CalDAV bez powiadomień i świecącego ekranu.",
+      "lead": "Miej plany rodzinne i służbowe zawsze na oku – bez dźwięków powiadomień i męczącego światła monitora.",
+      "sync_title": "Podłączanie kalendarzy iCal / CalDAV",
+      "sync_body": "Wklej prywatny lub publiczny link `.ics` z Google Calendar, Apple iCloud, Microsoft Outlook lub Nextcloud do ustawień wtyczki.",
+      "views_title": "Przejrzyste widoki",
+      "views_body": "Wybieraj spośród widoków:",
+      "customization_title": "Formaty czasu i kolory",
+      "customization_body": "Wybierz format 12h lub 24h, ukrywaj wydarzenia całodniowe i nadawaj własne kolory poszczególnym kalendarzom domowników."
+    },
+    "troubleshooting_faq": {
+      "title": "Rozwiązywanie problemów i pielęgnacja",
+      "description": "Porady dotyczące ponownego łączenia Wi-Fi, dbania o baterię i usuwania ghostingu za pomocą pełnego odświeżenia.",
+      "lead": "Praktyczne wskazówki dotyczące pielęgnacji i rozwiązywania najczęstszych pytań technicznych.",
+      "wifi_title": "Ponowne łączenie z Wi-Fi",
+      "wifi_body": "Po zmianie routera lub hasła wyłącz i włącz zasilanie ramki dwukrotnie w krótkim odstępie, aby ponownie uruchomić sieć `Zenso-Setup`.",
+      "ghosting_title": "Usuwanie powidoków (Full White Wipe)",
+      "ghosting_body": "Po wielu częściowych odświeżeniach na e-papierze mogą pojawić się delikatne cienie. W panelu kliknij **Wymuś pełne odświeżenie**, by wyczyścić ekran do czystej bieli.",
+      "battery_title": "Pielęgnacja akumulatora",
+      "battery_body": "Wbudowany akumulator posiada zabezpieczenia przed przeładowaniem. Aby zachować maksymalną żywotność przez lata, doładowuj ramkę, gdy wskaźnik osiągnie 15-20%."
+    }
+  },
+  "developer_guide": {
+    "overview": {
+      "title": "Architektura Local-First",
+      "description": "Poznaj filozofię Local-First, pełną suwerenność danych oraz otwarty ekosystem deweloperski Zenso.",
+      "lead": "Zenso zostało zaprojektowane z myślą o **pełnej suwerenności danych**. Twoje zdjęcia, kalendarze i telemetria urządzeń nie muszą opuszczać Twojej domowej sieci lokalnej.",
+      "local_first_title": "Niezależność Local-First i brak wymuszonej chmury",
+      "local_first_body": "W przeciwieństwie do komercyjnych ekranów, które po wyłączeniu zewnętrznych serwerów stają się bezużyteczne, Zenso traktuje sieć lokalną jako główne źródło prawdy. Ramka może łączyć się bezpośrednio z Twoją instancją Docker na domowym serwerze lub NAS.",
+      "licensing_title": "Otwarty ekosystem i przejrzyste zasady",
+      "licensing_body": "Dostarczamy bezpłatne, gotowe obrazy Docker dla całego stosu serwerowego. Jednocześnie oprogramowanie mikrokontrolera (GPLv3), publiczne schematy (Apache 2.0), plugin deweloperski Vite (MIT) oraz szablony wtyczek (MIT) są w pełni otwarte.",
+      "stack_title": "Trzy warstwy architektury",
+      "stack_body": "Architektura Zenso składa się z trzech współpracujących modułów:"
+    },
+    "docker_setup": {
+      "title": "Instalacja Docker i Self-Hosting",
+      "description": "Uruchom oficjalny stos Zenso API i Panel na serwerze domowym lub NAS za pomocą Docker Compose.",
+      "lead": "Uruchomienie kompletnego stosu Zenso na własnym serwerze lub NAS zajmuje mniej niż dwie minuty dzięki Docker Compose.",
+      "compose_title": "Plik konfiguracyjny docker-compose.yml",
+      "compose_body": "Stwórz katalog dla projektu i zapisz w nim poniższy plik:",
+      "run_title": "Uruchomienie kontenerów",
+      "run_body": "Wystartuj stos w tle poleceniem:",
+      "storage_title": "Trwałość danych i kopie zapasowe",
+      "storage_body": "Wszystkie ustawienia, ekrany i konfiguracje widgetów zapisywane są w wolumenie `postgres_data`. Regularny backup wolumenu pozwala na łatwe przenoszenie instancji między serwerami."
+    },
+    "environment_variables": {
+      "title": "Zmienne środowiskowe",
+      "description": "Tabela zmiennych konfiguracyjnych .env: porty, baza danych, CORS i dostęp do sieci prywatnej LAN.",
+      "lead": "Skonfiguruj instancję Zenso za pomocą zmiennych środowiskowych umieszczonych w pliku `.env`.",
+      "core_title": "Główne zmienne konfiguracyjne",
+      "core_body": "| Zmienna | Domyślnie | Zastosowanie |",
+      "network_title": "Dostęp do sieci domowej (LAN)",
+      "network_body": "| Zmienna | Domyślnie | Opis |"
+    },
+    "cold_boot_setup": {
+      "title": "Kreator pierwszego uruchomienia",
+      "description": "Zainicjalizuj instancję za pomocą jednorazowego tokenu instalacyjnego odczytanego z logów Dockera.",
+      "lead": "Przy pierwszym starcie nowa instancja Zenso wymaga podania jednorazowego tokenu zabezpieczającego, co uniemożliwia nieautoryzowane przejęcie instancji.",
+      "token_title": "Odczytanie Setup Tokenu",
+      "token_body": "Przejrzyj logi kontenera API, aby odnaleźć wygenerowany token instalatora:",
+      "wizard_title": "Uruchomienie kreatora w przeglądarce",
+      "wizard_body": "Otwórz przeglądarkę pod adresem:",
+      "claim_title": "Utworzenie konta właściciela",
+      "claim_body": "Wprowadź adres e-mail administratora oraz bezpieczne hasło. Po zatwierdzeniu token zostaje bezpowrotnie unieważniony, a Ty zyskujesz pełny dostęp do panelu."
+    },
+    "plugin_architecture": {
+      "title": "Architektura wtyczek widgetów",
+      "description": "Jak działają wtyczki widgetów: szablony LiquidJS, rendering po stronie serwera i schematy JSON.",
+      "lead": "Widgety Zenso powstają przy użyciu standardowych, przystępnych technologii webowych: HTML, CSS oraz silnika LiquidJS.",
+      "rendering_title": "Renderowanie serwerowe headless",
+      "rendering_body": "Zamiast obciążać energooszczędny mikrokontroler pełnym silnikiem przeglądarki, rendering odbywa się po stronie serwera. Serwer wypełnia szablon Liquid danymi, aplikuje style CSS i przetwarza obraz w gotową mapę bitową zoptymalizowaną pod wyświetlacz e-paper.",
+      "structure_title": "Struktura katalogów wtyczki",
+      "structure_body": "Prawidłowa wtyczka Zenso zawiera następujące pliki:",
+      "data_flow_title": "Źródła danych i bezpieczeństwo",
+      "data_flow_body": "Widgety nie wykonują bezpośrednich zapytań sieciowych w kodzie szablonu. Wymagane źródła danych (np. kalendarze ICS, obrazy) deklarowane są w manifeście i bezpiecznie pobierane przez serwer."
+    },
+    "widget_sdk_quickstart": {
+      "title": "Szybki start z Widget SDK",
+      "description": "Stwórz i przetestuj swój pierwszy widget w kilka minut za pomocą szablonu wtyczki i pluginu Vite.",
+      "lead": "Rozpocznij tworzenie własnych widgetów z natychmiastowym podglądem na żywo w mniej niż 5 minut.",
+      "step1_title": "Sklonuj oficjalny szablon",
+      "step1_body": "Pobierz oficjalne repozytorium szablonu startowego:",
+      "step2_title": "Uruchom lokalny serwer deweloperski",
+      "step2_body": "Uruchom środowisko deweloperskie oparte na `@zenso/vite-plugin`:",
+      "step3_title": "Przetestuj z danymi mockowymi",
+      "step3_body": "Edytuj plik `mock/plugin.json`, aby przetestować różne scenariusze (np. długie tytuły, brak zdjęć). Zmiany w `index.liquid` i `style.css` odświeżają się natychmiastowo."
+    },
+    "manifest_and_schemas": {
+      "title": "Manifest i schematy JSON",
+      "description": "Definiuj pola formularzy i źródła danych zgodnie z publicznymi kontraktami na schemas.zenso.ink.",
+      "lead": "Plik `manifest.json` opisuje wtyczkę dla systemu Zenso i pozwala na automatyczne wygenerowanie formularzy ustawień w panelu.",
+      "manifest_title": "Zgodność ze schematami JSON",
+      "manifest_body": "Każda wtyczka jest walidowana względem publicznych schematów pod adresem `https://schemas.zenso.ink/v1/plugin-manifest.schema.json`.",
+      "fields_title": "Dostępne typy pól konfiguracyjnych",
+      "fields_body": "W sekcji `config_schema` możesz zadeklarować pola dla użytkownika:",
+      "sources_title": "Deklarowanie zewnętrznych źródeł danych",
+      "sources_body": "W bloku `data_sources` definiuj kanały zewnętrzne. Serwer pobiera je samodzielnie, eliminując problemy z CORS i bezpiecznie przechowując klucze dostępowe."
+    },
+    "building_and_publishing": {
+      "title": "Pakowanie i instalacja wtyczek",
+      "description": "Buduj paczkę produkcyjną plugin.zip i wgrywaj ją bezpośrednio do Panelu Zenso.",
+      "lead": "Gdy wtyczka jest gotowa, spakuj ją do pliku produkcyjnego i wgraj do swojego panelu webowego.",
+      "build_title": "Generowanie archiwum produkcyjnego",
+      "build_body": "Uruchom polecenie budujące:",
+      "upload_title": "Instalacja w Panelu Zenso",
+      "upload_body": "1. W panelu webowym Zenso przejdź do zakładki **Wtyczki (Plugins)**."
+    }
+  },
+  "hardware_protocol": {
+    "overview": {
+      "title": "Architektura sprzętowa",
+      "description": "Poznaj mikrokontroler Seeed Studio XIAO ESP32-S3, płytę bazową EE04 i układ odcięcia zasilania.",
+      "lead": "Konstrukcja sprzętowa ramki Zenso łączy japońską precyzję z zaawansowaną, energooszczędną elektroniką wbudowaną.",
+      "mcu_title": "Moduł Seeed Studio XIAO ESP32-S3",
+      "mcu_body": "Sercem urządzenia jest kompaktowy moduł Seeed Studio XIAO ESP32-S3 z dwurdzeniowym procesorem Xtensa 32-bit LX7 o taktowaniu 240 MHz, łącznością Wi-Fi 2.4 GHz (802.11 b/g/n), Bluetooth 5.0 LE, 8 MB pamięci PSRAM oraz 8 MB pamięci SPI Flash.",
+      "power_title": "Sprzętowe odcięcie zasilania (< 15 µA w uśpieniu)",
+      "power_body": "Aby osiągnąć wielomiesięczną pracę na baterii, dedykowana płyta rozszerzeń EE04 wykorzystuje obwód power gating oparty na tranzystorze MOSFET. Pomiędzy odświeżeniami zasilanie kontrolera ekranu jest fizycznie odcinane, redukując prąd czuwania poniżej 15 µA.",
+      "fpc_title": "Złącze FPC 50-pin i obwód akumulatora",
+      "fpc_body": "Płyta bazowa posiada 50-pinowe złącze FPC o rastrze 0.5 mm, kompatybilne z ekranami Waveshare i Good Display, kontroler ładowania Li-Ion TP4056/BQ oraz dzielnik napięcia podłączony do wejścia przetwornika ADC w celu pomiaru stanu baterii."
+    },
+    "zenso_firmware": {
+      "title": "Oprogramowanie Zenso Firmware",
+      "description": "Kompiluj i wgrywaj firmware GPLv3 w PlatformIO oraz korzystaj z menu diagnostycznego przez port szeregowy.",
+      "lead": "Oprogramowanie Zenso Firmware jest w pełni otwarte na licencji **GNU General Public License v3 (GPLv3)**. Odpowiada za zarządzanie energią, łączność Wi-Fi i odświeżanie ekranu.",
+      "build_title": "Kompilacja i wgrywanie w PlatformIO",
+      "build_body": "Sklonuj oficjalne repozytorium i otwórz je w środowisku PlatformIO:",
+      "serial_title": "Konsola diagnostyczna na porcie szeregowym",
+      "serial_body": "Uruchom monitor portu szeregowego z prędkością 115200 baud (`pio device monitor`), aby uzyskać dostęp do interaktywnego menu:",
+      "license_title": "Wolność otwartego oprogramowania GNU GPLv3",
+      "license_body": "Możesz swobodnie modyfikować i rozwijać kod oprogramowania. Zgodnie z GPLv3, w przypadku dystrybucji zmodyfikowanych binariów, musisz udostępnić odpowiedni kod źródłowy."
+    },
+    "byod_guide": {
+      "title": "Przewodnik BYOD (Własne ekrany)",
+      "description": "Podłączaj własne ekrany e-paper (Waveshare Spectra 6, ACeP, BWR, monochromatyczne) i konfiguruj palety barw.",
+      "lead": "W ramach programu **Bring Your Own Device (BYOD)** majsterkowicze mogą budować własne ramki w oparciu o popularne wyświetlacze e-paper.",
+      "supported_title": "Wspierane wyświetlacze e-paper",
+      "supported_body": "- **Waveshare 7.3\" Spectra 6 (E6)**: 800×480, żywa paleta 6 barw.",
+      "wiring_title": "Podłączanie taśmy FPC",
+      "wiring_body": "Wsuń taśmę FPC wyświetlacza w złącze płyty EE04, upewniając się, że niebieskie usztywnienie taśmy jest skierowane do góry, a następnie zatrzaśnij blokadę złącza.",
+      "panel_config_title": "Konfiguracja profilu w panelu Zenso",
+      "panel_config_body": "W panelu webowym w sekcji **Ustawienia urządzenia -> Profil wyświetlacza** wybierz **Custom BYOD**. Wprowadź rozdzielczość (szerokość i wysokość), głębię kolorów oraz wybierz paletę barw. Serwer automatycznie dopasuje generowane obrazy do specyfikacji Twojego ekranu."
+    }
+  },
+  "sidebar": {
+    "sections": {
+      "start_here": "Pierwsze kroki",
+      "user_guide": "Podręcznik Użytkownika",
+      "developer_guide": "Podręcznik Dewelopera",
+      "hardware_protocol": "Sprzęt i BYOD"
+    },
+    "items": {
+      "overview": "Przegląd",
+      "quickstart": "Szybki start",
+      "faq": "Często zadawane pytania"
+    }
   }
 }
