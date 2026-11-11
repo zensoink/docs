@@ -50,11 +50,11 @@ test('astro.config.mjs configures all 3 main sections and Start Here sourced fro
 	const plDict = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, 'src/i18n/pl.json'), 'utf-8'));
 	const jaDict = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, 'src/i18n/ja.json'), 'utf-8'));
 
-	for (const loc of [enDict, plDict, jaDict]) {
-		assert.ok(loc.sidebar?.sections?.start_here, 'Must contain start_here section label');
-		assert.ok(loc.sidebar?.sections?.user_guide, 'Must contain user_guide section label');
-		assert.ok(loc.sidebar?.sections?.developer_guide, 'Must contain developer_guide section label');
-		assert.ok(loc.sidebar?.sections?.hardware_protocol, 'Must contain hardware_protocol section label');
+	for (const dict of [enDict, plDict, jaDict]) {
+		assert.ok(dict.sidebar?.sections?.start_here, 'Must contain start_here section label');
+		assert.ok(dict.sidebar?.sections?.user_guide, 'Must contain user_guide section label');
+		assert.ok(dict.sidebar?.sections?.developer_guide, 'Must contain developer_guide section label');
+		assert.ok(dict.sidebar?.sections?.hardware_protocol, 'Must contain hardware_protocol section label');
 	}
 
 	assert.equal(enDict.sidebar.sections.start_here, 'Start Here');

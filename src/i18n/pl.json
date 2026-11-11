@@ -53,8 +53,6 @@
     "step5_desc": "Twoja ramka aktualizuje się bezgłośnie według wybranego harmonogramu (np. co godzinę w dzień, uśpiona w nocy) i natychmiast przechodzi w tryb ultra-głębokiego uśpienia (< 15 µA), chroniąc baterię i domowy spokój."
   },
   "overview": {
-    "title": "Dokumentacja Zenso",
-    "description": "Zenso to bezprzewodowa ramka smart z 7-kolorowym e-papierem, która żyje na uboczu — bez światła, bez hałasu, z baterią na wiele miesięcy.",
     "intro": "Zenso to bezprzewodowa ramka z 7-kolorowym e-papierem stworzona po to, aby cicho wtopić się w Twój dom. Wyświetla zdjęcia rodziny, pogodę i wydarzenia z kalendarza bez emitowania ani jednego fotonu światła — jak wydruk na ścianie. Gdy bateria się rozładuje, ostatni obraz pozostaje na ekranie bez końca. Wystarczy podłączyć USB-C, kiedy chcesz to zmienić.",
     "philosophy_title": "Filozofia Japandi i spokojnego życia",
     "philosophy_body": "Współczesne wnętrza są przesycone ekranami LED i OLED, które walczą o uwagę wzroku. Zenso łączy japońską ideę *Ma* (harmonijnej przestrzeni) ze skandynawską funkcjonalnością. Jest cyfrowym meblem, który naturalnie współgra z rytmem Twojego dnia.",

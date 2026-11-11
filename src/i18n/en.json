@@ -53,8 +53,6 @@
     "step5_desc": "Your frame will update quietly according to your preferred schedule (e.g., hourly during the day, asleep overnight) and immediately enter ultra-low power deep sleep (< 15 µA) between refreshes, preserving battery and home tranquility."
   },
   "overview": {
-    "title": "Zenso Documentation",
-    "description": "Zenso is a cordless 7-color e-paper smart frame that stays out of your way — no light, no noise, months of battery life.",
     "intro": "Zenso is a cordless 7-color e-paper smart frame designed to fit quietly into your home. It displays family photos, weather, and calendar events without emitting a single photon of light — just like a print on the wall. When the battery runs out, the last image stays on the screen indefinitely. Plug in USB-C when you're ready to refresh.",
     "philosophy_title": "The Spirit of Japandi & Calm Living",
     "philosophy_body": "Modern living spaces are saturated with bright LED and OLED screens competing for human attention. Zenso embodies the Japanese concept of *Ma* (negative space) and Scandinavian functionalism. It harmonizes with your interior, acting as a piece of digital furniture that breathes with your daily rhythm.",
