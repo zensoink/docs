@@ -114,7 +114,7 @@
       "description": "Łącz wiele widgetów na jednym ekranie dzięki gotowym układom slotów i rotacji obrazu.",
       "lead": "Ekran to kompozycja wizualna wyświetlana na ramce. Zenso umożliwia dzielenie ekranu na niezależne sloty z widgetami.",
       "layouts_title": "Gotowe szablony układów",
-      "layouts_body": "Wybieraj spośród zoptymalizowanych szablonów:",
+      "layouts_body": "Wybieraj spośród zoptymalizowanych szablonów:\n- **Pełny ekran (Full)**: Jeden duży slot na 100% powierzchni (idealny do zdjęć i kalendarza).\n- **Podział 50/50**: Dwie pionowe kolumny obok siebie.\n- **Góra i dół**: Dwa poziome pasy.\n- **Siatka 2x2**: Cztery sloty na gęsty pulpit informacyjny (zegar, pogoda, kalendarz, notatki).",
       "rotation_title": "Rotacja i orientacja ekranu",
       "rotation_body": "Niezależnie od tego, czy ramka stoi w pionie na komodzie, czy wisi poziomo na ścianie, ustaw rotację (0°, 90°, 180°, 270°). Silnik automatycznie dostosuje proporcje.",
       "preview_title": "Podgląd proporcji na żywo",
@@ -138,7 +138,7 @@
       "config_title": "Konfiguracja źródła zdjęć",
       "config_body": "Wklej bezpośredni adres URL do zdjęcia lub wybierz album w panelu. Wtyczka automatycznie zoptymalizuje plik pod kątem e-papieru.",
       "fitting_title": "Tryby skalowania: Cover i Contain",
-      "fitting_body": "- **Cover (Wypełnienie)**: Wypełnia cały slot bez czarnych pasów, delikatnie przycinając krawędzie.",
+      "fitting_body": "- **Cover (Wypełnienie)**: Wypełnia cały slot bez czarnych pasów, delikatnie przycinając krawędzie.\n- **Contain (Dopasowanie)**: Skaluje całe zdjęcie wewnątrz slotu, zachowując 100% oryginalnego kadru.",
       "dithering_title": "Zaawansowany dithering 7 barw",
       "dithering_body": "Zdjęcia przechodzą proces kwantyzacji barw dopasowany do pigmentów ACeP. Dostępny jest także tryb czarno-biały o podwyższonym kontraście."
     },
@@ -149,7 +149,7 @@
       "sync_title": "Podłączanie kalendarzy iCal / CalDAV",
       "sync_body": "Wklej prywatny lub publiczny link `.ics` z Google Calendar, Apple iCloud, Microsoft Outlook lub Nextcloud do ustawień wtyczki.",
       "views_title": "Przejrzyste widoki",
-      "views_body": "Wybieraj spośród widoków:",
+      "views_body": "Wybieraj spośród widoków:\n- **Agenda (Lista)**: Najbliższe wydarzenia na dziś i jutro.\n- **Widok miesiąca**: Klasyczna siatka z zaznaczonymi dniami z wydarzeniami.\n- **Widok dnia**: Szczegółowy harmonogram godzinowy.",
       "customization_title": "Formaty czasu i kolory",
       "customization_body": "Wybierz format 12h lub 24h, ukrywaj wydarzenia całodniowe i nadawaj własne kolory poszczególnym kalendarzom domowników."
     },

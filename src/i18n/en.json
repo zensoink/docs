@@ -114,7 +114,7 @@
       "description": "Combine multiple widgets on a single screen using split-screen presets and rotation management.",
       "lead": "A Screen represents a visual canvas displayed on your e-paper frame. Zenso allows you to divide screens into multiple independent widget slots.",
       "layouts_title": "Grid & Slot Presets",
-      "layouts_body": "Choose from optimized layout presets:",
+      "layouts_body": "Choose from optimized layout presets:\n- **Full Screen**: A single immersive slot occupying 100% of the canvas (ideal for photography or monthly calendars).\n- **Split 50/50**: Two balanced side-by-side columns.\n- **Top & Bottom**: Two horizontal rows.\n- **2x2 Grid**: Four compact quadrants for dense ambient dashboards (e.g. clock, weather, agenda, and quotes).",
       "rotation_title": "Canvas Rotation & Orientation",
       "rotation_body": "Whether your frame is hung on a wall in landscape or resting on an easel in portrait, set the rotation to 0°, 90°, 180°, or 270°. The layout engine automatically transposes coordinates to prevent distortion.",
       "preview_title": "Live Proportional Preview",
@@ -138,7 +138,7 @@
       "config_title": "Setting Up Photo Feeds",
       "config_body": "Provide a direct image URL or select an uploaded album in the panel. The plugin automatically caches the image and schedules updates according to your preference.",
       "fitting_title": "Cover vs Contain Scaling Modes",
-      "fitting_body": "- **Cover (Fill)**: Scales the image to fill the entire slot without black bars, gently cropping overflowing edges.",
+      "fitting_body": "- **Cover (Fill)**: Scales the image to fill the entire slot without black bars, gently cropping overflowing edges.\n- **Contain (Fit)**: Fits the entire image within the slot borders, preserving 100% of the original photo framing.",
       "dithering_title": "Optimized 7-Color Dithering",
       "dithering_body": "Photographs are processed with perceptual color palette quantization tailored to ACeP pigment capsules. An optional high-contrast monochrome mode is also available for dramatic black-and-white portraits."
     },
@@ -149,7 +149,7 @@
       "sync_title": "Connecting iCalendar & CalDAV Feeds",
       "sync_body": "Paste any standard secret or public `.ics` link from Google Calendar, Apple iCloud Calendar, Microsoft Outlook, or Nextcloud into the plugin settings.",
       "views_title": "Flexible Layout Views",
-      "views_body": "Select between multiple clean views:",
+      "views_body": "Select between multiple clean views:\n- **Agenda / List**: Shows upcoming events for today and tomorrow.\n- **Month View**: Classic grid showing the current month with highlighted busy days.\n- **Day View**: Detailed timeline of hourly commitments.",
       "customization_title": "Colors & Time Formats",
       "customization_body": "Toggle between 12-hour and 24-hour time notations, hide all-day events, and assign distinctive color badges to differentiate family members or work categories."
     },
