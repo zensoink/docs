@@ -1,10 +1,10 @@
 {
   "site": {
     "title": "Zenso Documentation",
-    "description": "Everything you need to set up, personalise, and get the most out of your Zenso 7-color e-paper smart frame."
+    "description": "Everything you need to set up, personalise, and get the most out of your Zenso multi-color e-paper smart frame."
   },
   "hero": {
-    "tagline": "The complete source of truth for Zenso — cordless 7-color e-paper smart frame, ESP32 firmware, web panel, self-hosted Docker stack, and open plugin SDK.",
+    "tagline": "The complete source of truth for Zenso — cordless multi-color e-paper smart frame, ESP32 firmware, web panel, self-hosted Docker stack, and open plugin SDK.",
     "actions": {
       "get_started": "Get Started",
       "zenso_web": "Visit Zenso.ink",
@@ -53,10 +53,10 @@
     "step5_desc": "Your frame will update quietly according to your preferred schedule (e.g., hourly during the day, asleep overnight) and immediately enter ultra-low power deep sleep (< 15 µA) between refreshes, preserving battery and home tranquility."
   },
   "overview": {
-    "intro": "Zenso is a cordless 7-color e-paper smart frame designed to fit quietly into your home. It displays family photos, weather, and calendar events without emitting a single photon of light — just like a print on the wall. When the battery runs out, the last image stays on the screen indefinitely. Plug in USB-C when you're ready to refresh.",
+    "intro": "Zenso is a cordless multi-color e-paper smart frame designed to fit quietly into your home. It displays family photos, weather, and calendar events without emitting a single photon of light — just like a print on the wall. When the battery runs out, the last image stays on the screen indefinitely. Plug in USB-C when you're ready to refresh.",
     "philosophy_title": "The Spirit of Japandi & Calm Living",
     "philosophy_body": "Modern living spaces are saturated with bright LED and OLED screens competing for human attention. Zenso embodies the Japanese concept of *Ma* (negative space) and Scandinavian functionalism. It harmonizes with your interior, acting as a piece of digital furniture that breathes with your daily rhythm.",
-    "display_title": "Advanced 7-Color Electronic Paper",
+    "display_title": "Advanced Multi-Color Electronic Paper",
     "display_body": "At the heart of every frame lies an Advanced Color e-Paper (ACeP) display featuring physical color microcapsules. By moving red, green, blue, yellow, black, and white pigments with microscopic voltage pulses, the screen reflects natural ambient light. It emits **zero photons**, produces zero blue light in the dark, and causes zero eyestrain.",
     "craftsmanship_title": "Natural European Solid Oak",
     "craftsmanship_body": "Every frame enclosure is CNC-machined from solid European oak and finished by hand with natural protective oils. There are no visible wires, no intrusive plastic bezels, and no glowing status LEDs on the front face.",
@@ -119,8 +119,8 @@
       "config_body": "Provide a direct image URL or select an uploaded album in the panel. The plugin automatically caches the image and schedules updates according to your preference.",
       "fitting_title": "Cover vs Contain Scaling Modes",
       "fitting_body": "- **Cover (Fill)**: Scales the image to fill the entire slot without black bars, gently cropping overflowing edges.\n- **Contain (Fit)**: Fits the entire image within the slot borders, preserving 100% of the original photo framing.",
-      "dithering_title": "Optimized 7-Color Dithering",
-      "dithering_body": "Photographs are processed with perceptual color palette quantization tailored to ACeP pigment capsules. An optional high-contrast monochrome mode is also available for dramatic black-and-white portraits."
+      "dithering_title": "Optimized Multi-Color Dithering",
+      "dithering_body": "Photographs are processed with perceptual color palette quantization tailored to your display's custom palette (2 to 7 colors). An optional high-contrast monochrome mode is also available for dramatic black-and-white portraits."
     },
     "plugins_calendar": {
       "title": "Calendar Plugin",
@@ -250,7 +250,7 @@
       "build_title": "Compiling and Flashing with PlatformIO",
       "build_body": "Clone the official repository and open it in PlatformIO (VS Code or CLI):\n\n```bash\ngit clone https://github.com/zensoink/zenso-firmware.git\ncd zenso-firmware\npio run -t upload\n```\n\nConnect the frame to your computer via USB-C while holding the BOOT button if entering download mode manually.",
       "serial_title": "Serial Developer Diagnostics Menu",
-      "serial_body": "Open the PlatformIO serial monitor at 115200 baud (`pio device monitor`) to access the developer diagnostic interface:\n- `h`: Print diagnostic command list\n- `c`: Clear saved Wi-Fi credentials from LittleFS\n- `r`: Force hardware reboot\n- `1`: Render primary 7-color test pattern\n- `2`: Cycle waveform white-wipe test\n- `4`: Print battery ADC reading and supply voltage",
+      "serial_body": "Open the PlatformIO serial monitor at 115200 baud (`pio device monitor`) to access the developer diagnostic interface:\n- `h`: Print diagnostic command list\n- `c`: Clear saved Wi-Fi credentials from LittleFS\n- `r`: Force hardware reboot\n- `1`: Render primary color test pattern\n- `2`: Cycle waveform white-wipe test\n- `4`: Print battery ADC reading and supply voltage",
       "license_title": "GNU GPLv3 Open Source Freedom",
       "license_body": "You are free to audit, modify, and extend the firmware. If you distribute modified firmware binaries, you must make the corresponding source code publicly available under GPLv3."
     },
