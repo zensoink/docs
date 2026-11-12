@@ -1,0 +1,34 @@
+---
+title: "{{plugins.image.title}}"
+description: "{{plugins.image.description}}"
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+{{plugins.image.lead}}
+
+<Card title="{{plugins.image.repo_title}}" icon="github">
+	{{plugins.image.repo_desc}}
+
+	[**{{plugins.image.repo_button}} →**](https://github.com/zensoink/plugin-image)
+</Card>
+
+## {{plugins.image.features_title}}
+
+{{plugins.image.features_body}}
+
+## {{plugins.image.config_title}}
+
+{{plugins.image.config_body}}
+
+## {{plugins.image.fitting_title}}
+
+{{plugins.image.fitting_body}}
+
+## {{plugins.image.dithering_title}}
+
+{{plugins.image.dithering_body}}
+
+## {{plugins.image.dev_notes_title}}
+
+{{plugins.image.dev_notes_body}}

@@ -1,0 +1,34 @@
+---
+title: "{{plugins.calendar.title}}"
+description: "{{plugins.calendar.description}}"
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+{{plugins.calendar.lead}}
+
+<Card title="{{plugins.calendar.repo_title}}" icon="github">
+	{{plugins.calendar.repo_desc}}
+
+	[**{{plugins.calendar.repo_button}} →**](https://github.com/kstepien3/zenso-plugin-calendar)
+</Card>
+
+## {{plugins.calendar.features_title}}
+
+{{plugins.calendar.features_body}}
+
+## {{plugins.calendar.sync_title}}
+
+{{plugins.calendar.sync_body}}
+
+## {{plugins.calendar.views_title}}
+
+{{plugins.calendar.views_body}}
+
+## {{plugins.calendar.customization_title}}
+
+{{plugins.calendar.customization_body}}
+
+## {{plugins.calendar.dev_notes_title}}
+
+{{plugins.calendar.dev_notes_body}}

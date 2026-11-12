@@ -266,10 +266,74 @@
       "panel_config_body": "In the Zenso Web Panel under **Device Settings -> Display Profile**, select **Custom BYOD**. Define your exact pixel dimensions (width/height), color depth (1bpp, 2bpp, or 4bpp), and assign your preferred color palette. The server will automatically render and quantize all widget screens to match your unique hardware specifications."
     }
   },
+  "plugins": {
+    "overview": {
+      "title": "Official Plugins & Directory",
+      "description": "Explore official open-source plugins, starter scaffolds, and integration examples maintained by the Zenso team.",
+      "lead": "Official Zenso plugins provide reference implementations for widgets, live data syncing, and e-paper rendering. All official plugins are open source, allowing you to use them directly or fork them to build custom extensions.",
+      "directory_title": "Plugin Directory & Repositories",
+      "directory_table": "| Plugin | ID | Description | Repository | License |\n| :--- | :--- | :--- | :--- | :--- |\n| **Image Gallery** | `zenso.plugin.image` | Local & cloud photo slideshows with Floyd-Steinberg dithering | [`zensoink/plugin-image`](https://github.com/zensoink/plugin-image) | MIT |\n| **Calendar & Events** | `zenso.plugin.calendar` | iCal / Google / iCloud calendar agenda and monthly views | [`kstepien3/zenso-plugin-calendar`](https://github.com/kstepien3/zenso-plugin-calendar) | MIT |\n| **Starter Template** | `zenso.plugin.template` | TypeScript, Vite simulator, and schemas validation scaffold | [`zensoink/zenso-plugin-examples`](https://github.com/zensoink/zenso-plugin-examples) | MIT |",
+      "create_title": "Building Custom Plugins",
+      "create_body": "Looking to build your own widget from scratch? Use our official starter scaffold and follow the developer documentation:\n\n- [Widget SDK Quickstart]({{docs_prefix}}developer-guide/widget-sdk-quickstart) — Set up your local development server in minutes.\n- [Plugin Architecture]({{docs_prefix}}developer-guide/plugin-architecture) — Learn how LiquidJS templates and headless rendering work.\n- [Manifest & Schemas]({{docs_prefix}}developer-guide/manifest-and-schemas) — Configure form fields and data sources.\n- [Packaging & Installation]({{docs_prefix}}developer-guide/building-and-publishing) — Build a `plugin.zip` for the Zenso Web Panel."
+    },
+    "image": {
+      "title": "Image Plugin (plugin-image)",
+      "description": "Display personal photos, family albums, and art collections with authentic e-ink dithering and orientation detection.",
+      "lead": "The official Image Plugin turns your Zenso frame into a living art piece. It automatically adapts photos to your frame's aspect ratio, applies advanced dithering tuned for e-paper pigments, and cycles photos on a calm schedule.",
+      "repo_title": "Source Code & Repository",
+      "repo_desc": "The official Image Plugin is completely open source under the MIT license.",
+      "repo_button": "View plugin-image on GitHub",
+      "features_title": "Key Features",
+      "features_body": "- **Smart Auto-Rotation**: Reads EXIF orientation tags so photos never appear sideways or inverted.\n- **Multiple Photo Sources**: Connect Google Photos, Immich, Nextcloud, or upload directly via the Web Panel.\n- **Optimized Dithering**: Floyd-Steinberg error-diffusion algorithm calibrated for multi-color e-paper pigments.\n- **Flexible Sizing**: Fully responsive across Full Screen, 50/50 split, and quadrant widget layouts.",
+      "config_title": "Panel Configuration Options",
+      "config_body": "Configure the following settings in the Zenso Web Panel under **Widget Settings**:\n- **Source Collection**: Select the photo album or cloud provider feed.\n- **Shuffle Mode**: Sequential or random photo rotation on each refresh.\n- **Scaling Mode**: *Crop to Fill* (immersive full-bleed) or *Fit with Matting* (preserves full composition with calming paper borders).\n- **Contrast & Vibrancy**: Fine-tune contrast and saturation to pop on reflective pigment displays.",
+      "fitting_title": "Aspect Ratios & Matting",
+      "fitting_body": "Photographs rarely match the physical 16:9 or 5:3 aspect ratio of your display. The Image Plugin intelligently computes matting using background tone averaging or clean museum borders, avoiding ugly letterboxing artifacts.",
+      "dithering_title": "E-Paper Color Dithering",
+      "dithering_body": "Because physical e-paper displays have a fixed palette of physical color pigments (such as 6-color Spectra 6 or 7-color ACeP), the plugin processes every photograph through a tailored quantization pipeline before transmission, ensuring smooth skin tones, natural sky gradients, and crisp detail.",
+      "dev_notes_title": "Developer & Manifest Reference",
+      "dev_notes_body": "The plugin is built with LiquidJS and Sharp. View the full manifest schema and implementation at [github.com/zensoink/plugin-image](https://github.com/zensoink/plugin-image)."
+    },
+    "calendar": {
+      "title": "Calendar Plugin (zenso-plugin-calendar)",
+      "description": "Sync Google Calendar, Apple iCloud, and CalDAV feeds onto your desk with calm, non-intrusive visibility.",
+      "lead": "Keep your family or workday schedule visible at a glance without notification dings, glowing monitor tabs, or digital distractions.",
+      "repo_title": "Source Code & Repository",
+      "repo_desc": "The official Calendar Plugin is completely open source under the MIT license.",
+      "repo_button": "View zenso-plugin-calendar on GitHub",
+      "features_title": "Key Features",
+      "features_body": "- **Universal iCal Support**: Connect Google Calendar, Apple iCloud, Microsoft Outlook, and self-hosted Nextcloud.\n- **Multiple Calendar Aggregation**: Merge personal, family, and work calendars onto a single screen with color badges.\n- **Dynamic Layout Views**: Choose between Month Grid, Upcoming Agenda, or Today's Timeline.\n- **Privacy-Preserving**: Only the parsed event details required for rendering are retrieved; event descriptions can be masked.",
+      "sync_title": "Connecting iCalendar & CalDAV Feeds",
+      "sync_body": "1. In Google Calendar or iCloud, locate your calendar's private/secret `.ics` address.\n2. In the Zenso Web Panel, open the Calendar widget settings.\n3. Paste the URL into the **Feed URL** field and assign a friendly label and badge color.",
+      "views_title": "Flexible Layout Views",
+      "views_body": "- **Agenda View**: Chronological list of upcoming events for the next 24 to 72 hours, ideal for split-screen layouts.\n- **Month Grid View**: Traditional calendar wall-grid with highlighted dates, current-day indicator, and busy dots.\n- **Day Timeline**: Compact hour-by-hour schedule suitable for work desks.",
+      "customization_title": "Colors & Time Formatting",
+      "customization_body": "Customize the display with standard 12h/24h toggle, hide past events, filter out declined invitations, and configure localized date formats matching your locale.",
+      "dev_notes_title": "Developer & Manifest Reference",
+      "dev_notes_body": "The plugin parses ICS feeds using `ical.js` and formats schedules using LiquidJS templates. View the complete source code and contribute at [github.com/kstepien3/zenso-plugin-calendar](https://github.com/kstepien3/zenso-plugin-calendar)."
+    },
+    "template": {
+      "title": "Plugin Starter Template",
+      "description": "Complete starter scaffold configured with TypeScript, LiquidJS, Vite simulator, and schemas.zenso.ink validation.",
+      "lead": "The official starter template provides everything you need to develop, preview, and build production-ready Zenso plugins.",
+      "repo_title": "Source Code & Repository",
+      "repo_desc": "The official plugin scaffold and example repository is maintained under the MIT license.",
+      "repo_button": "View zenso-plugin-examples on GitHub",
+      "scaffold_title": "Template Structure & What's Included",
+      "scaffold_body": "The template repository includes:\n- **`manifest.json`**: Pre-configured schema contract pointing to `schemas.zenso.ink`.\n- **`index.liquid`**: Clean semantic markup template ready for custom styling.\n- **`style.css`**: CSS stylesheet optimized for typography and e-paper pixel contrast.\n- **`mock/plugin.json`**: Fixtures for rapid local iteration without live network dependencies.\n- **Vite Dev Simulator**: Real-time canvas preview simulating target e-paper aspect ratios and color palettes.",
+      "quickstart_title": "Getting Started in 3 Steps",
+      "quickstart_body": "```bash\n# 1. Clone the repository\ngit clone https://github.com/zensoink/zenso-plugin-examples.git my-plugin\ncd my-plugin\n\n# 2. Install dependencies & start simulator\npnpm install\npnpm dev\n\n# 3. Build distributable plugin.zip\npnpm build\n```",
+      "packaging_title": "Packaging & Uploading to Panel",
+      "packaging_body": "Running `pnpm build` creates a tested `dist/plugin.zip` archive containing your manifest, Liquid template, and bundled assets. Upload this ZIP directly in your Zenso Web Panel under **Plugins -> Upload** to start using it immediately.",
+      "dev_notes_title": "Next Steps",
+      "dev_notes_body": "For a complete walkthrough of widget creation, read the [Widget SDK Quickstart]({{docs_prefix}}developer-guide/widget-sdk-quickstart) and [Manifest & Schemas]({{docs_prefix}}developer-guide/manifest-and-schemas)."
+    }
+  },
   "sidebar": {
     "sections": {
       "start_here": "Start Here",
       "user_guide": "User Guide",
+      "official_plugins": "Official Plugins",
       "developer_guide": "Developer Guide",
       "hardware_protocol": "Hardware & BYOD"
     },

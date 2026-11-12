@@ -169,9 +169,20 @@ export default defineConfig({
 						createSidebarItem('docs/user-guide/panel-basics', enDict.user_guide.panel_basics.title, plDict.user_guide.panel_basics.title, jaDict.user_guide.panel_basics.title),
 						createSidebarItem('docs/user-guide/screens-and-layouts', enDict.user_guide.screens_and_layouts.title, plDict.user_guide.screens_and_layouts.title, jaDict.user_guide.screens_and_layouts.title),
 						createSidebarItem('docs/user-guide/refresh-and-battery', enDict.user_guide.refresh_and_battery.title, plDict.user_guide.refresh_and_battery.title, jaDict.user_guide.refresh_and_battery.title),
-						createSidebarItem('docs/user-guide/plugins-image', enDict.user_guide.plugins_image.title, plDict.user_guide.plugins_image.title, jaDict.user_guide.plugins_image.title),
-						createSidebarItem('docs/user-guide/plugins-calendar', enDict.user_guide.plugins_calendar.title, plDict.user_guide.plugins_calendar.title, jaDict.user_guide.plugins_calendar.title),
 						createSidebarItem('docs/user-guide/troubleshooting-faq', enDict.user_guide.troubleshooting_faq.title, plDict.user_guide.troubleshooting_faq.title, jaDict.user_guide.troubleshooting_faq.title),
+					],
+				},
+				{
+					label: enDict.sidebar.sections.official_plugins,
+					translations: {
+						pl: plDict.sidebar.sections.official_plugins,
+						ja: jaDict.sidebar.sections.official_plugins,
+					},
+					items: [
+						createSidebarItem('docs/plugins/overview', enDict.plugins.overview.title, plDict.plugins.overview.title, jaDict.plugins.overview.title),
+						createSidebarItem('docs/plugins/image', enDict.plugins.image.title, plDict.plugins.image.title, jaDict.plugins.image.title),
+						createSidebarItem('docs/plugins/calendar', enDict.plugins.calendar.title, plDict.plugins.calendar.title, jaDict.plugins.calendar.title),
+						createSidebarItem('docs/plugins/template', enDict.plugins.template.title, plDict.plugins.template.title, jaDict.plugins.template.title),
 					],
 				},
 				{
