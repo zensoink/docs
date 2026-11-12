@@ -72,5 +72,231 @@
     "a3": "**Standard 2.4 GHz 802.11 b/g/n networks.**\n\nZenso connects to standard 2.4 GHz Wi-Fi (supported by virtually all home broadband routers). 5 GHz-only bands are not supported by the hardware radio. If your home Wi-Fi broadcasts separate SSID names for 2.4 GHz and 5 GHz, connect to the 2.4 GHz network during initial onboarding.",
     "q4": "Can multiple family members send photos to the frame?",
     "a4": "**Yes.**\n\nYou can share your frame's private invite link or pairing QR code with trusted family members through [panel.zenso.ink](https://panel.zenso.ink) so they can contribute photos to your shared album without needing technical knowledge."
+  },
+  "user_guide": {
+    "overview": {
+      "title": "Overview & Philosophy",
+      "description": "Discover the calm technology, Japandi aesthetics, and paper-like tranquility of the Zenso smart frame.",
+      "lead": "Zenso was created to bring information and art into your home without the stress, bright glow, and constant notifications of conventional displays. Built around the principles of **calm technology**, Zenso stays out of your way until you choose to look at it.",
+      "philosophy_title": "The Spirit of Japandi & Calm Living",
+      "philosophy_body": "Modern living spaces are saturated with bright LED and OLED screens competing for human attention. Zenso embodies the Japanese concept of *Ma* (negative space) and Scandinavian functionalism. It harmonizes with your interior, acting as a piece of digital furniture that breathes with your daily rhythm.",
+      "display_title": "Advanced 7-Color Electronic Paper",
+      "display_body": "At the heart of every frame lies an Advanced Color e-Paper (ACeP) display featuring physical color microcapsules. By moving red, green, blue, yellow, black, and white pigments with microscopic voltage pulses, the screen reflects natural ambient light. It emits **zero photons**, produces zero blue light in the dark, and causes zero eyestrain.",
+      "craftsmanship_title": "Natural European Solid Oak",
+      "craftsmanship_body": "Every frame enclosure is CNC-machined from solid European oak and finished by hand with natural protective oils. There are no visible wires, no intrusive plastic bezels, and no glowing status LEDs on the front face."
+    },
+    "quickstart": {
+      "title": "Unboxing & Wi-Fi Setup",
+      "description": "Get your Zenso frame unboxed, connected to Wi-Fi via captive portal, and paired in under three minutes.",
+      "lead": "Setting up your Zenso frame requires no technical background and takes less than three minutes using any smartphone or laptop.",
+      "step1_title": "Unbox and Power On",
+      "step1_body": "Slide the power switch on the rear panel to the **ON** position. The e-paper display will cycle through a clean waveform wipe and present the onboarding welcome screen.",
+      "step2_title": "Connect to the Temporary Hotspot",
+      "step2_body": "On your smartphone or computer, open your Wi-Fi network settings and connect to the temporary network named **`Zenso-Setup`**.",
+      "step3_title": "Select Your Home 2.4 GHz Network",
+      "step3_body": "A captive portal web page will open automatically. Choose your home 2.4 GHz Wi-Fi network from the list, enter your password, and save. *(Note: 5 GHz-only bands are not supported by the hardware radio).*",
+      "step4_title": "Scan the Pairing QR Code",
+      "step4_body": "Once connected to the internet, the frame will fetch authorization and display an authentic pairing QR code. Scan it with your phone's camera to claim the frame in your Zenso Web Panel."
+    },
+    "panel_basics": {
+      "title": "Managing Your Frame",
+      "description": "Learn how to use the Zenso Web Panel to monitor frame battery levels, network status, and screen assignments.",
+      "lead": "The Zenso Web Panel at [panel.zenso.ink](https://panel.zenso.ink) (or your private self-hosted instance) serves as the central command center for all your frames.",
+      "access_title": "Accessing Your Dashboard",
+      "access_body": "Log in with your user credentials or passkey. Your dashboard displays all claimed frames with real-time telemetry, device nicknames, and their currently active display screens.",
+      "telemetry_title": "Battery and Signal Telemetry",
+      "telemetry_body": "Each frame card reports its current battery percentage, estimated remaining battery lifespan, Wi-Fi RSSI signal strength, and exact timestamp of the last successful synchronization check-in.",
+      "screen_assignment_title": "Assigning Active Screens",
+      "screen_assignment_body": "Switch screens instantly or set up automated rotation schedules. Changes configured in the panel are pushed to your frame during its next scheduled wake-up cycle."
+    },
+    "screens_and_layouts": {
+      "title": "Screens & Layouts",
+      "description": "Combine multiple widgets on a single screen using split-screen presets and rotation management.",
+      "lead": "A Screen represents a visual canvas displayed on your e-paper frame. Zenso allows you to divide screens into multiple independent widget slots.",
+      "layouts_title": "Grid & Slot Presets",
+      "layouts_body": "Choose from optimized layout presets:",
+      "rotation_title": "Canvas Rotation & Orientation",
+      "rotation_body": "Whether your frame is hung on a wall in landscape or resting on an easel in portrait, set the rotation to 0°, 90°, 180°, or 270°. The layout engine automatically transposes coordinates to prevent distortion.",
+      "preview_title": "Live Proportional Preview",
+      "preview_body": "The panel provides an instant, pixel-accurate live preview showing exactly how each slot and widget will render on your specific display resolution."
+    },
+    "refresh_and_battery": {
+      "title": "Refresh Cadence & Battery Life",
+      "description": "Optimize refresh intervals, configure night sleep schedules, and achieve months of cordless operation.",
+      "lead": "Because electrophoretic displays require electrical power **only when changing pigments**, Zenso operates cordlessly for months on a single USB-C charge.",
+      "cadence_title": "Configuring Refresh Cadence",
+      "cadence_body": "Adjust your update interval according to the content you display. A photo frame or calendar updates perfectly every 1 to 2 hours, whereas an ambient status board can refresh every 15 minutes.",
+      "sleep_title": "Quiet Night Sleep Schedules",
+      "sleep_body": "Configure a quiet night schedule (e.g., 23:00 to 07:00). During these hours, the microcontroller remains in ultra-low-power deep sleep (< 15 µA), saving energy when no one is awake.",
+      "charging_title": "USB-C Fast Charging",
+      "charging_body": "When the battery reaches 15%, the panel notifies you. Simply plug in any standard USB-C charger for 2 to 3 hours to restore full charge for the next several months."
+    },
+    "plugins_image": {
+      "title": "Photo Frame Plugin",
+      "description": "Display family photos, curated art collections, and ambient photography with cover and contain fit modes.",
+      "lead": "The official Photo Frame plugin transforms your Zenso frame into an exhibition of personal memories and timeless artwork.",
+      "config_title": "Setting Up Photo Feeds",
+      "config_body": "Provide a direct image URL or select an uploaded album in the panel. The plugin automatically caches the image and schedules updates according to your preference.",
+      "fitting_title": "Cover vs Contain Scaling Modes",
+      "fitting_body": "- **Cover (Fill)**: Scales the image to fill the entire slot without black bars, gently cropping overflowing edges.",
+      "dithering_title": "Optimized 7-Color Dithering",
+      "dithering_body": "Photographs are processed with perceptual color palette quantization tailored to ACeP pigment capsules. An optional high-contrast monochrome mode is also available for dramatic black-and-white portraits."
+    },
+    "plugins_calendar": {
+      "title": "Calendar Plugin",
+      "description": "Sync Google Calendar, Apple iCloud, and CalDAV feeds onto your desk with calm, non-intrusive visibility.",
+      "lead": "Keep your family or workday schedule visible at a glance without notification dings or glowing monitor tabs.",
+      "sync_title": "Connecting iCalendar & CalDAV Feeds",
+      "sync_body": "Paste any standard secret or public `.ics` link from Google Calendar, Apple iCloud Calendar, Microsoft Outlook, or Nextcloud into the plugin settings.",
+      "views_title": "Flexible Layout Views",
+      "views_body": "Select between multiple clean views:",
+      "customization_title": "Colors & Time Formats",
+      "customization_body": "Toggle between 12-hour and 24-hour time notations, hide all-day events, and assign distinctive color badges to differentiate family members or work categories."
+    },
+    "troubleshooting_faq": {
+      "title": "Troubleshooting & Maintenance",
+      "description": "Solutions for Wi-Fi reconnection, battery care, and clearing display ghosting with a full white wipe.",
+      "lead": "Practical maintenance steps and solutions for everyday questions about your Zenso smart frame.",
+      "wifi_title": "Reconnecting to Wi-Fi",
+      "wifi_body": "If you change your home router or Wi-Fi password, turn the frame power switch off and on twice rapidly, or press the internal reset button on the baseboard to re-broadcast the `Zenso-Setup` hotspot.",
+      "ghosting_title": "Clearing Screen Ghosting (Full White Wipe)",
+      "ghosting_body": "Electronic paper can occasionally retain faint shadow traces after hundreds of partial updates. In the web panel, click **Force Full Refresh** to cycle through an inverted waveform wipe, restoring pristine contrast.",
+      "battery_title": "Battery Health Best Practices",
+      "battery_body": "The internal Lithium-Ion battery includes built-in overcharge and over-discharge protection. For maximum battery longevity over years of use, recharge when the battery indicator reaches 15-20%."
+    }
+  },
+  "developer_guide": {
+    "overview": {
+      "title": "Local-First Architecture",
+      "description": "Understand Zenso's Local-First philosophy, complete data sovereignty, and open developer ecosystem.",
+      "lead": "Zenso is built from the ground up on the principle of **data sovereignty**. Your photos, schedules, and device telemetry remain strictly within your local home network unless you explicitly configure external services.",
+      "local_first_title": "Local-First & Cordless Independence",
+      "local_first_body": "Unlike typical commercial smart displays that become paperweights when remote servers go down, Zenso treats your local network as the primary source of truth. The frame can communicate directly with your self-hosted Docker instance on your home server or NAS.",
+      "licensing_title": "Open Ecosystem & Transparent Model",
+      "licensing_body": "We provide official, free-to-use Docker images for the complete backend stack. Meanwhile, the microcontroller firmware (GPLv3), public schemas (Apache 2.0), Vite development plugin (MIT), and starter templates (MIT) are fully open source.",
+      "stack_title": "Architecture Stack",
+      "stack_body": "The architecture comprises three functional layers:"
+    },
+    "docker_setup": {
+      "title": "Docker & Self-Hosting",
+      "description": "Deploy the official Zenso API and Panel stack on your HomeLab or NAS using Docker Compose.",
+      "lead": "Running Zenso on your local infrastructure takes less than two minutes using Docker Compose.",
+      "compose_title": "Standard docker-compose.yml",
+      "compose_body": "Create a directory for Zenso and save the following configuration file:",
+      "run_title": "Launching the Stack",
+      "run_body": "Run the container stack in detached mode:",
+      "storage_title": "Data Persistence & Backups",
+      "storage_body": "All user settings, screens, layouts, and widget configurations are securely stored inside the named Docker volume `postgres_data`. Regular volume backups guarantee simple migration between servers."
+    },
+    "environment_variables": {
+      "title": "Environment Variables",
+      "description": "Reference guide for configuring ports, database URLs, CORS, and private LAN access in .env.",
+      "lead": "Configure your Zenso container deployment through standard environment variables defined in your `.env` file.",
+      "core_title": "Core Service Variables",
+      "core_body": "| Variable | Default | Purpose |",
+      "network_title": "Private Network Access (LAN Integration)",
+      "network_body": "| Variable | Default | Description |"
+    },
+    "cold_boot_setup": {
+      "title": "Cold-Boot Setup Wizard",
+      "description": "Initialize a new instance securely using the setup token generated in Docker container logs.",
+      "lead": "When a new Zenso instance starts for the first time, it enforces a cryptographic bootstrap protocol to prevent unauthorized claiming.",
+      "token_title": "Locating the Setup Token",
+      "token_body": "Inspect the container logs of the API container to retrieve the generated single-use token:",
+      "wizard_title": "Running the Setup Wizard",
+      "wizard_body": "Open your web browser and navigate to:",
+      "claim_title": "Creating the Instance Owner Account",
+      "claim_body": "Specify the administrator email and a strong password. Once submitted, the token is permanently invalidated, and you are logged into your sovereign Zenso dashboard."
+    },
+    "plugin_architecture": {
+      "title": "Widget Plugin Architecture",
+      "description": "Learn how Zenso widgets use LiquidJS templates, server-side headless rendering, and JSON schemas.",
+      "lead": "Zenso widgets are authorable using standard, approachable web technologies: HTML, CSS, and the LiquidJS template engine.",
+      "rendering_title": "Server-Side Headless Rendering",
+      "rendering_body": "Instead of running a heavy JavaScript browser engine on the low-power microcontroller, widgets are rendered server-side. The renderer populates the Liquid template with live data, applies responsive CSS, and rasterizes the canvas into an optimized multi-color e-paper bitmap.",
+      "structure_title": "Plugin Package Structure",
+      "structure_body": "A valid Zenso plugin contains the following core files:",
+      "data_flow_title": "Data Sources & Reactive Updates",
+      "data_flow_body": "Widgets do not handle raw networking themselves. Instead, you declare required data sources (e.g. image URLs, iCal feeds) in the manifest, and the Zenso server securely fetches and passes the data into your Liquid template."
+    },
+    "widget_sdk_quickstart": {
+      "title": "Widget SDK Quickstart",
+      "description": "Create and preview your first custom widget in minutes using the plugin template and Vite plugin.",
+      "lead": "Develop your first Zenso widget with live hot-reloading in less than five minutes.",
+      "step1_title": "Clone the Starter Template",
+      "step1_body": "Clone the official public starter repository:",
+      "step2_title": "Start the Local Dev Server",
+      "step2_body": "Launch the local development environment powered by `@zenso/vite-plugin`:",
+      "step3_title": "Test with Mock Data",
+      "step3_body": "Edit `mock/plugin.json` to simulate various states (e.g. long calendar titles, missing photos, network errors). Any edit to `index.liquid` or `style.css` updates instantly without reloading."
+    },
+    "manifest_and_schemas": {
+      "title": "Manifest & Schemas",
+      "description": "Define configuration forms, field types, and data sources using published schemas at schemas.zenso.ink.",
+      "lead": "The `manifest.json` file describes your plugin to the Zenso platform and automatically generates user settings forms.",
+      "manifest_title": "Schema Specification Contract",
+      "manifest_body": "All plugins validate against published JSON schemas hosted at `https://schemas.zenso.ink/v1/plugin-manifest.schema.json`.",
+      "fields_title": "Configurable Input Fields",
+      "fields_body": "Declare inputs in `config_schema` to let users customize the widget:",
+      "sources_title": "Declaring Data Sources",
+      "sources_body": "Use the `data_sources` block to declare external feeds. The platform fetches them server-side, preventing client CORS issues and isolating credentials."
+    },
+    "building_and_publishing": {
+      "title": "Packaging & Installation",
+      "description": "Package your widget into a distributable plugin.zip archive and upload it to the Zenso Panel.",
+      "lead": "Once your widget is ready, bundle it into a distributable package and upload it to your Zenso panel.",
+      "build_title": "Building the Distributable Archive",
+      "build_body": "Run the build script:",
+      "upload_title": "Installing via Web Panel",
+      "upload_body": "1. Navigate to **Plugins** in your Zenso Web Panel."
+    }
+  },
+  "hardware_protocol": {
+    "overview": {
+      "title": "Hardware Architecture",
+      "description": "Inspect the Seeed Studio XIAO ESP32-S3 microcontroller, EE04 baseboard, and power gating circuitry.",
+      "lead": "The physical Zenso frame blends precision Japanese electronic engineering with ultra-low-power embedded circuitry.",
+      "mcu_title": "Seeed Studio XIAO ESP32-S3",
+      "mcu_body": "The frame core is powered by the compact Seeed Studio XIAO ESP32-S3 module, featuring a dual-core Xtensa 32-bit LX7 processor running at 240 MHz, integrated 2.4 GHz Wi-Fi (802.11 b/g/n), Bluetooth 5.0 LE, 8 MB PSRAM, and 8 MB SPI Flash.",
+      "power_title": "Hardware Power Gating (< 15 µA Sleep)",
+      "power_body": "To deliver months of battery life, the custom EE04 carrier board incorporates a high-side MOSFET power gating circuit. Between refresh intervals, power to the display controller and external peripherals is physically severed, dropping overall standby current draw below 15 µA.",
+      "fpc_title": "50-Pin FPC Connector & Battery Circuit",
+      "fpc_body": "The carrier board features a standard 50-pin 0.5mm pitch FPC receptacle compatible with Waveshare and Good Display raw panels, paired with an onboard TP4056/BQ-series Li-Ion charging controller and voltage divider connected to ADC GPIO for battery monitoring."
+    },
+    "zenso_firmware": {
+      "title": "Open-Source Firmware",
+      "description": "Build and flash the GPLv3 firmware with PlatformIO, and access the serial developer diagnostics console.",
+      "lead": "Zenso firmware is fully open source under the **GNU General Public License v3 (GPLv3)**. It manages power cycling, Wi-Fi connectivity, and display updates.",
+      "build_title": "Compiling and Flashing with PlatformIO",
+      "build_body": "Clone the official repository and open it in PlatformIO (VS Code or CLI):",
+      "serial_title": "Serial Developer Diagnostics Menu",
+      "serial_body": "Open the PlatformIO serial monitor at 115200 baud (`pio device monitor`) to access the developer diagnostic interface:",
+      "license_title": "GNU GPLv3 Open Source Freedom",
+      "license_body": "You are free to audit, modify, and extend the firmware. If you distribute modified firmware binaries, you must make the corresponding source code publicly available under GPLv3."
+    },
+    "byod_guide": {
+      "title": "BYOD Display Guide",
+      "description": "Connect custom e-paper panels (Waveshare Spectra 6, ACeP, BWR, monochrome) and configure custom palettes.",
+      "lead": "With Zenso's **Bring Your Own Device (BYOD)** program, makers can build custom smart frames using off-the-shelf electronic paper panels.",
+      "supported_title": "Supported E-Paper Display Panels",
+      "supported_body": "- **Waveshare 7.3\" Spectra 6 (E6)**: 800×480, full 6-color vibrant pigment palette.",
+      "wiring_title": "Connecting via FPC Ribbon",
+      "wiring_body": "Connect your display's 50-pin or 24-pin FPC ribbon cable to the carrier board. Ensure the blue stiffener faces upward before locking the FPC flip-lock connector.",
+      "panel_config_title": "Configuring Custom Profiles in Panel",
+      "panel_config_body": "In the Zenso Web Panel under **Device Settings -> Display Profile**, select **Custom BYOD**. Define your exact pixel dimensions (width/height), color depth (1bpp, 2bpp, or 4bpp), and assign your preferred color palette. The server will automatically render and quantize all widget screens to match your unique hardware specifications."
+    }
+  },
+  "sidebar": {
+    "sections": {
+      "start_here": "Start Here",
+      "user_guide": "User Guide",
+      "developer_guide": "Developer Guide",
+      "hardware_protocol": "Hardware & BYOD"
+    },
+    "items": {
+      "overview": "Overview",
+      "quickstart": "Quick Start",
+      "faq": "FAQ"
+    }
   }
 }
