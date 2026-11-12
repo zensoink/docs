@@ -105,3 +105,42 @@ test('Every expected slug has a corresponding content file across en, pl, and ja
 	}
 });
 
+test('SEO meta tags and OpenGraph tags are populated across all built HTML documentation pages', () => {
+	const distDir = path.join(ROOT_DIR, 'dist');
+	if (!fs.existsSync(distDir)) return;
+
+	for (const slug of EXPECTED_SLUGS) {
+		for (const locale of LOCALES) {
+			const relHtmlPath = slug === 'docs'
+				? `${locale}/docs/index.html`
+				: `${locale}/${slug}/index.html`;
+
+			const htmlPath = path.join(distDir, relHtmlPath);
+			if (fs.existsSync(htmlPath)) {
+				const html = fs.readFileSync(htmlPath, 'utf-8');
+				assert.match(html, /<meta name="description"[^>]*content="[^"]+"/, `${relHtmlPath} must have meta description`);
+				assert.match(html, /<meta property="og:title"[^>]*content="[^"]+"/, `${relHtmlPath} must have og:title`);
+			}
+		}
+	}
+});
+
+test('docs-sitemap-0.xml contains all routes across en, pl, and ja locales', () => {
+	const sitemapPath = path.join(ROOT_DIR, 'dist/docs-sitemap-0.xml');
+	if (!fs.existsSync(sitemapPath)) return;
+
+	const sitemapContent = fs.readFileSync(sitemapPath, 'utf-8');
+	for (const slug of EXPECTED_SLUGS) {
+		for (const locale of LOCALES) {
+			const expectedUrl = slug === 'docs'
+				? `https://www.zenso.ink/${locale}/docs/`
+				: `https://www.zenso.ink/${locale}/${slug}/`;
+
+			assert.ok(
+				sitemapContent.includes(expectedUrl),
+				`Sitemap must contain: ${expectedUrl}`
+			);
+		}
+	}
+});
+
