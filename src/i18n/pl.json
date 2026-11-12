@@ -266,10 +266,74 @@
       "panel_config_body": "W panelu webowym w sekcji **Ustawienia urządzenia -> Profil wyświetlacza** wybierz **Custom BYOD**. Wprowadź rozdzielczość (szerokość i wysokość), głębię kolorów oraz wybierz paletę barw. Serwer automatycznie dopasuje generowane obrazy do specyfikacji Twojego ekranu."
     }
   },
+  "plugins": {
+    "overview": {
+      "title": "Oficjalne Wtyczki i Katalog",
+      "description": "Poznaj oficjalne wtyczki open-source, szablony startowe oraz przykłady integracji rozwijane przez zespół Zenso.",
+      "lead": "Oficjalne wtyczki Zenso stanowią wzorcowe implementacje widgetów, synchronizacji danych na żywo oraz renderowania e-papieru. Wszystkie oficjalne wtyczki są w pełni otwartoźródłowe — możesz używać ich bezpośrednio lub forknąć, by stworzyć własne rozszerzenia.",
+      "directory_title": "Katalog wtyczek i repozytoria",
+      "directory_table": "| Wtyczka | ID | Opis | Repozytorium | Licencja |\n| :--- | :--- | :--- | :--- | :--- |\n| **Galeria Zdjęć** | `zenso.plugin.image` | Pokaz slajdów ze zdjęć lokalnych i chmurowych z ditheringiem Floyd-Steinberg | [`zensoink/plugin-image`](https://github.com/zensoink/plugin-image) | MIT |\n| **Kalendarz i Wydarzenia** | `zenso.plugin.calendar` | Agenda i widok miesiąca dla Google, iCloud i CalDAV | [`kstepien3/zenso-plugin-calendar`](https://github.com/kstepien3/zenso-plugin-calendar) | MIT |\n| **Szablon Startowy** | `zenso.plugin.template` | Szablon TypeScript, symulator Vite i walidacja schematów | [`zensoink/zenso-plugin-examples`](https://github.com/zensoink/zenso-plugin-examples) | MIT |",
+      "create_title": "Tworzenie własnych wtyczek",
+      "create_body": "Chcesz stworzyć własny widget od podstaw? Skorzystaj z oficjalnego szablonu i zapoznaj się z dokumentacją deweloperską:\n\n- [Szybki start z Widget SDK]({{docs_prefix}}developer-guide/widget-sdk-quickstart) — Uruchom lokalny serwer w kilka minut.\n- [Architektura wtyczek]({{docs_prefix}}developer-guide/plugin-architecture) — Dowiedz się, jak działają szablony LiquidJS i renderowanie headless.\n- [Manifest i schematy JSON]({{docs_prefix}}developer-guide/manifest-and-schemas) — Zdefiniuj pola formularza i źródła danych.\n- [Pakowanie i instalacja]({{docs_prefix}}developer-guide/building-and-publishing) — Zbuduj paczkę `plugin.zip` dla Panelu Zenso."
+    },
+    "image": {
+      "title": "Wtyczka Obrazów (plugin-image)",
+      "description": "Wyświetlaj zdjęcia osobiste, albumy rodzinne i kolekcje sztuki z autentycznym ditheringiem e-ink i detekcją orientacji.",
+      "lead": "Oficjalna wtyczka obrazów zamienia ramkę Zenso w żywe dzieło sztuki. Automatycznie dopasowuje zdjęcia do proporcji ramki, stosuje zaawansowany dithering dopasowany do pigmentów e-papieru i spokojnie rotuje fotografie według harmonogramu.",
+      "repo_title": "Kod źródłowy i repozytorium",
+      "repo_desc": "Oficjalna wtyczka obrazów jest w pełni otwartoźródłowa na licencji MIT.",
+      "repo_button": "Zobacz plugin-image na GitHubie",
+      "features_title": "Kluczowe możliwości",
+      "features_body": "- **Inteligentna auto-rotacja**: Odczytuje metadane orientacji EXIF, dzięki czemu zdjęcia nigdy nie są obrócone.\n- **Wiele źródeł zdjęć**: Połącz Google Photos, Immich, Nextcloud lub przesyłaj pliki bezpośrednio w Panelu Zenso.\n- **Zoptymalizowany dithering**: Algorytm dyfuzji błędu Floyd-Steinberg skalibrowany pod wielobarwne pigmenty e-papieru.\n- **Elastyczne rozmiary**: Pełne wsparcie dla widoku pełnoekranowego, podziału 50/50 oraz ćwiartek ekranu.",
+      "config_title": "Opcje konfiguracji w panelu",
+      "config_body": "W Panelu Zenso w sekcji **Ustawienia widgetu** skonfigurujesz:\n- **Kolekcja źródłowa**: Wybór albumu lub zsynchronizowanej chmury.\n- **Tryb tasowania**: Rotacja sekwencyjna lub losowa przy każdym odświeżeniu.\n- **Dopasowanie kadru**: *Wypełnij (kadrowanie)* lub *Dopasuj z marginesami* (zachowanie całego kadru ze spokojnymi papierowymi marginesami).\n- **Kontrast i nasycenie**: Podbicie kontrastu dostosowane do fizycznych właściwości e-papieru.",
+      "fitting_title": "Proporcje i marginesy",
+      "fitting_body": "Fotografie rzadko odpowiadają proporcjom 16:9 lub 5:3 wyświetlacza. Wtyczka obrazów inteligentnie dobiera marginesy i uśrednione tło, zapobiegając nieestetycznym czarnym pasom.",
+      "dithering_title": "Dithering barwny dla e-papieru",
+      "dithering_body": "Ponieważ fizyczne ekrany e-paper posiadają ograniczoną paletę fizycznych pigmentów barwnych (np. 6 kolorów Spectra 6 lub 7 kolorów ACeP), wtyczka przetwarza każde zdjęcie przez dedykowany potok kwantyzacji, zapewniając naturalne przejścia tonalne i wyrazisty detal.",
+      "dev_notes_title": "Dokumentacja deweloperska i manifest",
+      "dev_notes_body": "Wtyczka została zbudowana w oparciu o LiquidJS i bibliotekę Sharp. Pełną specyfikację manifestu oraz implementację znajdziesz na [github.com/zensoink/plugin-image](https://github.com/zensoink/plugin-image)."
+    },
+    "calendar": {
+      "title": "Wtyczka Kalendarza (zenso-plugin-calendar)",
+      "description": "Synchronizuj Google Calendar, Apple iCloud i kanały CalDAV z dyskretną, spokojną czytelnością na biurku.",
+      "lead": "Zachowaj wgląd w plan dnia i wydarzenia rodzinne bez powiadomień dźwiękowych, świecących monitorów czy cyfrowego przebodźcowania.",
+      "repo_title": "Kod źródłowy i repozytorium",
+      "repo_desc": "Oficjalna wtyczka kalendarza jest otwarta na licencji MIT.",
+      "repo_button": "Zobacz zenso-plugin-calendar na GitHubie",
+      "features_title": "Kluczowe możliwości",
+      "features_body": "- **Uniwersalne wsparcie iCal**: Łącz Google Calendar, Apple iCloud, Microsoft Outlook oraz własne instancje Nextcloud.\n- **Agregacja wielu kalendarzy**: Połącz kalendarze osobiste, rodzinne i służbowe na jednym ekranie z kolorowymi znacznikami.\n- **Różnorodne widoki**: Wybierz widok miesięczny, agendę nadchodzących wydarzeń lub harmonogram dzienny.\n- **Ochrona prywatności**: Pobierane są wyłącznie dane niezbędne do wyświetlenia wpisów, a opisy wydarzeń mogą być maskowane.",
+      "sync_title": "Podłączanie kanałów iCalendar i CalDAV",
+      "sync_body": "1. W Google Calendar lub iCloud znajdź prywatny adres URL kalendarza w formacie `.ics`.\n2. W Panelu Zenso otwórz konfigurację widgetu Kalendarza.\n3. Wklej adres w polu **URL kalendarza**, nadaj etykietę i wybierz kolor znacznika.",
+      "views_title": "Dostępne widoki układu",
+      "views_body": "- **Widok agendy**: Chronologiczna lista wydarzeń na najbliższe 24-72 godziny, doskonała do układów dzielonych.\n- **Siatka miesiąca**: Klasyczny kalendarz ścienny z oznaczeniem dni zajętych i bieżącej daty.\n- **Oś czasu dnia**: Kompaktowy harmonogram godzinowy na biurko do pracy.",
+      "customization_title": "Kolory i formatowanie czasu",
+      "customization_body": "Dostosuj format czasu 12h/24h, ukryj minione wydarzenia, odfiltruj odrzucone zaproszenia i skonfiguruj format daty zgodny z lokalnym językiem.",
+      "dev_notes_title": "Dokumentacja deweloperska i manifest",
+      "dev_notes_body": "Wtyczka przetwarza kanały ICS za pomocą `ical.js` i formatuje szablony w LiquidJS. Kod źródłowy dostępny jest na [github.com/kstepien3/zenso-plugin-calendar](https://github.com/kstepien3/zenso-plugin-calendar)."
+    },
+    "template": {
+      "title": "Szablon Startowy Wtyczki",
+      "description": "Kompletny szablon startowy skonfigurowany z TypeScriptem, LiquidJS, symulatorem Vite i walidacją schemas.zenso.ink.",
+      "lead": "Oficjalny szablon startowy zapewnia wszystko, co niezbędne do tworzenia, testowania i budowania produkcyjnych wtyczek Zenso.",
+      "repo_title": "Kod źródłowy i repozytorium",
+      "repo_desc": "Oficjalny szablon i repozytorium przykładów są utrzymywane na licencji MIT.",
+      "repo_button": "Zobacz zenso-plugin-examples na GitHubie",
+      "scaffold_title": "Struktura szablonu i zawartość",
+      "scaffold_body": "Repozytorium szablonu zawiera:\n- **`manifest.json`**: Skonfigurowany kontrakt walidowany względem `schemas.zenso.ink`.\n- **`index.liquid`**: Semantyczny szablon HTML/Liquid gotowy do własnej stylizacji.\n- **`style.css`**: Arkusz stylów CSS zoptymalizowany pod kątem typografii i kontrastu e-papieru.\n- **`mock/plugin.json`**: Dane testowe do szybkiego lokalnego prototypowania bez zewnętrznych zależności.\n- **Symulator deweloperski Vite**: Podgląd na żywo symulujący fizyczne ekrany i palety barw.",
+      "quickstart_title": "Rozpoczęcie pracy w 3 krokach",
+      "quickstart_body": "```bash\n# 1. Sklonuj repozytorium\ngit clone https://github.com/zensoink/zenso-plugin-examples.git my-plugin\ncd my-plugin\n\n# 2. Zainstaluj zależności i uruchom symulator\npnpm install\npnpm dev\n\n# 3. Zbuduj paczkę produkcyjną plugin.zip\npnpm build\n```",
+      "packaging_title": "Pakowanie i instalacja w panelu",
+      "packaging_body": "Polecenie `pnpm build` tworzy przetestowane archiwum `dist/plugin.zip` zawierające manifest, szablon i zasoby. Wgraj plik ZIP w Panelu Zenso w zakładce **Wtyczki -> Wgraj wtyczkę**, aby od razu z niej korzystać.",
+      "dev_notes_title": "Kolejne kroki",
+      "dev_notes_body": "Pełny przewodnik po tworzeniu widgetów znajdziesz w sekcjach [Szybki start z Widget SDK]({{docs_prefix}}developer-guide/widget-sdk-quickstart) oraz [Manifest i schematy JSON]({{docs_prefix}}developer-guide/manifest-and-schemas)."
+    }
+  },
   "sidebar": {
     "sections": {
       "start_here": "Pierwsze kroki",
       "user_guide": "Podręcznik Użytkownika",
+      "official_plugins": "Oficjalne Wtyczki",
       "developer_guide": "Podręcznik Dewelopera",
       "hardware_protocol": "Sprzęt i BYOD"
     },

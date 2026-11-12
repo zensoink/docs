@@ -1,0 +1,30 @@
+---
+title: "{{plugins.template.title}}"
+description: "{{plugins.template.description}}"
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+{{plugins.template.lead}}
+
+<Card title="{{plugins.template.repo_title}}" icon="github">
+	{{plugins.template.repo_desc}}
+
+	[**{{plugins.template.repo_button}} →**](https://github.com/zensoink/zenso-plugin-examples)
+</Card>
+
+## {{plugins.template.scaffold_title}}
+
+{{plugins.template.scaffold_body}}
+
+## {{plugins.template.quickstart_title}}
+
+{{plugins.template.quickstart_body}}
+
+## {{plugins.template.packaging_title}}
+
+{{plugins.template.packaging_body}}
+
+## {{plugins.template.dev_notes_title}}
+
+{{plugins.template.dev_notes_body}}

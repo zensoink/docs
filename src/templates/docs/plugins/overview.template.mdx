@@ -1,0 +1,34 @@
+---
+title: "{{plugins.overview.title}}"
+description: "{{plugins.overview.description}}"
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+{{plugins.overview.lead}}
+
+## {{plugins.overview.directory_title}}
+
+{{plugins.overview.directory_table}}
+
+<CardGrid>
+	<LinkCard
+		title="{{plugins.image.title}}"
+		description="{{plugins.image.description}}"
+		href="{{docs_prefix}}plugins/image"
+	/>
+	<LinkCard
+		title="{{plugins.calendar.title}}"
+		description="{{plugins.calendar.description}}"
+		href="{{docs_prefix}}plugins/calendar"
+	/>
+	<LinkCard
+		title="{{plugins.template.title}}"
+		description="{{plugins.template.description}}"
+		href="{{docs_prefix}}plugins/template"
+	/>
+</CardGrid>
+
+## {{plugins.overview.create_title}}
+
+{{plugins.overview.create_body}}

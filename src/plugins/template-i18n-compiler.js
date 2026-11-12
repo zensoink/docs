@@ -54,6 +54,12 @@ export function compileTemplateContent(templateContent, dict, fallbackDict, asse
 		return match; // Keep token if neither target nor fallback exists
 	});
 
+	// Finally, resolve any built-in path/locale tokens that may have been introduced from dictionary values
+	result = result
+		.replace(/\{\{\s*assets_prefix\s*\}\}/g, assetsPrefix)
+		.replace(/\{\{\s*docs_prefix\s*\}\}/g, docsPrefix)
+		.replace(/\{\{\s*locale\s*\}\}/g, locale);
+
 	return result;
 }
 

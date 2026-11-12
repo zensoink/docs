@@ -17,9 +17,13 @@ const EXPECTED_SLUGS = [
 	'docs/user-guide/panel-basics',
 	'docs/user-guide/screens-and-layouts',
 	'docs/user-guide/refresh-and-battery',
-	'docs/user-guide/plugins-image',
-	'docs/user-guide/plugins-calendar',
 	'docs/user-guide/troubleshooting-faq',
+
+	// Official Plugins (Separated Subtree)
+	'docs/plugins/overview',
+	'docs/plugins/image',
+	'docs/plugins/calendar',
+	'docs/plugins/template',
 
 	// Developer Guide
 	'docs/developer-guide/overview',
@@ -37,7 +41,7 @@ const EXPECTED_SLUGS = [
 	'docs/hardware-protocol/byod-guide',
 ];
 
-test('astro.config.mjs configures all 3 main sections and Start Here sourced from src/i18n dictionaries', () => {
+test('astro.config.mjs configures all 4 main sections and Start Here sourced from src/i18n dictionaries', () => {
 	const astroConfig = fs.readFileSync(path.join(ROOT_DIR, 'astro.config.mjs'), 'utf-8');
 
 	// Verify astro.config.mjs sources sidebar sections dynamically from i18n
@@ -53,22 +57,26 @@ test('astro.config.mjs configures all 3 main sections and Start Here sourced fro
 	for (const dict of [enDict, plDict, jaDict]) {
 		assert.ok(dict.sidebar?.sections?.start_here, 'Must contain start_here section label');
 		assert.ok(dict.sidebar?.sections?.user_guide, 'Must contain user_guide section label');
+		assert.ok(dict.sidebar?.sections?.official_plugins, 'Must contain official_plugins section label');
 		assert.ok(dict.sidebar?.sections?.developer_guide, 'Must contain developer_guide section label');
 		assert.ok(dict.sidebar?.sections?.hardware_protocol, 'Must contain hardware_protocol section label');
 	}
 
 	assert.equal(enDict.sidebar.sections.start_here, 'Start Here');
 	assert.equal(enDict.sidebar.sections.user_guide, 'User Guide');
+	assert.equal(enDict.sidebar.sections.official_plugins, 'Official Plugins');
 	assert.equal(enDict.sidebar.sections.developer_guide, 'Developer Guide');
 	assert.equal(enDict.sidebar.sections.hardware_protocol, 'Hardware & BYOD');
 
 	assert.equal(plDict.sidebar.sections.start_here, 'Pierwsze kroki');
 	assert.equal(plDict.sidebar.sections.user_guide, 'Podręcznik Użytkownika');
+	assert.equal(plDict.sidebar.sections.official_plugins, 'Oficjalne Wtyczki');
 	assert.equal(plDict.sidebar.sections.developer_guide, 'Podręcznik Dewelopera');
 	assert.equal(plDict.sidebar.sections.hardware_protocol, 'Sprzęt i BYOD');
 
 	assert.equal(jaDict.sidebar.sections.start_here, 'はじめに');
 	assert.equal(jaDict.sidebar.sections.user_guide, 'ユーザーガイド');
+	assert.equal(jaDict.sidebar.sections.official_plugins, '公式プラグイン');
 	assert.equal(jaDict.sidebar.sections.developer_guide, '開発者ガイド');
 	assert.equal(jaDict.sidebar.sections.hardware_protocol, 'ハードウェアとBYOD');
 
@@ -95,6 +103,14 @@ test('All expected routes exist in astro.config.mjs sidebar and consolidated rou
 	assert.ok(
 		!astroConfig.includes(`'docs/user-guide/quickstart'`),
 		'Sidebar must not contain removed docs/user-guide/quickstart'
+	);
+	assert.ok(
+		!astroConfig.includes(`'docs/user-guide/plugins-image'`),
+		'Sidebar must not contain removed docs/user-guide/plugins-image'
+	);
+	assert.ok(
+		!astroConfig.includes(`'docs/user-guide/plugins-calendar'`),
+		'Sidebar must not contain removed docs/user-guide/plugins-calendar'
 	);
 });
 

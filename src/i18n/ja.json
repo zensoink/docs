@@ -266,10 +266,74 @@
       "panel_config_body": "Webパネルの **機器設定 -> ディスプレイプロファイル** で **カスタムBYOD** を選択します。解像度（幅・高さ）、色深度、パレットを指定すると、サーバーがその仕様に合わせて自動的に画面を描画・量子化します。"
     }
   },
+  "plugins": {
+    "overview": {
+      "title": "公式プラグイン一覧と概要",
+      "description": "Zensoチームが開発・保守する公式オープンソースプラグイン、スターターテンプレート、連携サンプルを紹介します。",
+      "lead": "Zenso公式プラグインは、ウィジェット設計、リアルタイムデータ同期、電子ペーパー描画の公式リファレンス実装です。すべての公式プラグインはオープンソースとして公開されており、そのまま利用することも、フォークして独自のウィジェットを開発することもできます。",
+      "directory_title": "プラグイン一覧とリポジトリ",
+      "directory_table": "| プラグイン | ID | 説明 | リポジトリ | ライセンス |\n| :--- | :--- | :--- | :--- | :--- |\n| **フォトギャラリー** | `zenso.plugin.image` | Floyd-Steinbergディザリングによるローカル・クラウド写真スライドショー | [`zensoink/plugin-image`](https://github.com/zensoink/plugin-image) | MIT |\n| **カレンダー・予定** | `zenso.plugin.calendar` | Google・iCloud・CalDAV対応のアジェンダおよび月間カレンダー | [`kstepien3/zenso-plugin-calendar`](https://github.com/kstepien3/zenso-plugin-calendar) | MIT |\n| **スターターテンプレート** | `zenso.plugin.template` | TypeScript、Viteシミュレーター、スキーマ検証同梱の開発雛形 | [`zensoink/zenso-plugin-examples`](https://github.com/zensoink/zenso-plugin-examples) | MIT |",
+      "create_title": "カスタムプラグインの開発",
+      "create_body": "独自のウィジェットを開発したい場合は、公式スターターテンプレートと開発者ガイドをご活用ください：\n\n- [Widget SDKクイックスタート]({{docs_prefix}}developer-guide/widget-sdk-quickstart) — 数分でローカルプレビュー環境を起動できます。\n- [プラグインアーキテクチャ]({{docs_prefix}}developer-guide/plugin-architecture) — LiquidJSとヘッドレス描画の仕組みを学びます。\n- [マニフェストとスキーマ]({{docs_prefix}}developer-guide/manifest-and-schemas) — 設定項目とデータソースを定義します。\n- [パッケージングとインストール]({{docs_prefix}}developer-guide/building-and-publishing) — `plugin.zip` をビルドしてパネルに登録します。"
+    },
+    "image": {
+      "title": "画像プラグイン (plugin-image)",
+      "description": "写真や家族アルバム、アート作品を電子ペーパー専用ディザリングと向き自動認識で静かに美しく表示します。",
+      "lead": "公式画像プラグインは、Zensoフレームをリビングに溶け込むアートフレームへと変貌させます。画面のアスペクト比に合わせた自動リサイズ、電子ペーパー顔料に最適化された高品質ディザリング、穏やかな更新サイクルを提供します。",
+      "repo_title": "ソースコードとリポジトリ",
+      "repo_desc": "公式画像プラグインはMITライセンスの下で完全公開されています。",
+      "repo_button": "GitHubで plugin-image を見る",
+      "features_title": "主な機能",
+      "features_body": "- **向きの自動判定**：EXIFメタデータを読み取り、横向きや逆さまの写真も自動で正しい向きに回転します。\n- **多彩な写真ソース**：Googleフォト、Immich、Nextcloudとの連携、またはWebパネルからの直接アップロードに対応。\n- **専用ディザリング**：電子ペーパーの物理顔料パレットに合わせたFloyd-Steinberg誤差拡散処理。\n- **柔軟な配置サイズ**：全画面表示、左右50/50分割、4分割グリッドに対応。",
+      "config_title": "Webパネル設定項目",
+      "config_body": "Zenso Webパネルの **ウィジェット設定** で以下の項目を調整できます：\n- **写真コレクション**：表示するアルバムやクラウドフィードの選択。\n- **シャッフル順**：更新ごとの順次表示またはランダム表示。\n- **拡大・トリミング**：*枠いっぱいにトリミング* または *余白を残して全体表示*。\n- **コントラストと鮮やかさ**：反射型電子ペーパーで映えるトーン調整。",
+      "fitting_title": "アスペクト比とマット余白",
+      "fitting_body": "写真のアスペクト比はディスプレイの16:9や5:3と一致しないことが一般的です。画像プラグインはマット紙のような穏やかな余白や背景色平均化により、不自然な黒帯を出さずに美しく整えます。",
+      "dithering_title": "電子ペーパー用カラーディザリング",
+      "dithering_body": "物理的な電子ペーパー画面は表示できる顔料色数（Spectra 6の6色やACePの7色など）が決まっています。本プラグインは送信前に高精度な量子化処理を行い、肌のトーンや青空のグラデーションを滑らかに表現します。",
+      "dev_notes_title": "開発者向けマニフェスト情報",
+      "dev_notes_body": "LiquidJSとSharpライブラリで構築されています。詳細な実装とスキーマ定義は [github.com/zensoink/plugin-image](https://github.com/zensoink/plugin-image) をご覧ください。"
+    },
+    "calendar": {
+      "title": "カレンダープラグイン (zenso-plugin-calendar)",
+      "description": "Googleカレンダー、Apple iCloud、CalDAVフィードをデスク上に静かに、落ち着いた見やすさで同期します。",
+      "lead": "通知音や光るディスプレイに気を取られることなく、家族や仕事の予定をひと目で把握できます。",
+      "repo_title": "ソースコードとリポジトリ",
+      "repo_desc": "公式カレンダープラグインはMITライセンスの下で公開されています。",
+      "repo_button": "GitHubで zenso-plugin-calendar を見る",
+      "features_title": "主な機能",
+      "features_body": "- **汎用iCal対応**：Googleカレンダー、Apple iCloud、Microsoft Outlook、Nextcloudの予定を同期。\n- **複数カレンダーの統合**：個人・家族・仕事の予定を色分けバッジで1画面に整理。\n- **多彩な表示形式**：月間カレンダーグリッド、直近のアジェンダ一覧、今日のタイムラインから選択。\n- **プライバシー保護**：描画に必要な最小限の予定情報のみを取得し、詳細本文のマスキングも可能です。",
+      "sync_title": "iCalendar・CalDAVフィードの連携",
+      "sync_body": "1. GoogleカレンダーやiCloudで、非公開の `.ics` 形式URLを取得します。\n2. Zenso Webパネルでカレンダーウィジェットの設定を開きます。\n3. **カレンダーURL** 欄にURLを貼り付け、ラベルとバッジ色を設定します。",
+      "views_title": "柔軟なレイアウト表示",
+      "views_body": "- **アジェンダ表示**：今後24〜72時間の予定を時系列で一覧表示。分割画面に最適です。\n- **月間カレンダー**：日付と予定のある日をドットで表示する伝統的な壁掛けカレンダー形式。\n- **デイリータイムライン**：デスク作業向けの1日の時間割表示。",
+      "customization_title": "表示色と時刻フォーマット",
+      "customization_body": "12時間/24時間表記の切り替え、終了した予定の非表示、辞退した予定の除外、ロケールに応じた日付表示に対応しています。",
+      "dev_notes_title": "開発者向けマニフェスト情報",
+      "dev_notes_body": "`ical.js` でICSフィードを解析し、LiquidJSテンプレートで描画します。ソースコードは [github.com/kstepien3/zenso-plugin-calendar](https://github.com/kstepien3/zenso-plugin-calendar) にて公開されています。"
+    },
+    "template": {
+      "title": "プラグインスターターテンプレート",
+      "description": "TypeScript、LiquidJS、Viteシミュレーター、schemas.zenso.ink検証を備えた公式スターターテンプレートです。",
+      "lead": "公式スターターテンプレートには、Zensoウィジェットを開発・プレビュー・ビルドするために必要なすべてが揃っています。",
+      "repo_title": "ソースコードとリポジトリ",
+      "repo_desc": "公式テンプレートおよびサンプルリポジトリはMITライセンスで提供されています。",
+      "repo_button": "GitHubで zenso-plugin-examples を見る",
+      "scaffold_title": "テンプレートの構成と同梱内容",
+      "scaffold_body": "リポジトリ構成：\n- **`manifest.json`**：`schemas.zenso.ink` 仕様に準拠した事前設定済み契約。\n- **`index.liquid`**：カスタムスタイリングしやすいセマンティックなHTMLテンプレート。\n- **`style.css`**：電子ペーパーの視認性に最適化されたスタイルシート。\n- **`mock/plugin.json`**：ネットワーク通信なしでローカル検証できるモックデータ。\n- **Viteシミュレーター**：実機の画面比率とパレット色を忠実にシミュレートする開発環境。",
+      "quickstart_title": "3ステップで始めるウィジェット開発",
+      "quickstart_body": "```bash\n# 1. リポジトリをクローン\ngit clone https://github.com/zensoink/zenso-plugin-examples.git my-plugin\ncd my-plugin\n\n# 2. 依存関係のインストールとシミュレーター起動\npnpm install\npnpm dev\n\n# 3. 配布用 plugin.zip のビルド\npnpm build\n```",
+      "packaging_title": "パッケージングとパネルへの登録",
+      "packaging_body": "`pnpm build` を実行すると、マニフェストとテンプレートがまとめられた `dist/plugin.zip` が生成されます。Zenso Webパネルの **プラグイン -> アップロード** から登録すれば、すぐに画面に配置できます。",
+      "dev_notes_title": "次のステップ",
+      "dev_notes_body": "ウィジェット開発の全手順については、[Widget SDKクイックスタート]({{docs_prefix}}developer-guide/widget-sdk-quickstart) および [マニフェストとスキーマ]({{docs_prefix}}developer-guide/manifest-and-schemas) を参照してください。"
+    }
+  },
   "sidebar": {
     "sections": {
       "start_here": "はじめに",
       "user_guide": "ユーザーガイド",
+      "official_plugins": "公式プラグイン",
       "developer_guide": "開発者ガイド",
       "hardware_protocol": "ハードウェアとBYOD"
     },
