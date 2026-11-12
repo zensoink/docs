@@ -175,16 +175,16 @@
       "licensing_title": "Open Ecosystem & Transparent Model",
       "licensing_body": "We provide official, free-to-use Docker images for the complete backend stack. Meanwhile, the microcontroller firmware (GPLv3), public schemas (Apache 2.0), Vite development plugin (MIT), and starter templates (MIT) are fully open source.",
       "stack_title": "Architecture Stack",
-      "stack_body": "The architecture comprises three functional layers:"
+      "stack_body": "The architecture comprises three functional layers:\n1. **Core Services**: High-performance backend handling device sessions, layout rendering, and image quantization.\n2. **Web Panel**: Responsive configuration interface accessible via browser on desktop and mobile.\n3. **Firmware & Widgets**: Microcontroller runtime and Liquid-based widget templates."
     },
     "docker_setup": {
       "title": "Docker & Self-Hosting",
       "description": "Deploy the official Zenso API and Panel stack on your HomeLab or NAS using Docker Compose.",
       "lead": "Running Zenso on your local infrastructure takes less than two minutes using Docker Compose.",
       "compose_title": "Standard docker-compose.yml",
-      "compose_body": "Create a directory for Zenso and save the following configuration file:",
+      "compose_body": "Create a directory for Zenso and save the following configuration file:\n\n```yaml\nservices:\n  postgres:\n    image: postgres:16-alpine\n    restart: unless-stopped\n    environment:\n      POSTGRES_DB: zenso\n      POSTGRES_USER: zenso\n      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme_secure_password}\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n\n  zenso-api:\n    image: ghcr.io/zensoink/zenso-api:latest\n    restart: unless-stopped\n    ports:\n      - \"3000:3000\"\n    environment:\n      PORT: 3000\n      DATABASE_URL: postgresql://zenso:${DB_PASSWORD:-changeme_secure_password}@postgres:5432/zenso\n      FRONTEND_URL: http://${HOST_IP:-localhost}:8080\n      ZENSO_ALLOW_PRIVATE_NETWORKS: \"true\"\n    depends_on:\n      - postgres\n\n  zenso-panel:\n    image: ghcr.io/zensoink/zenso-panel:latest\n    restart: unless-stopped\n    ports:\n      - \"8080:80\"\n    depends_on:\n      - zenso-api\n\nvolumes:\n  postgres_data:\n```",
       "run_title": "Launching the Stack",
-      "run_body": "Run the container stack in detached mode:",
+      "run_body": "Run the container stack in detached mode:\n\n```bash\ndocker compose up -d\n```\n\nVerify that all containers are healthy by checking `docker compose ps`.",
       "storage_title": "Data Persistence & Backups",
       "storage_body": "All user settings, screens, layouts, and widget configurations are securely stored inside the named Docker volume `postgres_data`. Regular volume backups guarantee simple migration between servers."
     },
@@ -193,18 +193,18 @@
       "description": "Reference guide for configuring ports, database URLs, CORS, and private LAN access in .env.",
       "lead": "Configure your Zenso container deployment through standard environment variables defined in your `.env` file.",
       "core_title": "Core Service Variables",
-      "core_body": "| Variable | Default | Purpose |",
+      "core_body": "| Variable | Default | Purpose |\n| :--- | :--- | :--- |\n| `PORT` | `3000` | Port on which the API listens for panel and device connections. |\n| `DATABASE_URL` | — | Connection string for PostgreSQL (e.g. `postgresql://user:pass@host:5432/db`). |\n| `FRONTEND_URL` | `http://localhost:8080` | Canonical URL of the panel used for CORS validation and invite links. |\n| `SESSION_SECRET` | — | Secure cryptographic salt for signing session tokens. |",
       "network_title": "Private Network Access (LAN Integration)",
-      "network_body": "| Variable | Default | Description |"
+      "network_body": "| Variable | Default | Description |\n| :--- | :--- | :--- |\n| `ZENSO_ALLOW_PRIVATE_NETWORKS` | `false` | When set to `true`, permits widgets and plugins to query internal RFC1918 IPs (e.g. Home Assistant at `192.168.1.50`) without triggering SSRF protection blocks. |"
     },
     "cold_boot_setup": {
       "title": "Cold-Boot Setup Wizard",
       "description": "Initialize a new instance securely using the setup token generated in Docker container logs.",
       "lead": "When a new Zenso instance starts for the first time, it enforces a cryptographic bootstrap protocol to prevent unauthorized claiming.",
       "token_title": "Locating the Setup Token",
-      "token_body": "Inspect the container logs of the API container to retrieve the generated single-use token:",
+      "token_body": "Inspect the container logs of the API container to retrieve the generated single-use token:\n\n```bash\ndocker compose logs zenso-api | grep \"SETUP TOKEN\"\n```\n\nYou will see an entry similar to: `ZENSO_SETUP_TOKEN: zenso_sec_9f81a7b...`",
       "wizard_title": "Running the Setup Wizard",
-      "wizard_body": "Open your web browser and navigate to:",
+      "wizard_body": "Open your web browser and navigate to:\n\n`http://<SERVER_IP>:8080/setup`\n\nPaste your setup token and click **Verify Instance**.",
       "claim_title": "Creating the Instance Owner Account",
       "claim_body": "Specify the administrator email and a strong password. Once submitted, the token is permanently invalidated, and you are logged into your sovereign Zenso dashboard."
     },
@@ -215,7 +215,7 @@
       "rendering_title": "Server-Side Headless Rendering",
       "rendering_body": "Instead of running a heavy JavaScript browser engine on the low-power microcontroller, widgets are rendered server-side. The renderer populates the Liquid template with live data, applies responsive CSS, and rasterizes the canvas into an optimized multi-color e-paper bitmap.",
       "structure_title": "Plugin Package Structure",
-      "structure_body": "A valid Zenso plugin contains the following core files:",
+      "structure_body": "A valid Zenso plugin contains the following core files:\n\n```\nmy-zenso-widget/\n├── manifest.json      # Metadata, configuration schema, and data sources\n├── index.liquid       # Visual template with Liquid placeholders\n├── style.css          # Scoped CSS stylesheet\n└── mock/              # Sample mock data for local development\n    └── plugin.json\n```",
       "data_flow_title": "Data Sources & Reactive Updates",
       "data_flow_body": "Widgets do not handle raw networking themselves. Instead, you declare required data sources (e.g. image URLs, iCal feeds) in the manifest, and the Zenso server securely fetches and passes the data into your Liquid template."
     },
@@ -224,9 +224,9 @@
       "description": "Create and preview your first custom widget in minutes using the plugin template and Vite plugin.",
       "lead": "Develop your first Zenso widget with live hot-reloading in less than five minutes.",
       "step1_title": "Clone the Starter Template",
-      "step1_body": "Clone the official public starter repository:",
+      "step1_body": "Clone the official public starter repository:\n\n```bash\ngit clone https://github.com/zensoink/zenso-plugin-template.git my-widget\ncd my-widget\npnpm install\n```",
       "step2_title": "Start the Local Dev Server",
-      "step2_body": "Launch the local development environment powered by `@zenso/vite-plugin`:",
+      "step2_body": "Launch the local development environment powered by `@zenso/vite-plugin`:\n\n```bash\npnpm dev\n```\n\nOpen `http://localhost:5173` in your browser. You will see a live preview simulating your widget inside an actual e-paper canvas.",
       "step3_title": "Test with Mock Data",
       "step3_body": "Edit `mock/plugin.json` to simulate various states (e.g. long calendar titles, missing photos, network errors). Any edit to `index.liquid` or `style.css` updates instantly without reloading."
     },
@@ -235,9 +235,9 @@
       "description": "Define configuration forms, field types, and data sources using published schemas at schemas.zenso.ink.",
       "lead": "The `manifest.json` file describes your plugin to the Zenso platform and automatically generates user settings forms.",
       "manifest_title": "Schema Specification Contract",
-      "manifest_body": "All plugins validate against published JSON schemas hosted at `https://schemas.zenso.ink/v1/plugin-manifest.schema.json`.",
+      "manifest_body": "All plugins validate against published JSON schemas hosted at `https://schemas.zenso.ink/v1/plugin-manifest.schema.json`.\n\n```json\n{\n  \"$schema\": \"https://schemas.zenso.ink/v1/plugin-manifest.schema.json\",\n  \"id\": \"com.example.greeting\",\n  \"name\": \"Daily Greeting\",\n  \"version\": \"1.0.0\",\n  \"entrypoint\": \"index.liquid\"\n}\n```",
       "fields_title": "Configurable Input Fields",
-      "fields_body": "Declare inputs in `config_schema` to let users customize the widget:",
+      "fields_body": "Declare inputs in `config_schema` to let users customize the widget:\n- `text`: Single-line text input\n- `boolean`: Simple toggle switch\n- `number`: Numeric input with optional `min` and `max`\n- `color`: Color picker matching the e-paper palette\n- `select`: Dropdown list with predefined options",
       "sources_title": "Declaring Data Sources",
       "sources_body": "Use the `data_sources` block to declare external feeds. The platform fetches them server-side, preventing client CORS issues and isolating credentials."
     },
@@ -246,9 +246,9 @@
       "description": "Package your widget into a distributable plugin.zip archive and upload it to the Zenso Panel.",
       "lead": "Once your widget is ready, bundle it into a distributable package and upload it to your Zenso panel.",
       "build_title": "Building the Distributable Archive",
-      "build_body": "Run the build script:",
+      "build_body": "Run the build script:\n\n```bash\npnpm build\n```\n\nThis validates your manifest against `schemas.zenso.ink` and packages your assets into a single clean `plugin.zip` file in the `dist/` directory.",
       "upload_title": "Installing via Web Panel",
-      "upload_body": "1. Navigate to **Plugins** in your Zenso Web Panel."
+      "upload_body": "1. Navigate to **Plugins** in your Zenso Web Panel.\n2. Click **Upload Plugin** and select your `plugin.zip` file.\n3. The panel verifies the manifest and makes the widget immediately selectable in any screen layout slot."
     }
   },
   "hardware_protocol": {
