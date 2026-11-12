@@ -41,8 +41,8 @@
     "title": "Szybki start (Wdrożenie)",
     "description": "Przewodnik krok po kroku po rozpakowaniu i konfiguracji ramki Zenso.",
     "intro": "Konfiguracja ramki Zenso nie wymaga programowania i zajmuje mniej niż dwie minuty.",
-    "step1_title": "Włączenie zasilania",
-    "step1_desc": "Włącz przełącznik zasilania umieszczony na tylnym panelu. Wyświetlacz e-papierowy wykona odświeżenie fali i wyświetli ekran powitalny.",
+    "step1_title": "Rozpakowanie i włączenie zasilania",
+    "step1_desc": "Przesuń przełącznik zasilania umieszczony na tylnym panelu w pozycję ON. Wyświetlacz e-papieru wykona czyszczenie ekranu i wyświetli powitalny ekran wdrożeniowy.",
     "step2_title": "Połączenie z Wi-Fi",
     "step2_desc": "Na smartfonie otwórz ustawienia Wi-Fi:\n1. Połącz się z tymczasowym punktem dostępowym ramki (SSID: `Zenso-Setup`).\n2. Strona logowania (captive portal) otworzy się automatycznie.\n3. Wybierz domową sieć Wi-Fi 2.4 GHz i wprowadź hasło.\n   *(Uwaga: pasma wyłącznie 5 GHz nie są obsługiwane przez moduł 802.11 b/g/n).* ",
     "step3_title": "Zeskanowanie kodu QR parowania",
@@ -53,9 +53,13 @@
     "step5_desc": "Twoja ramka aktualizuje się bezgłośnie według wybranego harmonogramu (np. co godzinę w dzień, uśpiona w nocy) i natychmiast przechodzi w tryb ultra-głębokiego uśpienia (< 15 µA), chroniąc baterię i domowy spokój."
   },
   "overview": {
-    "title": "Przegląd",
-    "description": "Zenso to bezprzewodowa ramka smart z 7-kolorowym e-papierem, która żyje na uboczu — bez światła, bez hałasu, z baterią na wiele miesięcy.",
     "intro": "Zenso to bezprzewodowa ramka z 7-kolorowym e-papierem stworzona po to, aby cicho wtopić się w Twój dom. Wyświetla zdjęcia rodziny, pogodę i wydarzenia z kalendarza bez emitowania ani jednego fotonu światła — jak wydruk na ścianie. Gdy bateria się rozładuje, ostatni obraz pozostaje na ekranie bez końca. Wystarczy podłączyć USB-C, kiedy chcesz to zmienić.",
+    "philosophy_title": "Filozofia Japandi i spokojnego życia",
+    "philosophy_body": "Współczesne wnętrza są przesycone ekranami LED i OLED, które walczą o uwagę wzroku. Zenso łączy japońską ideę *Ma* (harmonijnej przestrzeni) ze skandynawską funkcjonalnością. Jest cyfrowym meblem, który naturalnie współgra z rytmem Twojego dnia.",
+    "display_title": "7-kolorowy elektroniczny papier ACeP",
+    "display_body": "W ramce zastosowano zaawansowany wyświetlacz e-paper ACeP z fizycznymi mikrokapsułkami barwnika. Przemieszczanie pigmentów pod wpływem mikroskopijnych impulsów napięciowych pozwala na naturalne odbijanie światła. Ekran emituje **zero światła**, nie męczy wzroku i w nocy jest całkowicie ciemny.",
+    "craftsmanship_title": "Naturalny europejski dąb",
+    "craftsmanship_body": "Każda obudowa jest precyzyjnie frezowana z litego drewna dębowego i ręcznie wykańczana naturalnymi olejami. Brak wystających kabli, plastikowych ramek czy świecących diod na froncie podkreśla organiczny charakter produktu.",
     "refresh_title": "Aktualizacje dostosowane do Twojego rytmu",
     "refresh_desc": "Ustaw własny harmonogram w panelu webowym — aktualizacje co godzinę w ciągu dnia, całkowita cisza w nocy. Ramka budzi się tylko wtedy, gdy trzeba, i natychmiast wraca do uśpienia, żeby nigdy nie zakłócać spokoju domu.",
     "local_title": "Twoje dane pozostają Twoje",
@@ -74,30 +78,6 @@
     "a4": "**Tak.**\n\nMożesz udostępnić zaufanym członkom rodziny prywatny link zaproszenia lub kod QR parowania za pośrednictwem [panel.zenso.ink](https://panel.zenso.ink), aby mogli dodawać zdjęcia do wspólnego albumu bez technicznej wiedzy."
   },
   "user_guide": {
-    "overview": {
-      "title": "Przegląd i filozofia",
-      "description": "Odkryj spokojną technologię, estetykę Japandi i naturalny urok e-papieru w ramce Zenso.",
-      "lead": "Zenso powstało, aby wprowadzić informacje i sztukę do Twojego domu bez stresu, świecących ekranów i natłoku powiadomień. Oparte na zasadach **spokojnej technologii (calm technology)**, Zenso towarzyszy Ci dyskretnie, nie domagając się ciągłej uwagi.",
-      "philosophy_title": "Filozofia Japandi i spokojnego życia",
-      "philosophy_body": "Współczesne wnętrza są przesycone ekranami LED i OLED, które walczą o uwagę wzroku. Zenso łączy japońską ideę *Ma* (harmonijnej przestrzeni) ze skandynawską funkcjonalnością. Jest cyfrowym meblem, który naturalnie współgra z rytmem Twojego dnia.",
-      "display_title": "7-kolorowy elektroniczny papier ACeP",
-      "display_body": "W ramce zastosowano zaawansowany wyświetlacz e-paper ACeP z fizycznymi mikrokapsułkami barwnika. Przemieszczanie pigmentów pod wpływem mikroskopijnych impulsów napięciowych pozwala na naturalne odbijanie światła. Ekran emituje **zero światła**, nie męczy wzroku i w nocy jest całkowicie ciemny.",
-      "craftsmanship_title": "Naturalny europejski dąb",
-      "craftsmanship_body": "Każda obudowa jest precyzyjnie frezowana z litego drewna dębowego i ręcznie wykańczana naturalnymi olejami. Brak wystających kabli, plastikowych ramek czy świecących diod na froncie podkreśla organiczny charakter produktu."
-    },
-    "quickstart": {
-      "title": "Rozpakowanie i konfiguracja Wi-Fi",
-      "description": "Rozpakuj ramkę Zenso, połącz z Wi-Fi przez portal konfiguracyjny i sparuj urządzenie w 3 minuty.",
-      "lead": "Konfiguracja ramki Zenso jest prosta, nie wymaga wiedzy technicznej i trwa poniżej trzech minut z poziomu smartfona.",
-      "step1_title": "Włącz zasilanie",
-      "step1_body": "Przesuń przełącznik z tyłu obudowy w pozycję **ON**. Wyświetlacz wykona cykl czyszczenia ekranu i pokaże powitalny ekran konfiguracyjny.",
-      "step2_title": "Połącz się z siecią konfiguracyjną",
-      "step2_body": "W ustawieniach Wi-Fi swojego smartfona lub laptopa wybierz tymczasową sieć o nazwie **`Zenso-Setup`**.",
-      "step3_title": "Wskaż domowe Wi-Fi 2.4 GHz",
-      "step3_body": "W oknie portalu konfiguracyjnego wybierz domową sieć Wi-Fi 2.4 GHz i wpisz hasło. *(Uwaga: pasma 5 GHz nie są obsługiwane przez moduł radiowy).*",
-      "step4_title": "Zeskanuj kod QR i sparuj ramkę",
-      "step4_body": "Po połączeniu z siecią ramka pobierze autoryzację i wyświetli kod QR. Zeskanuj go aparatem smartfona, aby przypisać ramkę do swojego konta w panelu."
-    },
     "panel_basics": {
       "title": "Zarządzanie ramką w Panelu",
       "description": "Dowiedz się, jak korzystać z panelu Zenso, aby sprawdzać stan baterii, zasięg Wi-Fi i przypisywać ekrany.",
@@ -294,7 +274,7 @@
       "hardware_protocol": "Sprzęt i BYOD"
     },
     "items": {
-      "overview": "Przegląd",
+      "overview": "Przegląd i Filozofia",
       "quickstart": "Szybki start",
       "faq": "Często zadawane pytania"
     }

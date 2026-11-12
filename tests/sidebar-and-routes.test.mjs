@@ -13,9 +13,7 @@ const EXPECTED_SLUGS = [
 	'docs/getting-started/quickstart',
 	'docs/getting-started/faq',
 
-	// User Guide
-	'docs/user-guide/overview',
-	'docs/user-guide/quickstart',
+	// User Guide (streamlined to dashboard & feature management)
 	'docs/user-guide/panel-basics',
 	'docs/user-guide/screens-and-layouts',
 	'docs/user-guide/refresh-and-battery',
@@ -52,11 +50,11 @@ test('astro.config.mjs configures all 3 main sections and Start Here sourced fro
 	const plDict = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, 'src/i18n/pl.json'), 'utf-8'));
 	const jaDict = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, 'src/i18n/ja.json'), 'utf-8'));
 
-	for (const loc of [enDict, plDict, jaDict]) {
-		assert.ok(loc.sidebar?.sections?.start_here, 'Must contain start_here section label');
-		assert.ok(loc.sidebar?.sections?.user_guide, 'Must contain user_guide section label');
-		assert.ok(loc.sidebar?.sections?.developer_guide, 'Must contain developer_guide section label');
-		assert.ok(loc.sidebar?.sections?.hardware_protocol, 'Must contain hardware_protocol section label');
+	for (const dict of [enDict, plDict, jaDict]) {
+		assert.ok(dict.sidebar?.sections?.start_here, 'Must contain start_here section label');
+		assert.ok(dict.sidebar?.sections?.user_guide, 'Must contain user_guide section label');
+		assert.ok(dict.sidebar?.sections?.developer_guide, 'Must contain developer_guide section label');
+		assert.ok(dict.sidebar?.sections?.hardware_protocol, 'Must contain hardware_protocol section label');
 	}
 
 	assert.equal(enDict.sidebar.sections.start_here, 'Start Here');
@@ -73,9 +71,14 @@ test('astro.config.mjs configures all 3 main sections and Start Here sourced fro
 	assert.equal(jaDict.sidebar.sections.user_guide, 'ユーザーガイド');
 	assert.equal(jaDict.sidebar.sections.developer_guide, '開発者ガイド');
 	assert.equal(jaDict.sidebar.sections.hardware_protocol, 'ハードウェアとBYOD');
+
+	// Verify sidebar Overview & Philosophy item label
+	assert.equal(enDict.sidebar.items.overview, 'Overview & Philosophy');
+	assert.equal(plDict.sidebar.items.overview, 'Przegląd i Filozofia');
+	assert.equal(jaDict.sidebar.items.overview, '概要と哲学');
 });
 
-test('All 19 new specification routes plus Start Here exist in astro.config.mjs sidebar', () => {
+test('All expected routes exist in astro.config.mjs sidebar and consolidated routes are removed', () => {
 	const astroConfig = fs.readFileSync(path.join(ROOT_DIR, 'astro.config.mjs'), 'utf-8');
 
 	for (const slug of EXPECTED_SLUGS) {
@@ -84,6 +87,15 @@ test('All 19 new specification routes plus Start Here exist in astro.config.mjs 
 			`Sidebar must register slug: '${slug}'`
 		);
 	}
+
+	assert.ok(
+		!astroConfig.includes(`'docs/user-guide/overview'`),
+		'Sidebar must not contain removed docs/user-guide/overview'
+	);
+	assert.ok(
+		!astroConfig.includes(`'docs/user-guide/quickstart'`),
+		'Sidebar must not contain removed docs/user-guide/quickstart'
+	);
 });
 
 test('Every expected slug has a corresponding content file across en, pl, and ja locales', () => {
