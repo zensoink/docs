@@ -133,7 +133,7 @@ export default defineConfig({
 					attrs: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
 				},
 			],
-			favicon: '/favicon.svg',
+			favicon: '/favicon.ico',
 			title: SITE_TITLE,
 			defaultLocale: DEFAULT_LOCALE,
 			locales: starlightLocales,

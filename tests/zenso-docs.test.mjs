@@ -71,3 +71,36 @@ test('Root redirect routes to canonical documentation path', () => {
 	assert.ok(fs.existsSync(rootHtml), 'root redirect must exist');
 	assert.ok(fs.existsSync(docsHtml), 'docs redirect must exist');
 });
+
+test('Favicon configuration uses valid raster icon and avoids unrouted favicon.svg', () => {
+	const astroConfig = fs.readFileSync(path.join(ROOT_DIR, 'astro.config.mjs'), 'utf-8');
+	assert.match(
+		astroConfig,
+		/favicon:\s*['"]\/favicon\.ico['"]/,
+		'astro.config.mjs starlight configuration must set favicon to /favicon.ico'
+	);
+	assert.doesNotMatch(
+		astroConfig,
+		/favicon:\s*['"]\/favicon\.svg['"]/,
+		'astro.config.mjs must not set favicon to /favicon.svg because root domain SPA router does not serve it'
+	);
+
+	const distDir = path.join(ROOT_DIR, 'dist');
+	if (fs.existsSync(distDir)) {
+		const indexHtmlPath = path.join(distDir, 'en/docs/index.html');
+		if (fs.existsSync(indexHtmlPath)) {
+			const content = fs.readFileSync(indexHtmlPath, 'utf-8');
+			assert.doesNotMatch(
+				content,
+				/href="\/favicon\.svg"/,
+				'Built docs HTML must not reference /favicon.svg'
+			);
+			assert.match(
+				content,
+				/href="\/favicon\.ico"/,
+				'Built docs HTML must reference /favicon.ico'
+			);
+		}
+	}
+});
+
