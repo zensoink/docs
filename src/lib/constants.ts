@@ -36,27 +36,41 @@ export function isSupportedLocale(candidate: string | null | undefined): candida
 
 // --- Ecosystem URLs ---
 
+export interface EcosystemUrls {
+	readonly mainSite: 'https://zenso.ink';
+	readonly github: 'https://github.com/zensoink';
+	readonly discord: 'https://discord.gg/vTjzkwz3XV';
+	readonly panel: 'https://panel.zenso.ink';
+}
+
 export const ECOSYSTEM_URLS = {
-	mainSite: 'https://www.zenso.ink',
+	mainSite: 'https://zenso.ink',
 	github: 'https://github.com/zensoink',
 	discord: 'https://discord.gg/vTjzkwz3XV',
 	panel: 'https://panel.zenso.ink',
-} as const;
+} as const satisfies EcosystemUrls;
 
-export const SITE_URL = ECOSYSTEM_URLS.mainSite;
-export const MAIN_SITE_BASE_URL = ECOSYSTEM_URLS.mainSite;
+export const SITE_URL: EcosystemUrls['mainSite'] = ECOSYSTEM_URLS.mainSite;
+export const MAIN_SITE_BASE_URL: EcosystemUrls['mainSite'] = ECOSYSTEM_URLS.mainSite;
 export const GITHUB_URL = ECOSYSTEM_URLS.github;
 export const DISCORD_URL = ECOSYSTEM_URLS.discord;
 export const PANEL_URL = ECOSYSTEM_URLS.panel;
 
 // --- Storage Keys ---
 
+export interface StorageKeys {
+	readonly locale: 'zenso.lang';
+	readonly scroll: 'zenso.lang_switch_scroll';
+	readonly theme: 'zenso.theme';
+	readonly starlightTheme: 'starlight-theme';
+}
+
 export const STORAGE_KEYS = {
 	locale: 'zenso.lang',
 	scroll: 'zenso.lang_switch_scroll',
 	theme: 'zenso.theme',
 	starlightTheme: 'starlight-theme',
-} as const;
+} as const satisfies StorageKeys;
 
 export const LOCALE_STORAGE_KEY = STORAGE_KEYS.locale;
 export const SCROLL_STORAGE_KEY = STORAGE_KEYS.scroll;
@@ -65,6 +79,15 @@ export const STARLIGHT_THEME_STORAGE_KEY = STORAGE_KEYS.starlightTheme;
 
 // --- Site Metadata & Starlight Build Config ---
 
+export interface SiteConfig {
+	readonly title: string;
+	readonly assetsDir: string;
+	readonly logo: {
+		readonly src: string;
+		readonly alt: string;
+	};
+}
+
 export const SITE_CONFIG = {
 	title: 'Zenso',
 	assetsDir: '_docs_assets',
@@ -72,7 +95,7 @@ export const SITE_CONFIG = {
 		src: './src/assets/logo.svg',
 		alt: 'Zenso Logo',
 	},
-} as const;
+} as const satisfies SiteConfig;
 
 export const SITE_TITLE = SITE_CONFIG.title;
 export const DOCS_ASSETS_DIR = SITE_CONFIG.assetsDir;
@@ -138,5 +161,5 @@ export function getExternalLinks(locale: string = DEFAULT_LOCALE): readonly Exte
 			title: 'Zenso Main Website',
 			external: false,
 		},
-	];
+	] as const satisfies readonly ExternalLinkItem[];
 }

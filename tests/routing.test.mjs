@@ -48,20 +48,20 @@ test('localizePath formats routes accurately across all locales', () => {
 	assert.equal(localizePath('', 'pl'), '/pl/docs/');
 
 	// From unlocalized /docs
-	assert.equal(localizePath('/docs', 'en'), '/en/docs');
+	assert.equal(localizePath('/docs', 'en'), '/en/docs/');
 	assert.equal(localizePath('/docs/', 'ja'), '/ja/docs/');
 
 	// Cross-locale switching
-	assert.equal(localizePath('/en/docs', 'pl'), '/pl/docs');
+	assert.equal(localizePath('/en/docs', 'pl'), '/pl/docs/');
 	assert.equal(localizePath('/pl/docs/', 'ja'), '/ja/docs/');
-	assert.equal(localizePath('/ja/docs/api/overview', 'en'), '/en/docs/api/overview');
+	assert.equal(localizePath('/ja/docs/api/overview', 'en'), '/en/docs/api/overview/');
 
 	// Preserve query strings and hash anchors
-	assert.equal(localizePath('/en/docs?search=e-ink#section-1', 'pl'), '/pl/docs?search=e-ink#section-1');
-	assert.equal(localizePath('/pl/docs/hardware#assembly?view=full', 'ja'), '/ja/docs/hardware#assembly?view=full');
+	assert.equal(localizePath('/en/docs?search=e-ink#section-1', 'pl'), '/pl/docs/?search=e-ink#section-1');
+	assert.equal(localizePath('/pl/docs/hardware#assembly?view=full', 'ja'), '/ja/docs/hardware/#assembly?view=full');
 
 	// Fallback for invalid target locale
-	assert.equal(localizePath('/pl/docs', 'invalid'), '/en/docs');
+	assert.equal(localizePath('/pl/docs', 'invalid'), '/en/docs/');
 });
 
 test('getDocsHome returns canonical docs landing route', () => {
@@ -72,10 +72,10 @@ test('getDocsHome returns canonical docs landing route', () => {
 });
 
 test('getMainSiteUrl returns localized canonical main site route', () => {
-	assert.equal(MAIN_SITE_BASE_URL, 'https://www.zenso.ink');
-	assert.equal(getMainSiteUrl('en'), 'https://www.zenso.ink/en/');
-	assert.equal(getMainSiteUrl('pl'), 'https://www.zenso.ink/pl/');
-	assert.equal(getMainSiteUrl('ja'), 'https://www.zenso.ink/ja/');
-	assert.equal(getMainSiteUrl('invalid'), 'https://www.zenso.ink/en/');
-	assert.equal(getMainSiteUrl(), 'https://www.zenso.ink/en/');
+	assert.equal(MAIN_SITE_BASE_URL, 'https://zenso.ink');
+	assert.equal(getMainSiteUrl('en'), 'https://zenso.ink/en/');
+	assert.equal(getMainSiteUrl('pl'), 'https://zenso.ink/pl/');
+	assert.equal(getMainSiteUrl('ja'), 'https://zenso.ink/ja/');
+	assert.equal(getMainSiteUrl('invalid'), 'https://zenso.ink/en/');
+	assert.equal(getMainSiteUrl(), 'https://zenso.ink/en/');
 });

@@ -76,14 +76,24 @@ test('Static build outputs docs-sitemap files matching wrangler.jsonc route patt
 	const indexContent = fs.readFileSync(docsSitemapPath, 'utf-8');
 	assert.match(
 		indexContent,
-		/https:\/\/(www\.)?zenso\.ink\/docs-sitemap-0\.xml/,
-		'docs-sitemap.xml must point to docs-sitemap-0.xml'
+		/https:\/\/zenso\.ink\/docs-sitemap-0\.xml/,
+		'docs-sitemap.xml must point to docs-sitemap-0.xml without www'
+	);
+	assert.doesNotMatch(
+		indexContent,
+		/www\.zenso\.ink/,
+		'docs-sitemap.xml must not contain www.zenso.ink'
 	);
 
 	const urlsetContent = fs.readFileSync(docsSitemap0Path, 'utf-8');
-	assert.match(urlsetContent, /https:\/\/(www\.)?zenso\.ink\/en\/docs\//);
-	assert.match(urlsetContent, /https:\/\/(www\.)?zenso\.ink\/pl\/docs\//);
-	assert.match(urlsetContent, /https:\/\/(www\.)?zenso\.ink\/ja\/docs\//);
+	assert.match(urlsetContent, /https:\/\/zenso\.ink\/en\/docs\//);
+	assert.match(urlsetContent, /https:\/\/zenso\.ink\/pl\/docs\//);
+	assert.match(urlsetContent, /https:\/\/zenso\.ink\/ja\/docs\//);
+	assert.doesNotMatch(
+		urlsetContent,
+		/www\.zenso\.ink/,
+		'docs-sitemap-0.xml must not contain www.zenso.ink'
+	);
 
 	// Redundant sitemaps must be removed to prevent duplicates
 	assert.ok(
@@ -94,4 +104,16 @@ test('Static build outputs docs-sitemap files matching wrangler.jsonc route patt
 		!fs.existsSync(path.join(ROOT_DIR, 'dist/sitemap-0.xml')),
 		'dist/sitemap-0.xml must be removed in favor of docs-sitemap-0.xml'
 	);
+});
+
+test('public/_redirects configures 301 trailing slash redirects and sitemap alias', () => {
+	const redirectsPath = path.join(ROOT_DIR, 'public/_redirects');
+	assert.ok(fs.existsSync(redirectsPath), 'public/_redirects must exist');
+
+	const content = fs.readFileSync(redirectsPath, 'utf-8');
+	assert.match(content, /^\/docs\s+\/en\/docs\/\s+301/m, 'Must 301 redirect /docs to /en/docs/');
+	assert.match(content, /^\/en\/docs\s+\/en\/docs\/\s+301/m, 'Must 301 redirect /en/docs to /en/docs/');
+	assert.match(content, /^\/pl\/docs\s+\/pl\/docs\/\s+301/m, 'Must 301 redirect /pl/docs to /pl/docs/');
+	assert.match(content, /^\/ja\/docs\s+\/ja\/docs\/\s+301/m, 'Must 301 redirect /ja/docs to /ja/docs/');
+	assert.match(content, /^\/sitemap-index\.xml\s+\/docs-sitemap\.xml\s+200/m, 'Must 200 rewrite /sitemap-index.xml to /docs-sitemap.xml');
 });

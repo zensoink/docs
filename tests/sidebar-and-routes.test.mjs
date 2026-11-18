@@ -161,8 +161,8 @@ test('docs-sitemap-0.xml contains all routes across en, pl, and ja locales', () 
 	for (const slug of EXPECTED_SLUGS) {
 		for (const locale of LOCALES) {
 			const expectedUrl = slug === 'docs'
-				? `https://www.zenso.ink/${locale}/docs/`
-				: `https://www.zenso.ink/${locale}/${slug}/`;
+				? `https://zenso.ink/${locale}/docs/`
+				: `https://zenso.ink/${locale}/${slug}/`;
 
 			assert.ok(
 				sitemapContent.includes(expectedUrl),
