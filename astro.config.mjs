@@ -105,6 +105,7 @@ function entryRedirectEnhancer() {
 // https://astro.build/config
 export default defineConfig({
 	site: SITE_URL,
+	trailingSlash: 'always',
 	build: {
 		assets: DOCS_ASSETS_DIR,
 	},
@@ -131,6 +132,10 @@ export default defineConfig({
 				{
 					tag: 'link',
 					attrs: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
+				},
+				{
+					tag: 'link',
+					attrs: { rel: 'sitemap', href: '/docs-sitemap.xml' },
 				},
 			],
 			favicon: '/favicon.ico',

@@ -104,3 +104,56 @@ test('Favicon configuration uses valid raster icon and avoids unrouted favicon.s
 	}
 });
 
+test('Canonical tags, hreflang alternates, and sitemap links use https://zenso.ink without www', () => {
+	const distDir = path.join(ROOT_DIR, 'dist');
+	if (!fs.existsSync(distDir)) return;
+
+	const indexHtmlPath = path.join(distDir, 'en/docs/index.html');
+	if (fs.existsSync(indexHtmlPath)) {
+		const content = fs.readFileSync(indexHtmlPath, 'utf-8');
+
+		// Canonical link must be https://zenso.ink/en/docs/ (no www, trailing slash)
+		assert.match(
+			content,
+			/<link rel="canonical" href="https:\/\/zenso\.ink\/en\/docs\/"\/>/,
+			'Canonical URL must be https://zenso.ink/en/docs/ without www and with trailing slash'
+		);
+
+		// Sitemap link must point to /docs-sitemap.xml
+		assert.match(
+			content,
+			/<link rel="sitemap" href="\/docs-sitemap\.xml"\/>/,
+			'Sitemap link in head must point to /docs-sitemap.xml'
+		);
+
+		// Must not contain reference to sitemap-index.xml
+		assert.doesNotMatch(
+			content,
+			/href="\/sitemap-index\.xml"/,
+			'Head must not contain link to unrouted sitemap-index.xml'
+		);
+
+		// Hreflang alternates must use zenso.ink without www and with trailing slash
+		assert.match(
+			content,
+			/<link rel="alternate" hreflang="en" href="https:\/\/zenso\.ink\/en\/docs\/"\/>/,
+			'hreflang en must point to https://zenso.ink/en/docs/'
+		);
+		assert.match(
+			content,
+			/<link rel="alternate" hreflang="pl" href="https:\/\/zenso\.ink\/pl\/docs\/"\/>/,
+			'hreflang pl must point to https://zenso.ink/pl/docs/'
+		);
+		assert.match(
+			content,
+			/<link rel="alternate" hreflang="ja" href="https:\/\/zenso\.ink\/ja\/docs\/"\/>/,
+			'hreflang ja must point to https://zenso.ink/ja/docs/'
+		);
+		assert.match(
+			content,
+			/<link rel="alternate" hreflang="x-default" href="https:\/\/zenso\.ink\/en\/docs\/"\/>/,
+			'hreflang x-default must point to https://zenso.ink/en/docs/'
+		);
+	}
+});
+

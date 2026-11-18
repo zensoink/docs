@@ -28,7 +28,7 @@ import {
 } from '../src/lib/constants.ts';
 
 test('constants: ecosystem URLs are canonical and consistent', () => {
-	assert.equal(ECOSYSTEM_URLS.mainSite, 'https://www.zenso.ink');
+	assert.equal(ECOSYSTEM_URLS.mainSite, 'https://zenso.ink');
 	assert.equal(ECOSYSTEM_URLS.github, 'https://github.com/zensoink');
 	assert.equal(ECOSYSTEM_URLS.discord, 'https://discord.gg/vTjzkwz3XV');
 	assert.equal(ECOSYSTEM_URLS.panel, 'https://panel.zenso.ink');
@@ -67,7 +67,7 @@ test('constants: starlight social links match ecosystem URLs', () => {
 	assert.equal(STARLIGHT_SOCIAL_LINKS.length, 3);
 	assert.deepEqual(STARLIGHT_SOCIAL_LINKS[0], { icon: 'github', label: 'GitHub', href: 'https://github.com/zensoink' });
 	assert.deepEqual(STARLIGHT_SOCIAL_LINKS[1], { icon: 'discord', label: 'Discord', href: 'https://discord.gg/vTjzkwz3XV' });
-	assert.deepEqual(STARLIGHT_SOCIAL_LINKS[2], { icon: 'external', label: 'Zenso.ink', href: 'https://www.zenso.ink' });
+	assert.deepEqual(STARLIGHT_SOCIAL_LINKS[2], { icon: 'external', label: 'Zenso.ink', href: 'https://zenso.ink' });
 });
 
 test('constants: locale invariants and helpers behave correctly', () => {
@@ -81,11 +81,11 @@ test('constants: locale invariants and helpers behave correctly', () => {
 });
 
 test('constants: getMainSiteUrl formats localized root routes', () => {
-	assert.equal(getMainSiteUrl('en'), 'https://www.zenso.ink/en/');
-	assert.equal(getMainSiteUrl('pl'), 'https://www.zenso.ink/pl/');
-	assert.equal(getMainSiteUrl('ja'), 'https://www.zenso.ink/ja/');
-	assert.equal(getMainSiteUrl('invalid'), 'https://www.zenso.ink/en/');
-	assert.equal(getMainSiteUrl(), 'https://www.zenso.ink/en/');
+	assert.equal(getMainSiteUrl('en'), 'https://zenso.ink/en/');
+	assert.equal(getMainSiteUrl('pl'), 'https://zenso.ink/pl/');
+	assert.equal(getMainSiteUrl('ja'), 'https://zenso.ink/ja/');
+	assert.equal(getMainSiteUrl('invalid'), 'https://zenso.ink/en/');
+	assert.equal(getMainSiteUrl(), 'https://zenso.ink/en/');
 });
 
 test('constants: getExternalLinks provides localized same-window zenso.ink and new-tab socials', () => {
@@ -104,12 +104,12 @@ test('constants: getExternalLinks provides localized same-window zenso.ink and n
 
 	const zensoWeb = plLinks.find((l) => l.label === 'zenso.ink');
 	assert.ok(zensoWeb);
-	assert.equal(zensoWeb.href, 'https://www.zenso.ink/pl/');
+	assert.equal(zensoWeb.href, 'https://zenso.ink/pl/');
 	assert.equal(zensoWeb.external, false);
 
 	const enLinks = getExternalLinks('en');
 	const enZensoWeb = enLinks.find((l) => l.label === 'zenso.ink');
-	assert.equal(enZensoWeb?.href, 'https://www.zenso.ink/en/');
+	assert.equal(enZensoWeb?.href, 'https://zenso.ink/en/');
 	assert.equal(enZensoWeb?.external, false);
 });
 

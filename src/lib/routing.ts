@@ -125,6 +125,12 @@ export function localizePath(pathname: string, targetLocale: string): string {
 		}
 	}
 
+	// Canonical route invariant: all internal documentation paths must end with a trailing slash
+	const hasFileExtension = /\.[a-zA-Z0-9]+$/.test(pathBody);
+	if (!hasFileExtension && !pathBody.endsWith('/')) {
+		pathBody = `${pathBody}/`;
+	}
+
 	return `/${validLocale}${pathBody}${queryOrHash}`;
 }
 

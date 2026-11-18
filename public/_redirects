@@ -1,0 +1,8 @@
+# Cloudflare Workers Static Assets Canonical Redirects & Rewrites
+# Enforce trailing slashes with clean 301 permanent redirects and provide sitemap alias
+
+/docs /en/docs/ 301
+/en/docs /en/docs/ 301
+/pl/docs /pl/docs/ 301
+/ja/docs /ja/docs/ 301
+/sitemap-index.xml /docs-sitemap.xml 200
