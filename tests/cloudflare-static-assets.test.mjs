@@ -117,3 +117,46 @@ test('public/_redirects configures 301 trailing slash redirects and sitemap alia
 	assert.match(content, /^\/ja\/docs\s+\/ja\/docs\/\s+301/m, 'Must 301 redirect /ja/docs to /ja/docs/');
 	assert.match(content, /^\/sitemap-index\.xml\s+\/docs-sitemap\.xml\s+200/m, 'Must 200 rewrite /sitemap-index.xml to /docs-sitemap.xml');
 });
+
+test('Documentation sources and build output must not reference unrouted /images/ paths', () => {
+	function findFiles(dir, extensions) {
+		if (!fs.existsSync(dir)) return [];
+		let results = [];
+		for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+			const fullPath = path.join(dir, entry.name);
+			if (entry.isDirectory()) {
+				results = results.concat(findFiles(fullPath, extensions));
+			} else if (extensions.some((ext) => entry.name.endsWith(ext))) {
+				results.push(fullPath);
+			}
+		}
+		return results;
+	}
+
+	const docSourceFiles = [
+		...findFiles(path.join(ROOT_DIR, 'src/templates'), ['.md', '.mdx']),
+		...findFiles(path.join(ROOT_DIR, 'src/content/docs'), ['.md', '.mdx']),
+	];
+
+	for (const filePath of docSourceFiles) {
+		const content = fs.readFileSync(filePath, 'utf-8');
+		const relPath = path.relative(ROOT_DIR, filePath);
+		assert.doesNotMatch(
+			content,
+			/\]\(\/images\//,
+			`Source file ${relPath} must not use unrouted /images/ path (Angular SPA intercepts /images/*)`
+		);
+	}
+
+	const distHtmlFiles = findFiles(path.join(ROOT_DIR, 'dist'), ['.html']);
+	for (const filePath of distHtmlFiles) {
+		const content = fs.readFileSync(filePath, 'utf-8');
+		const relPath = path.relative(ROOT_DIR, filePath);
+		assert.doesNotMatch(
+			content,
+			/src="\/images\//,
+			`Built HTML file ${relPath} must not contain src="/images/ (must be routed under _docs_assets or docs)`
+		);
+	}
+});
+
