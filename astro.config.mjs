@@ -178,6 +178,16 @@ export default defineConfig({
 					],
 				},
 				{
+					label: enDict.sidebar.sections.devices,
+					translations: {
+						pl: plDict.sidebar.sections.devices,
+						ja: jaDict.sidebar.sections.devices,
+					},
+					items: [
+						createSidebarItem('docs/devices/device-schedule', enDict.devices.device_schedule.title, plDict.devices.device_schedule.title, jaDict.devices.device_schedule.title),
+					],
+				},
+				{
 					label: enDict.sidebar.sections.official_plugins,
 					translations: {
 						pl: plDict.sidebar.sections.official_plugins,
