@@ -144,6 +144,7 @@ export default defineConfig({
 			locales: starlightLocales,
 			logo: LOGO_CONFIG,
 			components: {
+				Head: './src/components/Head.astro',
 				SiteTitle: './src/components/SiteTitle.astro',
 				Header: './src/components/Header.astro',
 				PageFrame: './src/components/PageFrame.astro',

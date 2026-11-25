@@ -41,6 +41,12 @@ test('Astro components keep background effect on body and not in hero sections',
 	assert.match(siteTitleAstro, /getMainSiteUrl\(locale\)/, 'SiteTitle must resolve mainSiteHref via getMainSiteUrl');
 	assert.match(siteTitleAstro, /docs-home-pill/, 'SiteTitle must include Docs home pill');
 	assert.match(siteTitleAstro, /setupBodyDitherScroll/, 'SiteTitle must bundle scroll fade handler');
+
+	assert.match(astroConfig, /Head:\s*'\.\/src\/components\/Head\.astro'/, 'astro.config.mjs must register custom Head component');
+	const headAstro = fs.readFileSync(path.join(ROOT_DIR, 'src/components/Head.astro'), 'utf-8');
+	assert.match(headAstro, /og:image/, 'Head.astro must emit og:image');
+	assert.match(headAstro, /twitter:image/, 'Head.astro must emit twitter:image');
+	assert.match(headAstro, /application\/ld\+json/, 'Head.astro must emit JSON-LD structured data');
 });
 
 test('Build distribution contains styled documentation landing page with full sidebar and no splash hero', () => {

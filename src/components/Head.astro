@@ -1,0 +1,52 @@
+---
+/**
+ * Custom Starlight Head Component
+ * Preserves Starlight head metadata and adds localized Open Graph / Twitter
+ * preview images alongside Organization, WebSite, BreadcrumbList, and TechArticle JSON-LD.
+ */
+import { resolveLocale } from '../lib/routing.ts';
+import {
+	buildDocsStructuredData,
+	getDocsOgImageAlt,
+	getDocsOgImageUrl,
+	serializeJsonLd,
+} from '../lib/seo.ts';
+
+const { head, entry, id } = Astro.locals.starlightRoute;
+const locale = resolveLocale(Astro.url.pathname);
+const ogImageUrl = getDocsOgImageUrl(locale);
+const ogImageAlt = getDocsOgImageAlt(locale);
+const isErrorPage = id === '404' || Astro.url.pathname === '/404.html';
+
+const hasMeta = (attr: 'property' | 'name', key: string): boolean =>
+	head.some((item) => item.tag === 'meta' && item.attrs?.[attr] === key);
+
+const socialImageMetas = [
+	{ attr: 'property', key: 'og:image', content: ogImageUrl },
+	{ attr: 'property', key: 'og:image:alt', content: ogImageAlt },
+	{ attr: 'name', key: 'twitter:image', content: ogImageUrl },
+	{ attr: 'name', key: 'twitter:image:alt', content: ogImageAlt },
+] as const;
+
+const jsonLd = isErrorPage
+	? null
+	: serializeJsonLd(
+			buildDocsStructuredData({
+				localizedRoute: Astro.url.pathname,
+				title: entry.data.title,
+				description: entry.data.description ?? '',
+				locale,
+			})
+		);
+---
+
+{head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}
+
+{
+	socialImageMetas
+		.filter(({ attr, key }) => !hasMeta(attr, key))
+		.map(({ attr, key, content }) =>
+			attr === 'property' ? <meta property={key} {content} /> : <meta name={key} {content} />
+		)
+}
+{jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
